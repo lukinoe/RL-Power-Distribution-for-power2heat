@@ -150,6 +150,7 @@ class Model(nn.Module):
 
         else:
             batch_size = x.shape[0]
+            
 
             h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)  # [nr_layer, batch_size, hidden_size]
             c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)
