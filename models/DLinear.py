@@ -73,7 +73,7 @@ class Model(nn.Module):
     
         self.time_layer = nn.Linear(self.seq_len,self.pred_len)
 
-    def forward(self, x):
+    def forward(self, x, x_mark):
         # x: [Batch, Input length, Channel]
         seasonal_init, trend_init = self.decompsition(x)
         seasonal_init, trend_init = seasonal_init.permute(0,2,1), trend_init.permute(0,2,1)

@@ -612,14 +612,19 @@ class Dataset_Custom_Merge_TimeFeature(Dataset):
         seq_y_mark = self.data_stamp[r_begin:r_end]
 
 
+        # seq_x_future = self.data_x[r_end-self.pred_len: r_end,0]
+        # seq_x_future = np.append(np.zeros(seq_x.shape[0] - self.pred_len), seq_x_future)   # zero pad to seq_x shape
+        # seq_x_future = seq_x_future.reshape((seq_x.shape[0], 1))
+
+        # seq_y_timeenc = self.data_stamp[r_end-self.pred_len: r_end]
+        # seq_y_timeenc = np.append(np.zeros((seq_x.shape[0] - self.pred_len, seq_y_timeenc.shape[1])), seq_y_timeenc, axis=0) # shape (seq_x, nr_of_timefeatures)
+
         seq_x_future = self.data_x[r_end-self.pred_len: r_end,0]
-        seq_x_future = np.append(np.zeros(seq_x.shape[0] - self.pred_len), seq_x_future)   # zero pad to seq_x shape
-        seq_x_future = seq_x_future.reshape((seq_x.shape[0], 1))
+        seq_x_future = seq_x_future.reshape((seq_x_future.shape[0], 1))
 
         seq_y_timeenc = self.data_stamp[r_end-self.pred_len: r_end]
-        seq_y_timeenc = np.append(np.zeros((seq_x.shape[0] - self.pred_len, seq_y_timeenc.shape[1])), seq_y_timeenc, axis=0) # shape (seq_x, nr_of_timefeatures)
 
-        seq_x = np.concatenate((seq_x_future, seq_x, seq_y_timeenc), axis=1)
+        seq_x_mark = np.concatenate((seq_x_future, seq_y_timeenc), axis=1)
 
         return seq_x, seq_y, seq_x_mark, seq_y_mark    # seq_x_mark, seq_y_mark = Time_encoded data
 

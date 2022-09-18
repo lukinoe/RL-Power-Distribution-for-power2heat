@@ -73,7 +73,7 @@ class Model(nn.Module):
         # Merge Layer
 
         
-        self.lstm_hidden = 1024
+        self.lstm_hidden = 512
         hidden = self.lstm_hidden
         self.lstm_n_layers = 1
         input_size = 6
@@ -94,16 +94,11 @@ class Model(nn.Module):
         self.rnn_linear = nn.Linear(self.lstm_hidden, 1)
 
 
-    def forward(self, x):
+    def forward(self, x, x_mark):
         # x: [Batch, Input length, Channel]
 
-        _x = x
-        x_m1sum_future = _x[:,-self.pred_len:,0].reshape((_x.shape[0], self.pred_len, 1))
-        timeenc = _x[:,-self.pred_len:, -4:]
-
-        #print(timeenc.shape)
-
-        x = x[:,:,3].reshape((x.shape[0], x.shape[1], 1))  #  !!!!! which feature is temp3???
+        x_m1sum_future = x_mark[:,-self.pred_len:,0].reshape((x.shape[0], self.pred_len, 1))
+        timeenc = x_mark[:,-self.pred_len:,1:]
 
 
         seasonal_init, trend_init = self.decompsition(x)
@@ -121,7 +116,7 @@ class Model(nn.Module):
         x = seasonal_output + trend_output
         x = x.permute(0,2,1) # to [Batch, Output length, Channel]
 
-
+        print(x.shape)
         # x_concat = torch.cat((x, x_m1sum_future), dim=1)
         # x_concat = x_concat.permute(0,2,1) 
         
@@ -131,10 +126,12 @@ class Model(nn.Module):
         # x = self.Linear_Merge2(x)
 
         #print(timeenc.shape, x_m1sum_future.shape)
-        lstm = True
+        
 
         x2 = torch.cat((timeenc, x_m1sum_future, x), dim=2)
         #x2 = torch.cat((x_m1sum_future, x), dim=2)
+
+        lstm = True
 
         if not lstm:
             x2 = torch.flatten(x2, start_dim=1)
@@ -150,7 +147,6 @@ class Model(nn.Module):
 
         else:
             batch_size = x.shape[0]
-            
 
             h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)  # [nr_layer, batch_size, hidden_size]
             c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)

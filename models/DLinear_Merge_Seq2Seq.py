@@ -75,7 +75,7 @@ class Model(nn.Module):
         self.sigm = nn.ReLU()
         self.Linear_Merge2 = nn.Linear(1024,self.pred_len)
 
-    def forward(self, x):
+    def forward(self, x, x_mark):
         # x: [Batch, Input length, Channel]
 
 
