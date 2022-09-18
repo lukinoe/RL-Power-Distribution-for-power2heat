@@ -80,10 +80,10 @@ class Model(nn.Module):
 
         self.Linear_Merge1 = nn.Linear(self.pred_len*2,hidden)
         self.activation = nn.GELU()
-        self.activation2 = nn.GELU()
         self.Linear_Merge2 = nn.Linear(hidden,self.pred_len)
+        self.activation2 = nn.GELU()
 
-        self.linear_nn1 = nn.Linear(self.pred_len*6,hidden)
+        self.linear_nn1 = nn.Linear(self.pred_len*input_size,hidden)
         self.linear_nn2 = nn.Linear(hidden,hidden)
         self.linear_nn3 = nn.Linear(hidden,self.pred_len)
 
@@ -116,18 +116,8 @@ class Model(nn.Module):
         x = seasonal_output + trend_output
         x = x.permute(0,2,1) # to [Batch, Output length, Channel]
 
-        #print(x.shape)
-        # x_concat = torch.cat((x, x_m1sum_future), dim=1)
-        # x_concat = x_concat.permute(0,2,1) 
         
-
-        # x = self.Linear_Merge1(x_concat)
-        # x = self.activation(x)
-        # x = self.Linear_Merge2(x)
-
-        #print(timeenc.shape, x_m1sum_future.shape)
-        
-        x = x[:,:,-1].reshape(x.shape[0], x.shape[1], 1)
+        x = x[:,:,-1].reshape(x.shape[0], x.shape[1], 1) # only get perdiodicity of temp3
 
         x2 = torch.cat((timeenc, x_m1sum_future, x), dim=2)
         #x2 = torch.cat((x_m1sum_future, x), dim=2)
@@ -152,7 +142,7 @@ class Model(nn.Module):
             h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)  # [nr_layer, batch_size, hidden_size]
             c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)
             output, (hn, cn) = self.rnn(x2, (h0, c0))
-            x = self.rnn_linear(output)
+            x2 = self.rnn_linear(output)
 
 
         
