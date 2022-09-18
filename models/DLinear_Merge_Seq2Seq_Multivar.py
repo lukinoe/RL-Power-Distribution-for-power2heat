@@ -71,9 +71,9 @@ class Model(nn.Module):
 
         
         # Merge Layer
-        self.Linear_Merge1 = nn.Linear(self.pred_len*(self.channels+1),1024)
-        self.sigm = nn.Sigmoid()
-        self.Linear_Merge2 = nn.Linear(1024,self.pred_len)
+        self.Linear_Merge1 = nn.Linear(768,500)
+        self.sigm = nn.ReLU()
+        self.Linear_Merge2 = nn.Linear(500,self.pred_len)
 
         self.lstm_hidden = 1024
         self.lstm_n_layers = 1
@@ -90,7 +90,7 @@ class Model(nn.Module):
         batch_size = x.shape[0]
 
         x_ = x[:,:,1:]
-        x_m1sum_future = x[:,:self.pred_len,0].reshape((x.shape[0], self.pred_len, 1))
+        x_m1sum_future = x[:,-self.pred_len:,0].reshape((x.shape[0], self.pred_len, 1))
 
         x = x_
 
@@ -111,7 +111,7 @@ class Model(nn.Module):
         x = x.permute(0,2,1) # to [Batch, Output length, Channel]
 
 
-        lstm = True
+        lstm = False
 
         
         if not lstm:
@@ -122,11 +122,9 @@ class Model(nn.Module):
             x_concat = torch.cat((x, x_m1sum_future), dim=1)
             x_concat = x_concat.permute(0,2,1) 
 
-            print(x_m1sum_future.shape, x.shape)
-            x_concat = torch.cat((x, x_m1sum_future), dim=2)
-            x_concat = x_concat.permute(0,2,1) 
+            #print(x_m1sum_future.shape, x.shape)
 
-            print(x_concat.shape)
+            #print(x_concat.shape)
             
             x = self.Linear_Merge1(x_concat)
             x = self.sigm(x)

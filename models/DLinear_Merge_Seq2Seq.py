@@ -72,7 +72,7 @@ class Model(nn.Module):
         
         # Merge Layer
         self.Linear_Merge1 = nn.Linear(self.pred_len*2,1024)
-        self.sigm = nn.Sigmoid()
+        self.sigm = nn.ReLU()
         self.Linear_Merge2 = nn.Linear(1024,self.pred_len)
 
     def forward(self, x):
@@ -80,7 +80,7 @@ class Model(nn.Module):
 
 
         x_ = x[:,:,1].reshape((x.shape[0], x.shape[1], 1))
-        x_m1sum_future = x[:,:self.pred_len,0].reshape((x.shape[0], self.pred_len, 1))
+        x_m1sum_future = x[:,-self.pred_len:,0].reshape((x.shape[0], self.pred_len, 1))
 
         x = x_
 
