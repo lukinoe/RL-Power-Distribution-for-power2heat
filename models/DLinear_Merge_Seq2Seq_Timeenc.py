@@ -76,7 +76,7 @@ class Model(nn.Module):
         self.lstm_hidden = 512
         hidden = self.lstm_hidden
         self.lstm_n_layers = 1
-        input_size = 6
+        input_size = 8
 
         self.Linear_Merge1 = nn.Linear(self.pred_len*2,hidden)
         self.activation = nn.GELU()
@@ -116,7 +116,7 @@ class Model(nn.Module):
         x = seasonal_output + trend_output
         x = x.permute(0,2,1) # to [Batch, Output length, Channel]
 
-        print(x.shape)
+        #print(x.shape)
         # x_concat = torch.cat((x, x_m1sum_future), dim=1)
         # x_concat = x_concat.permute(0,2,1) 
         
