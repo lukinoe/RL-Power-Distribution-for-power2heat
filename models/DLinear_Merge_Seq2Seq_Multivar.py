@@ -75,7 +75,7 @@ class Model(nn.Module):
         self.sigm = nn.Sigmoid()
         self.Linear_Merge2 = nn.Linear(1024,self.pred_len)
 
-        self.lstm_hidden = 500
+        self.lstm_hidden = 1024
         self.lstm_n_layers = 1
         input_size = 4
 
