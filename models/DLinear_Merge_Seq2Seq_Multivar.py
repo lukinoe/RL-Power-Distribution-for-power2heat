@@ -84,7 +84,7 @@ class Model(nn.Module):
         self.rnn = nn.LSTM(input_size=input_size, hidden_size=self.lstm_hidden, num_layers=self.lstm_n_layers, batch_first=True)
         self.rnn_linear = nn.Linear(self.lstm_hidden, 1)
 
-    def forward(self, x):
+    def forward(self, x, x_mark):
         # x: [Batch, Input length, Channel]
 
         batch_size = x.shape[0]
