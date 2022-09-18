@@ -518,7 +518,7 @@ class Dataset_Custom_Merge_Multivariable(Dataset):
 class Dataset_Custom_Merge_TimeFeature(Dataset):
     def __init__(self, root_path, flag='train', size=None,
                  features='S', data_path='indv_house.csv',
-                 target='value', scale=False, timeenc=0, freq='h'):
+                 target='value', scale=False, timeenc=1, freq='15min'):
         # size [seq_len, label_len, pred_len]
         # info
         if size == None:
@@ -591,6 +591,8 @@ class Dataset_Custom_Merge_TimeFeature(Dataset):
         elif self.timeenc == 1:
             data_stamp = time_features(pd.to_datetime(df_stamp['date'].values), freq=self.freq)
             data_stamp = data_stamp.transpose(1, 0)
+
+            #print(data_stamp.shape)
 
         self.data_x = data[border1:border2]
         self.data_y = data[border1:border2]
