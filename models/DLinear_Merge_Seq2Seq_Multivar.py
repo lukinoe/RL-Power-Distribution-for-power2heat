@@ -79,6 +79,8 @@ class Model(nn.Module):
         self.lstm_n_layers = 1
         input_size = 4
 
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
         self.rnn = nn.LSTM(input_size=input_size, hidden_size=self.lstm_hidden, num_layers=self.lstm_n_layers, batch_first=True)
         self.rnn_linear = nn.Linear(self.lstm_hidden, 1)
 
@@ -138,8 +140,8 @@ class Model(nn.Module):
 
             #print(x_concat.shape)
 
-            h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden)  # [nr_layer, batch_size, hidden_size]
-            c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden)
+            h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)  # [nr_layer, batch_size, hidden_size]
+            c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)
             output, (hn, cn) = self.rnn(x_concat, (h0, c0))
             x = self.rnn_linear(output)
 
