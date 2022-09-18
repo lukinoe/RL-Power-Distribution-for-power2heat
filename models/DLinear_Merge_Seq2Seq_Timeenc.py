@@ -76,7 +76,7 @@ class Model(nn.Module):
         self.lstm_hidden = 512
         hidden = self.lstm_hidden
         self.lstm_n_layers = 1
-        input_size = 8
+        input_size = 4
 
         self.Linear_Merge1 = nn.Linear(self.pred_len*2,hidden)
         self.activation = nn.GELU()
@@ -128,8 +128,8 @@ class Model(nn.Module):
         #print(timeenc.shape, x_m1sum_future.shape)
         
 
-        x2 = torch.cat((timeenc, x_m1sum_future, x), dim=2)
-        #x2 = torch.cat((x_m1sum_future, x), dim=2)
+        #x2 = torch.cat((timeenc, x_m1sum_future, x), dim=2)
+        x2 = torch.cat((x_m1sum_future, x), dim=2)
 
         lstm = True
 

@@ -237,7 +237,7 @@ class Exp_Main(Exp_Basic):
                 if self.args.use_amp:
                     with torch.cuda.amp.autocast():
                         if 'DLinear' in self.args.model:
-                            outputs = self.model(batch_x)
+                            outputs = self.model(batch_x, batch_x_mark)
                         else:
                             if self.args.output_attention:
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
@@ -245,7 +245,7 @@ class Exp_Main(Exp_Basic):
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 else:
                     if 'DLinear' in self.args.model:
-                            outputs = self.model(batch_x)
+                            outputs = self.model(batch_x, batch_x_mark)
                     else:
                         if self.args.output_attention:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
@@ -328,7 +328,7 @@ class Exp_Main(Exp_Basic):
                 if self.args.use_amp:
                     with torch.cuda.amp.autocast():
                         if 'DLinear' in self.args.model:
-                            outputs = self.model(batch_x)
+                            outputs = self.model(batch_x, batch_x_mark)
                         else:
                             if self.args.output_attention:
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
@@ -336,7 +336,7 @@ class Exp_Main(Exp_Basic):
                                 outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 else:
                     if 'DLinear' in self.args.model:
-                        outputs = self.model(batch_x)
+                        outputs = self.model(batch_x, batch_x_mark)
                     else:
                         if self.args.output_attention:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
