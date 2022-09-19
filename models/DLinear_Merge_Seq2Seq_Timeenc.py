@@ -78,14 +78,11 @@ class Model(nn.Module):
         self.lstm_n_layers = 1
         input_size = 6
 
-        self.Linear_Merge1 = nn.Linear(self.pred_len*2,hidden)
-        self.activation = nn.GELU()
-        self.Linear_Merge2 = nn.Linear(hidden,self.pred_len)
-        self.activation2 = nn.GELU()
+
 
         self.linear_nn1 = nn.Linear(self.pred_len*input_size,hidden)
-        self.linear_nn2 = nn.Linear(hidden,hidden)
-        self.linear_nn3 = nn.Linear(hidden,self.pred_len)
+        self.activation = nn.GELU()
+        self.linear_nn2 = nn.Linear(hidden,self.pred_len)
 
 
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -122,7 +119,7 @@ class Model(nn.Module):
         x2 = torch.cat((timeenc, x_m1sum_future, x), dim=2)
         #x2 = torch.cat((x_m1sum_future, x), dim=2)
 
-        lstm = True
+        lstm = False
 
         if not lstm:
             x2 = torch.flatten(x2, start_dim=1)
@@ -133,8 +130,6 @@ class Model(nn.Module):
             x2 = self.linear_nn1(x2)
             x2 = self.activation(x2)
             x2 = self.linear_nn2(x2)
-            x2 = self.activation2(x2)
-            x2 = self.linear_nn3(x2)
 
             x2 = x2.permute(0,2,1)
 
@@ -147,7 +142,7 @@ class Model(nn.Module):
             x2 = self.rnn_linear(output)
 
 
-        print(x2.shape)
+        #print(x2.shape)
 
        
 
