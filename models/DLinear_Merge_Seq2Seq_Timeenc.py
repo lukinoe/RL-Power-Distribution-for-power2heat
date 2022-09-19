@@ -147,7 +147,7 @@ class Model(nn.Module):
             x2 = self.rnn_linear(output)
 
 
-        
+        print(x2.shape)
 
        
 

@@ -148,12 +148,7 @@ class Model(nn.Module):
 
             
         
-        print(x2.shape)
-        #x2 = x2.permute(0,2,1)
-
-        #print("LSTM out:",x2.shape)
-
-        #x = x + x2
+        #print(x2.shape)
 
         #print(x.shape)   # goal 32, 48, 1
 
