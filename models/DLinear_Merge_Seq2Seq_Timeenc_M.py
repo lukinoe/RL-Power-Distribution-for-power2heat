@@ -76,7 +76,7 @@ class Model(nn.Module):
         self.lstm_hidden = 2048
         hidden = self.lstm_hidden
         self.lstm_n_layers = 1
-        input_size = 8
+        input_size = 10
 
         self.Linear_Merge1 = nn.Linear(self.pred_len*2,hidden)
         self.activation = nn.GELU()
