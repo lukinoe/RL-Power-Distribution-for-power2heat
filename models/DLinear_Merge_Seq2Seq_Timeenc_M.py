@@ -122,7 +122,7 @@ class Model(nn.Module):
         x2 = torch.cat((timeenc, x_m1sum_future, x), dim=2)
         #x2 = torch.cat((x_m1sum_future, x), dim=2)
 
-        lstm = False
+        lstm = True
 
         if not lstm:
             x2 = torch.flatten(x2, start_dim=1)
