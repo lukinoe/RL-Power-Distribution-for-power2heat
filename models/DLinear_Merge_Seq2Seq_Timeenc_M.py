@@ -76,7 +76,7 @@ class Model(nn.Module):
         self.lstm_hidden = 2048
         hidden = self.lstm_hidden
         self.lstm_n_layers = 1
-        input_size = 6
+        input_size = 8
 
         self.Linear_Merge1 = nn.Linear(self.pred_len*2,hidden)
         self.activation = nn.GELU()
@@ -117,7 +117,9 @@ class Model(nn.Module):
         x = x.permute(0,2,1) # to [Batch, Output length, Channel]
 
         
-        x = x[:,:,-1].reshape(x.shape[0], x.shape[1], 1) # only get perdiodicity of temp3
+        # x = x[:,:,-1].reshape(x.shape[0], x.shape[1], 1) # only get perdiodicity of temp3
+
+        #x = x[:,:,:]
 
         x2 = torch.cat((timeenc, x_m1sum_future, x), dim=2)
         #x2 = torch.cat((x_m1sum_future, x), dim=2)
