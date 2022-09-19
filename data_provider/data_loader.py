@@ -731,7 +731,7 @@ class Dataset_Custom_Merge_TimeFeature_M(Dataset):
         seq_x = self.data_x[s_begin:s_end] # use all variable channels
         #seq_x = seq_x.reshape((seq_x.shape[0], 1))
 
-        seq_y = self.data_y[r_begin:r_end]
+        seq_y = self.data_y[r_begin:r_end, -3:] # take 3 temp values as target
         seq_x_mark = self.data_stamp[s_begin:s_end]
         seq_y_mark = self.data_stamp[r_begin:r_end]
 
