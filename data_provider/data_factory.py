@@ -1,4 +1,4 @@
-from data_provider.data_loader import Dataset_Custom_Future_Seq, Dataset_Custom_Merge, Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred, Dataset_Custom_Merge_Multivariable, Dataset_Custom_Merge_TimeFeature
+from data_provider.data_loader import Dataset_Custom_Future_Seq, Dataset_Custom_Merge, Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred, Dataset_Custom_Merge_Multivariable, Dataset_Custom_Merge_TimeFeature, Dataset_Custom_Merge_TimeFeature_M
 from torch.utils.data import DataLoader
 
 data_dict = {
@@ -10,7 +10,8 @@ data_dict = {
     'custom_merge': Dataset_Custom_Merge,
     "custom_merge_future": Dataset_Custom_Future_Seq,
     "custom_merge_multivar": Dataset_Custom_Merge_Multivariable,
-    "custom_merge_timeenc": Dataset_Custom_Merge_TimeFeature
+    "custom_merge_timeenc": Dataset_Custom_Merge_TimeFeature,
+    "custom_merge_timeenc_m": Dataset_Custom_Merge_TimeFeature_M
 }
 
 

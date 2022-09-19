@@ -1,6 +1,6 @@
 from data_provider.data_factory import data_provider
 from exp.exp_basic import Exp_Basic
-from models import Informer, Autoformer, Transformer, DLinear, DLinear_Merge, DLinear_Add, DLinear_Merge_Seq2Seq, DLinear_Merge_Seq2Seq_Multivar,DLinear_Merge_Seq2Seq_Timeenc
+from models import Informer, Autoformer, Transformer, DLinear, DLinear_Merge, DLinear_Add, DLinear_Merge_Seq2Seq, DLinear_Merge_Seq2Seq_Multivar,DLinear_Merge_Seq2Seq_Timeenc, DLinear_Merge_Seq2Seq_Timeenc_M
 from utils.tools import EarlyStopping, adjust_learning_rate, visual, test_params_flop
 from utils.metrics import metric
 
@@ -35,7 +35,8 @@ class Exp_Main(Exp_Basic):
             "DLinear_Add": DLinear_Add,
             "DLinear_Merge_Seq2Seq": DLinear_Merge_Seq2Seq,
             "DLinear_Merge_Seq2Seq_Multivar": DLinear_Merge_Seq2Seq_Multivar,
-            "DLinear_Merge_Seq2Seq_Timeenc": DLinear_Merge_Seq2Seq_Timeenc
+            "DLinear_Merge_Seq2Seq_Timeenc": DLinear_Merge_Seq2Seq_Timeenc,
+            "DLinear_Merge_Seq2Seq_Timeenc_M": DLinear_Merge_Seq2Seq_Timeenc_M
         }
         model = model_dict[self.args.model].Model(self.args).float()
 
@@ -154,6 +155,7 @@ class Exp_Main(Exp_Basic):
                         f_dim = -1 if self.args.features == 'MS' else 0
                         outputs = outputs[:, -self.args.pred_len:, f_dim:]
                         batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
+
                         loss = criterion(outputs, batch_y)
                         train_loss.append(loss.item())
                 else:
@@ -166,9 +168,14 @@ class Exp_Main(Exp_Basic):
                         else:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark, batch_y)
                     # print(outputs.shape,batch_y.shape)
+
+                    
                     f_dim = -1 if self.args.features == 'MS' else 0
                     outputs = outputs[:, -self.args.pred_len:, f_dim:]
                     batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
+
+                    #print(outputs.shape, batch_y.shape, self.args.features)
+
                     loss = criterion(outputs, batch_y)
                     train_loss.append(loss.item())
 
@@ -312,6 +319,7 @@ class Exp_Main(Exp_Basic):
             self.model.load_state_dict(torch.load(best_model_path))
 
         preds = []
+        reals = []
 
         self.model.eval()
         with torch.no_grad():
@@ -344,15 +352,21 @@ class Exp_Main(Exp_Basic):
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 pred = outputs.detach().cpu().numpy()  # .squeeze()
                 preds.append(pred)
+                real = batch_y.detach().cpu().numpy()
+                reals.append(real)
 
         preds = np.array(preds)
         preds = preds.reshape(-1, preds.shape[-2], preds.shape[-1])
+        
+        reals = np.array(reals)
+        reals = reals.reshape(-1, reals.shape[-2], reals.shape[-1])
 
         # result save
         folder_path = './results/' + setting + '/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        np.save(folder_path + 'real_prediction.npy', preds)
+        np.save(folder_path + 'prediction.npy', preds)
+        np.save(folder_path + 'real.npy', reals)
 
         return

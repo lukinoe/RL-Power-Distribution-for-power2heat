@@ -73,7 +73,7 @@ class Model(nn.Module):
         # Merge Layer
 
         
-        self.lstm_hidden = 1024
+        self.lstm_hidden = 1048
         hidden = self.lstm_hidden
         self.lstm_n_layers = 1
         input_size = 6
@@ -149,12 +149,14 @@ class Model(nn.Module):
 
         x2 = x2.permute(0,2,1)
 
+        #print(x2.shape)
+
         #x = x + x2
 
         #print(x.shape)   # goal 32, 48, 1
 
 
-        return x  
+        return x2
 
 
 
