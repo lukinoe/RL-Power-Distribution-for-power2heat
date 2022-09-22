@@ -71,27 +71,15 @@ class Model(nn.Module):
 
         
         # Merge Layer
-
-        
         self.lstm_hidden = 2048
         hidden = self.lstm_hidden
         self.lstm_n_layers = 1
         input_size = 10
 
-        self.Linear_Merge1 = nn.Linear(self.pred_len*2,hidden)
-        self.activation = nn.GELU()
-        self.Linear_Merge2 = nn.Linear(hidden,self.pred_len)
-        self.activation2 = nn.GELU()
-
-        self.linear_nn1 = nn.Linear(self.pred_len*input_size,hidden)
-        self.linear_nn2 = nn.Linear(hidden,hidden)
-        self.linear_nn3 = nn.Linear(hidden,self.pred_len)
-
-
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-        self.rnn = nn.LSTM(input_size=input_size, hidden_size=self.lstm_hidden, num_layers=self.lstm_n_layers, batch_first=True)
-        self.rnn_linear = nn.Linear(self.lstm_hidden, 3)
+        self.LSTM = nn.LSTM(input_size=input_size, hidden_size=self.lstm_hidden, num_layers=self.lstm_n_layers, batch_first=True)
+        self.Linear_Transform = nn.Linear(self.lstm_hidden, 3)
 
 
     def forward(self, x, x_mark):
@@ -99,7 +87,6 @@ class Model(nn.Module):
 
         x_m1sum_future = x_mark[:,-self.pred_len:,0].reshape((x.shape[0], self.pred_len, 1))
         timeenc = x_mark[:,-self.pred_len:,1:]
-
 
         seasonal_init, trend_init = self.decompsition(x)
         seasonal_init, trend_init = seasonal_init.permute(0,2,1), trend_init.permute(0,2,1)
@@ -116,49 +103,19 @@ class Model(nn.Module):
         x = seasonal_output + trend_output
         x = x.permute(0,2,1) # to [Batch, Output length, Channel]
 
+        x = torch.cat((timeenc, x_m1sum_future, x), dim=2)
+
+        batch_size = x.shape[0]
+
+        h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)  # [nr_layer, batch_size, hidden_size]
+        c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)
+        x, (hn, cn) = self.rnn(x, (h0, c0))
+        x = self.rnn_linear(x)
+
+        return x 
+
+
         
-        # x = x[:,:,-1].reshape(x.shape[0], x.shape[1], 1) # only get perdiodicity of temp3
-
-        #x = x[:,:,:]
-
-        x2 = torch.cat((timeenc, x_m1sum_future, x), dim=2)
-        #x2 = torch.cat((x_m1sum_future, x), dim=2)
-
-        lstm = True
-
-        if not lstm:
-            x2 = torch.flatten(x2, start_dim=1)
-            x2 = x2.reshape((x2.shape[0], x2.shape[1], 1))
-            
-            x2 = x2.permute(0,2,1) 
-
-            x2 = self.linear_nn1(x2)
-            x2 = self.activation(x2)
-            x2 = self.linear_nn2(x2)
-            x2 = self.activation2(x2)
-            x2 = self.linear_nn3(x2)
-
-            x2 = x2.permute(0,2,1)
-
-        else:
-            batch_size = x.shape[0]
-
-            h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)  # [nr_layer, batch_size, hidden_size]
-            c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)
-            output, (hn, cn) = self.rnn(x2, (h0, c0))
-            x2 = self.rnn_linear(output)
-
-            
-        
-        #print(x2.shape)
-
-        #print(x.shape)   # goal 32, 48, 1
-
-
-        return x2  
-
-
-
 
 class Model_original(nn.Module):
     """
