@@ -84,6 +84,7 @@ class Model(nn.Module):
 
     def forward(self, x, x_mark):
         # x: [Batch, Input length, Channel]
+        batch_size = x.shape[0]
 
         x_m1sum_future = x_mark[:,-self.pred_len:,0].reshape((x.shape[0], self.pred_len, 1))
         timeenc = x_mark[:,-self.pred_len:,1:]
@@ -105,8 +106,6 @@ class Model(nn.Module):
 
         x = torch.cat((timeenc, x_m1sum_future, x), dim=2)
 
-        batch_size = x.shape[0]
-
         h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)  # [nr_layer, batch_size, hidden_size]
         c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)
         x, (hn, cn) = self.rnn(x, (h0, c0))
@@ -115,7 +114,7 @@ class Model(nn.Module):
         return x 
 
 
-        
+
 
 class Model_original(nn.Module):
     """
