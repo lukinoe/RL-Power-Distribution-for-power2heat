@@ -108,8 +108,8 @@ class Model(nn.Module):
 
         h0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)  # [nr_layer, batch_size, hidden_size]
         c0 = torch.randn(self.lstm_n_layers, batch_size, self.lstm_hidden).to(self.device)
-        x, (hn, cn) = self.rnn(x, (h0, c0))
-        x = self.rnn_linear(x)
+        x, (hn, cn) = self.LSTM(x, (h0, c0))
+        x = self.Linear_Transform(x)
 
         return x 
 
