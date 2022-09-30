@@ -71,7 +71,7 @@ class Model(nn.Module):
 
         
         # Merge Layer
-        self.lstm_hidden = 2048
+        self.lstm_hidden = 500
         hidden = self.lstm_hidden
         self.lstm_n_layers = 1
         input_size = 10
