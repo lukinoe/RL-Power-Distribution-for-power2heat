@@ -34,7 +34,6 @@ model.to(device)
 model.load_state_dict(torch.load("C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/checkpoints/best/checkpoint.pth", map_location=torch.device(device)))
 
 
-
 def predict_thermal(x_mark):
 
     x_mark = torch.tensor(x_mark, dtype=torch.float64).reshape((1,100,1))
