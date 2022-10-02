@@ -38,6 +38,7 @@ class ExtData:
   def getDataFrame(self):
     self.get_data()
     df = self.merge()
+    self.clean(df)
 
     return df
 
@@ -58,10 +59,6 @@ class ExtData:
     loop = asyncio.new_event_loop()
     self.df_solar = loop.run_until_complete(self.get_solar())
     self.df_load = loop.run_until_complete(self.get_load())
-
-    # self.df_solar = asyncio.new_event_loop().run_until_complete(self.get_solar())
-    # self.df_load = asyncio.new_event_loop().run_until_complete(self.get_load())
-
 
 
   @asyncio.coroutine
@@ -89,7 +86,7 @@ class ExtData:
       df = preprocess_load(res)
       return df
 
+  def clean(self, df):
+    df.solar = df.solar.fillna(0)
+    df.load = df.load.fillna(0)
 
-# d = ExtData(interval=100)
-# df = d.getDataFrame()
-# print(df)
