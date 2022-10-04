@@ -1,15 +1,11 @@
 import os
 import sys
 import inspect
-
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-sys.path.insert(0, parentdir) 
-
-
 from thermal_model.models.DLinear_Merge_Seq2Seq_Timeenc_M  import Model
 import torch
 import numpy as np 
+
+_dir = os.path.dirname(os.path.realpath(__file__))
 
 class dotdict(dict):
     """dot.notation access to dictionary attributes"""
@@ -31,7 +27,7 @@ channels = 5
 
 model = Model(d)
 model.to(device)
-model.load_state_dict(torch.load("C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/thermal_model/checkpoints/best/checkpoint.pth", map_location=torch.device(device)))
+model.load_state_dict(torch.load(_dir + "/thermal_model/checkpoints/best/checkpoint.pth", map_location=torch.device(device)))
 
 
 def predict_thermal(x_mark):
