@@ -7,7 +7,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir) 
 
 
-from models.DLinear_Merge_Seq2Seq_Timeenc_M  import Model
+from thermal_model.models.DLinear_Merge_Seq2Seq_Timeenc_M  import Model
 import torch
 import numpy as np 
 
@@ -31,7 +31,7 @@ channels = 5
 
 model = Model(d)
 model.to(device)
-model.load_state_dict(torch.load("C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/checkpoints/best/checkpoint.pth", map_location=torch.device(device)))
+model.load_state_dict(torch.load("C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/thermal_model/checkpoints/best/checkpoint.pth", map_location=torch.device(device)))
 
 
 def predict_thermal(x_mark):

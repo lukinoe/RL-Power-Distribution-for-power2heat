@@ -1,15 +1,15 @@
 import pickle
 import os
 import pandas as pd
-from .utils.onehot_encode import onehot_build_dataset # . = relative path
-from .utils.onehot_encode import add_time_features
+from power_model.utils.onehot_encode import onehot_build_dataset # . = relative path
+from power_model.utils.onehot_encode import add_time_features
 
 _dir = os.path.dirname(os.path.realpath(__file__))
 
-with open(_dir + '/saved_models/model.pkl', 'rb') as f:
+with open(_dir + '/power_model/saved_models/model.pkl', 'rb') as f:
     model = pickle.load(f)
 
-with open(_dir + '/saved_scaler/scaler.pkl', 'rb') as f:
+with open(_dir + '/power_model/saved_scaler/scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 

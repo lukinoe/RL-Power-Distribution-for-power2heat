@@ -78,7 +78,7 @@ class ExtData:
   @asyncio.coroutine
   def get_load(self):
       loop = asyncio.get_event_loop()
-      future1 = loop.run_in_executor(None, requests.get, 'https://www.energy-charts.info/charts/power/data/de/week_2022_39.json')
+      future1 = loop.run_in_executor(None, requests.get, 'https://www.energy-charts.info/charts/power/data/de/week_2022_40.json')
 
       response1 = yield from future1
       res = response1.text

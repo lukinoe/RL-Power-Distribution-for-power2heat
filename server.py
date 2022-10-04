@@ -1,6 +1,6 @@
 from flask import Flask
 from pred_thermal import predict_thermal
-from power_model.pred_power import predict_power
+from pred_power import predict_power
 from getData import ExtData
 import pandas as pd
 import numpy as np
