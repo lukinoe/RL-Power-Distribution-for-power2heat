@@ -14,7 +14,7 @@ import os
 _dir = os.path.dirname(os.path.realpath(__file__))
 
 
-dataset = pd.read_csv(_dir + "/data/wout_m2sum_target_unscaled_date_m1_timefeatures_02-10.csv")
+dataset = pd.read_csv(_dir + "/data/wout_m2sum_target_unscaled_date_m1_timefeatures_04-10.csv")
 target = "power_consumption"
 
 
@@ -32,9 +32,11 @@ def fit_svr(dataset, encoding="none", scale=False, model="svr", epochs=200):
       X = dataset[:,:-1]
       y = dataset[:,-1].reshape(-1, 1)
 
+    sc_m1sum = StandardScaler()
     sc_y = StandardScaler()
 
     if scale:
+      X[:,0] = sc_m1sum.fit_transform(X[:,0].reshape(-1, 1)).flatten()
       y = sc_y.fit_transform(y)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
@@ -58,17 +60,20 @@ def fit_svr(dataset, encoding="none", scale=False, model="svr", epochs=200):
     print(np.mean(y_pred), np.std(y_pred))
 
 
-    return regressor, y_pred, y_test, sc_y
+    return regressor, y_pred, y_test, sc_m1sum, sc_y
 
 
-svr, y_pred, y_test, sc_y = fit_svr(dataset, scale=True, encoding="onehot")
+svr, y_pred, y_test, sc_m1sum, sc_y = fit_svr(dataset, scale=True, encoding="onehot")
 
 # save model
 with open(_dir + '/saved_models/model.pkl','wb') as f:
     pickle.dump(svr,f)
 
 # save scaler
-with open(_dir + '/saved_scaler/scaler.pkl','wb') as f:
+with open(_dir + '/saved_scaler/scaler_y.pkl','wb') as f:
     pickle.dump(sc_y,f)
+
+with open(_dir + '/saved_scaler/scaler_m1sum.pkl','wb') as f:
+    pickle.dump(sc_m1sum,f)
 
 
