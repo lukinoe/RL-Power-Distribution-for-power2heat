@@ -3,15 +3,24 @@ import numpy as np
 import pandas as pd
 
 
-def add_time_features(data):
+def add_time_features(data, mode="power"):
     data = data.reset_index()
     data["date"] = pd.to_datetime(data.date)
 
-    data["month"] = data["date"].dt.month
-    data["day"] = data["date"].dt.day
-    data["hour"] = data["date"].dt.hour
-    data["weekday"] = data["date"].dt.dayofweek
-    data["minute"] = data["date"].dt.minute
+    if mode=="thermal":
+      data['month'] = data.date.apply(lambda row: row.month, 1)
+      data['day'] = data.date.apply(lambda row: row.day, 1)
+      data['weekday'] = data.date.apply(lambda row: row.weekday(), 1)
+      data['hour'] = data.date.apply(lambda row: row.hour, 1)
+      #data['minute'] = df_stamp.date.apply(lambda row: row.minute, 1)
+
+    else: # power
+      data["month"] = data["date"].dt.month
+      data["day"] = data["date"].dt.day
+      data["hour"] = data["date"].dt.hour
+      data["weekday"] = data["date"].dt.dayofweek
+      data["minute"] = data["date"].dt.minute
+
 
     del data["date"]
 

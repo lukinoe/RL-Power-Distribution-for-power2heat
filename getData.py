@@ -1,8 +1,15 @@
 from datetime import datetime
 import asyncio
+import mysql.connector
 import requests
 import json
 import pandas as pd
+import os
+
+# Obtain connection string information from the portal
+_dir = os.path.dirname(os.path.realpath(__file__))
+f = open(_dir + '//config.json')
+config = json.load(f)["mypv_db"]
 
 
 def preprocess_load(res):
@@ -35,12 +42,12 @@ class ExtData:
     self.date_format = "%Y-%m-%d %H:%M:%S"
 
 
-  def getDataFrame(self):
+  def getDataFrames(self):
     self.get_data()
     df = self.merge()
     self.clean(df)
 
-    return df
+    return df, self.df_historic
 
 
   def merge(self):
@@ -59,6 +66,7 @@ class ExtData:
     loop = asyncio.new_event_loop()
     self.df_solar = loop.run_until_complete(self.get_solar())
     self.df_load = loop.run_until_complete(self.get_load())
+    self.df_historic = loop.run_until_complete(self.get_historic())
 
 
   @asyncio.coroutine
@@ -85,6 +93,31 @@ class ExtData:
 
       df = preprocess_load(res)
       return df
+
+  @asyncio.coroutine
+  def get_historic(self):
+      try:
+        conn = mysql.connector.connect(**config)
+        print("Connection established")
+      except mysql.connector.Error as err:
+          print(err)
+      else:
+        cursor = conn.cursor()
+
+        # Read data
+        cursor.execute("SELECT * FROM `my-pv-live`.teichstrasse9;")
+        rows = cursor.fetchall()
+        print("Read",cursor.rowcount,"row(s) of data.")
+
+        df = pd.DataFrame(rows)
+        df.columns = ["id", "date", "i_temp1", "i_temp2", "i_temp3", "i_power", "i_m1sum"]
+        #print(df)
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        return df
 
   def clean(self, df):
     df.solar = df.solar.fillna(0)

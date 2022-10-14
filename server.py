@@ -11,13 +11,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def predict():
-    df = extdata.getDataFrame()
+    df, df_historic = extdata.getDataFrames()
 
     data = df.values
     solar_forecast = data[:,1]
     load_forecast = data[:,0]
 
-    res_thermal = predict_thermal(solar_forecast)
+    res_thermal = predict_thermal(df_historic[["i_temp1", "i_temp2", "i_temp3", "i_power", "i_m1sum"]], df["solar"])
     res_power = predict_power(df["solar"])
 
     print(res_thermal, res_power)
