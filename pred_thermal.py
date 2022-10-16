@@ -40,29 +40,19 @@ def predict_thermal(df_historic, df_solar):
 
     df_solar = add_time_features(df_solar, mode="thermal") #attention! minute is not added to encoding!!
 
-
-    # *** SCALE ***
     df_solar.solar = scaler_set["i_m1sum"].transform(df_solar.solar.to_numpy().reshape(-1,1)).flatten()
     for col in df_historic.columns:
         df_historic[col] = scaler_set[col].transform(df_historic[col].to_numpy().reshape(-1,1)).flatten()
 
-
-    # *** PREDICT ***
     x_mark = torch.tensor(df_solar.values, dtype=torch.float64).reshape((1,100,5))
     x_historic = torch.tensor(df_historic.values, dtype=torch.float64).reshape((1,500,5))
-    #x_mark = torch.cat((torch.randn(1, 100, 4), x_mark), dim=2)
+
 
     y_hat = model(x_historic.float(), x_mark.float())
     y_hat = y_hat.detach().numpy()
-
     y_hat = y_hat.reshape(100,3)
 
-    # *** UNSCALE ***
     for i,col in enumerate(["i_temp1", "i_temp2", "i_temp3"]):
         y_hat[:,i] = scaler_set[col].inverse_transform(y_hat[:,i].reshape(-1,1)).flatten()
-
-
-
-    print(y_hat)
 
     return y_hat
