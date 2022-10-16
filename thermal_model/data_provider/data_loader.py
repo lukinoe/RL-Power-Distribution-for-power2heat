@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import os
 import torch
+import pickle
 from torch.utils.data import Dataset, DataLoader
 from sklearn.preprocessing import StandardScaler
 from utils.timefeatures import time_features
@@ -350,7 +351,7 @@ class Dataset_Custom_Merge_TimeFeature(Dataset):
 class Dataset_Custom_Merge_TimeFeature_M(Dataset):
     def __init__(self, root_path, flag='train', size=None,
                  features='MS', data_path='indv_house.csv',
-                 target='value', scale=False, timeenc=1, freq='15min'):
+                 target='value', scale=True, timeenc=1, freq='15min'):
         # size [seq_len, label_len, pred_len]
         # info
         if size == None:
@@ -404,11 +405,21 @@ class Dataset_Custom_Merge_TimeFeature_M(Dataset):
             df_data = df_raw[[self.target]]
 
         if self.scale:
-            train_data = df_data[border1s[0]:border2s[0]]
-            self.scaler.fit(train_data.values)
-            # print(self.scaler.mean_)
-            # exit()
-            data = self.scaler.transform(df_data.values)
+
+            # save scaler
+            current_dir =  os.path.abspath(os.path.dirname(__file__))
+            parent_dir = os.path.abspath(current_dir + "/../")
+
+            scaler_set = {}
+            for col in df_data.columns:
+                scaler = StandardScaler()
+                df_data[col] = scaler.fit_transform(df_data[col].to_numpy().reshape(-1,1)).flatten()
+                scaler_set[col] = scaler
+            
+            with open(parent_dir + '/dataset/saved_scaler/scaler_dict.pkl','wb') as f:
+                pickle.dump(scaler_set, f)
+
+            data = df_data.values
         else:
             data = df_data.values
 

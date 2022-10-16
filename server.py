@@ -20,13 +20,11 @@ def predict():
     res_thermal = predict_thermal(df_historic[["i_m1sum","i_power","i_temp1","i_temp2","i_temp3"]], df["solar"])
     res_power = predict_power(df["solar"])
 
-    print(res_thermal, res_power)
-    print(res_thermal.shape, res_power.shape)
-
     response = {"load_forecast": list(load_forecast), 
                 "solar_forecast": list(solar_forecast), 
-                "predict_thermal": res_thermal.shape,
-                "predict_power": list(res_power.flatten())
+                "historical_temp": df_historic[["i_temp1","i_temp2","i_temp3"]].values.tolist(),
+                "predict_temp": res_thermal.tolist(),
+                "predict_power": res_power.flatten().tolist()
                 }
 
     return response
