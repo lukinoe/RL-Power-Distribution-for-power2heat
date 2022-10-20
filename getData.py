@@ -81,7 +81,8 @@ class ExtData:
       c = config["pv"]
       #https://api.forecast.solar/estimate/:lat/:lon/:dec/:az/:kwp
 
-      future1 = loop.run_in_executor(None, requests.get, 'https://api.forecast.solar/estimate/{}/{}/{}/{}/{}'.format(c["lat"], c["lon"], c["declination"], c["azimuth"], c["kwhp"]))
+      future1 = loop.run_in_executor(None, requests.get, 'https://api.forecast.solar/estimate/{}/{}/{}/{}/{}'
+      .format(c["lat"], c["lon"], c["declination"], c["azimuth"], c["kwhp"]))
 
       response1 = yield from future1
       res = response1.text
