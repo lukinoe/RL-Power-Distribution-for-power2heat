@@ -9,7 +9,7 @@ import os
 # Obtain connection string information from the portal
 _dir = os.path.dirname(os.path.realpath(__file__))
 f = open(_dir + '//config.json')
-config = json.load(f)["mypv_db"]
+config = json.load(f)
 
 
 def preprocess_load(res):
@@ -28,7 +28,13 @@ def preprocess_load(res):
     return datetime.fromtimestamp(int(digits)).strftime("%Y-%m-%d %H:%M:%S")
 
   ts = [get_date(t) for t in x]
-  df_load = pd.DataFrame({"date": ts, "val": y})
+  print(len(ts), len(y))
+  if len(ts) == len(y):
+    df_load = pd.DataFrame({"date": ts, "val": y})
+  else: #if array length does not match --> return 0's
+    df_load = pd.DataFrame({"date": ts, "val": [0]*len(ts)})  
+
+
   df_load = df_load.set_index('date')
   df_load.index = pd.to_datetime(df_load.index)
 
@@ -72,7 +78,10 @@ class ExtData:
   @asyncio.coroutine
   def get_solar(self):
       loop = asyncio.get_event_loop()
-      future1 = loop.run_in_executor(None, requests.get, 'https://api.forecast.solar/estimate/48.057194/14.346978/20/10/10')
+      c = config["pv"]
+      #https://api.forecast.solar/estimate/:lat/:lon/:dec/:az/:kwp
+
+      future1 = loop.run_in_executor(None, requests.get, 'https://api.forecast.solar/estimate/{}/{}/{}/{}/{}'.format(c["lat"], c["lon"], c["declination"], c["azimuth"], c["kwhp"]))
 
       response1 = yield from future1
       res = response1.text
@@ -86,7 +95,9 @@ class ExtData:
   @asyncio.coroutine
   def get_load(self):
       loop = asyncio.get_event_loop()
-      future1 = loop.run_in_executor(None, requests.get, 'https://www.energy-charts.info/charts/power/data/de/week_2022_41.json')
+      
+      week = str(datetime.now().isocalendar().week)
+      future1 = loop.run_in_executor(None, requests.get, 'https://www.energy-charts.info/charts/power/data/de/week_2022_' + week + '.json')
 
       response1 = yield from future1
       res = response1.text
@@ -97,7 +108,7 @@ class ExtData:
   @asyncio.coroutine
   def get_historic(self):
       try:
-        conn = mysql.connector.connect(**config)
+        conn = mysql.connector.connect(**config["db"])
         print("Connection established")
       except mysql.connector.Error as err:
           print(err)
