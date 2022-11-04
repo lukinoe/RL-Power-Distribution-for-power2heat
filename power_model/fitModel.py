@@ -6,7 +6,6 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from utils.onehot_encode import onehot_build_dataset
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 import math
 import pickle

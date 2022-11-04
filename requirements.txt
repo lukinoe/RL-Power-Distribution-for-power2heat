@@ -1,6 +1,7 @@
 numpy
-matplotlib
 pandas
 scikit-learn
+pickle
 torch==1.9.0
 flask
+mysql-connector-python
