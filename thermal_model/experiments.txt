@@ -13,3 +13,8 @@ python -u run_longExp.py --is_training 1 --root_path ./dataset/ --data_path temp
 
 # best performing timeenc
 python -u run_longExp.py --is_training 1 --root_path ./dataset/ --data_path temp3_date_m1_ipower_scaled.csv --model_id 1 --model DLinear_Merge_Seq2Seq_Timeenc --lradj 4 --train_epochs 50  --data custom_merge_timeenc --features MS --seq_len 500 --pred_len 192 --enc_in 7 --des 'Exp' --itr 1 --batch_size 32 --num_workers 0 --target i_temp3
+
+
+
+# FINAL MAE: 0.19 temp1,temp2,temp3
+!python -u run_longExp.py  --learning_rate 0.0001 --is_training 1 --root_path ./dataset/ --data_path "multitarget_date_m1_ipower_19-09.csv" --model_id 1 --model DLinear_Merge_Seq2Seq_Timeenc_M --lradj 4 --train_epochs 50  --data custom_merge_timeenc_m --features M --seq_len 500 --pred_len 100 --enc_in 7 --des 'Exp' --itr 1 --batch_size 32 --target i_temp3

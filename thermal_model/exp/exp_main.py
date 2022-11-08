@@ -1,6 +1,6 @@
 from data_provider.data_factory import data_provider
 from exp.exp_basic import Exp_Basic
-from models import Informer, Autoformer, Transformer, DLinear, DLinear_Merge, DLinear_Add, DLinear_Merge_Seq2Seq_Multivar, DLinear_Merge_Seq2Seq_Timeenc_M
+from models import Informer, Autoformer, Transformer, DLinear, DLinear_Merge, DLinear_Add, DLinear_Merge_Seq2Seq_Multivar, DLinear_Merge_Seq2Seq_Timeenc_M, DLinear_Merge_Seq2Seq_NoTime_M
 from utils.tools import EarlyStopping, adjust_learning_rate, visual, test_params_flop
 from utils.metrics import metric
 
@@ -34,6 +34,7 @@ class Exp_Main(Exp_Basic):
             'DLinear_Merge': DLinear_Merge,
             "DLinear_Add": DLinear_Add,
             "DLinear_Merge_Seq2Seq_Multivar": DLinear_Merge_Seq2Seq_Multivar,
+            "DLinear_Merge_Seq2Seq_NoTime_M": DLinear_Merge_Seq2Seq_NoTime_M,
             "DLinear_Merge_Seq2Seq_Timeenc_M": DLinear_Merge_Seq2Seq_Timeenc_M
         }
         model = model_dict[self.args.model].Model(self.args).float()
