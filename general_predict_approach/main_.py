@@ -17,8 +17,7 @@ from keras.callbacks import EarlyStopping
 from lstm import DataLSTM, LSTM, Trainer_LSTM
 
 
-
-from data_utils import onehot_build_dataset
+from data_utils import onehot_build_dataset, cyclical_encode_dataset
 
 
 class Model:
@@ -27,7 +26,7 @@ class Model:
     def __init__(self, dataset, encoding, scale, model="svr", target="power_consumption", test_size=0.05, epochs=200, verbose=1, 
 
         nn_params={'activation1': 'sigmoid', 'activation2': 'selu', 'lr': 0.001, 'n_hidden1': 500, 'n_hidden2': 50},
-        svr_params={"kernel": "rbf"},
+        svr_params={"kernel": "rbf", "C": 1,"epsilon": 0.1},
         lstm_params={"n_epochs": 20, "learning_rate":0.001, "batch_size": 64 , "hidden_size": 50, "num_layers": 1, "lookback_len": 100, "pred_len": 24}
 
     ) -> None:
@@ -50,13 +49,16 @@ class Model:
     def prepare_data(self):
         dataset = self.dataset
         
-        X = dataset.iloc[:,:-1].values.astype(float)
         if self.model== "lstm":
             X = dataset.values.astype(float)
+
+        else:
+            X = dataset.iloc[:,:-1].values.astype(float)
 
         y = dataset.iloc[:,-1].values.astype(float).reshape(-1, 1)
 
         if self.encoding == "onehot":
+
             dataset = onehot_build_dataset(dataset, self.target)
 
             X = dataset[:,:-1]
@@ -65,6 +67,14 @@ class Model:
 
             y = dataset[:,-1].reshape(-1, 1)
 
+        if self.encoding == "cyclical":
+            dataset, _ = cyclical_encode_dataset(dataset, self.target)
+
+            X = dataset[:,:-1]
+            if self.model== "lstm":
+                X = dataset
+
+            y = dataset[:,-1].reshape(-1, 1)
 
         if self.scale:
             y = self.sc_y.fit_transform(y)
@@ -88,6 +98,12 @@ class Model:
         if self.model == "lstm":
             regressor, y_pred = self.train_model_lstm(X_train, y_train, X_test, y_test)
 
+        if self.model =="linear_regression":
+            print(y_train, X_train)
+            from statsmodels.api import OLS
+            regressor = OLS(y_train, X_train).fit()
+            y_pred = regressor.predict(X_test)
+            
         return regressor, y_pred, y_test
 
     def results(self, plot=True):
@@ -96,24 +112,33 @@ class Model:
 
         if self.model != "lstm":
 
+            metrics_dict = self.get_metrics(y_pred, y_test)
+
             print("scaled MAE: ", mean_absolute_error(y_test, y_pred))
             
+            """ ATTENTION: the result dict for the benchmarks is not inverse scaled!"""
+
+            
             if self.scale:
-                y_test, y_pred = self.sc_y.inverse_transform(
-                y_test.reshape(-1, 1)), self.sc_y.inverse_transform(y_pred.reshape(-1, 1))
+                y_test, y_pred = self.sc_y.inverse_transform(y_test.reshape(-1, 1)), self.sc_y.inverse_transform(y_pred.reshape(-1, 1))
             
             print("y_pred mean and std:")
             print(np.mean(y_pred), np.std(y_pred))
 
             if plot:
-                plt.plot(y_pred[:500])
-                plt.plot(y_test[:500])
+                plt.plot(y_pred[:500], label="Prediction")
+                plt.plot(y_test[:500], label="real")
+                plt.xlabel('timesteps')
+                plt.ylabel('kwH')
+                plt.legend()
                 plt.show()
 
-            return self.get_metrics(y_pred, y_test)
 
         else:
-            metrics_dict = {"mae": y_pred}
+            metrics_dict = {"mae": y_pred[1], 
+                            "mse": y_pred[0], 
+                            "mape": None, 
+                            "r2": y_pred[2]}
 
         return metrics_dict
 
@@ -162,6 +187,7 @@ class Model:
         print(X_train.shape, y_test.shape)
 
         self.lstm_params.update({"input_size": X_train.shape[1]})
+        print(self.lstm_params)
         trainer = Trainer_LSTM(self.lstm_params)
         regressor, y_pred = trainer.training_loop(X_train, y_train, X_test, y_test)
 
@@ -175,7 +201,6 @@ class Model:
         r2 = r2_score(y_test, y_pred)
         mape = mean_absolute_percentage_error(y_test, y_pred)
         mae = mean_absolute_error(y_test, y_pred)
-
 
         return  {"mae": mae, "mse": mse, "mape":mape, "r2":r2 }
 

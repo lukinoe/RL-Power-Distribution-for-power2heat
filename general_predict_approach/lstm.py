@@ -13,11 +13,18 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 
+def r2_loss(output, target):
+    target_mean = torch.mean(target)
+    ss_tot = torch.sum((target - target_mean) ** 2)
+    ss_res = torch.sum((target - output) ** 2)
+    r2 = 1 - ss_res / ss_tot
+    return r2
+
+
 class DataLSTM():
 
     def __init__(self, X_train, y_train, X_test, y_test, lookback_len=100, pred_len=24) -> None:
         
-        print("###",X_train, y_train, X_test, y_test)
         self.lookback_len = lookback_len
         self.pred_len = pred_len
         self.generate_sequences(X_train, y_train, X_test, y_test)
@@ -128,6 +135,7 @@ class Trainer_LSTM():
 
         loss_fn = torch.nn.MSELoss()    # mean-squared error for regression
         loss_mae = loss = nn.L1Loss()
+
         optimiser = torch.optim.Adam(lstm.parameters(), lr=self.params["learning_rate"])
         batch_size = self.params["batch_size"]
         n_epochs= self.params["n_epochs"]
@@ -135,8 +143,13 @@ class Trainer_LSTM():
 
         for epoch in range(n_epochs):
             train_loss_l = []
-            test_loss_l = []
+            test_mse_loss_l = []
             test_mae_l = []
+            r2_l = []
+
+            metrics = []
+
+
             for b in range(0,len(X_train),batch_size):
                 inpt = X_train[b:b+batch_size,:,:]
                 target = y_train[b:b+batch_size]  
@@ -156,19 +169,35 @@ class Trainer_LSTM():
                 target_test = y_test[b:b+batch_size]  
                 lstm.eval()
                 test_preds = lstm(inpt_test)
-                test_loss = loss_fn(test_preds, target_test)
+
+
+                test_mse = loss_fn(test_preds, target_test)
                 test_mae = loss_mae(test_preds, target_test)
-                test_loss_l.append(test_loss.item())
+                r2_ = r2_loss(test_preds, target_test)     # R2 can also be negative if the outputs are even worse than a function predicting the mean
+
+                
+                ''' [MSE, MAE, R2]'''
+                metrics.append([test_mse.item(), test_mae.item(), r2_.item()])
+
+
+                test_mse_loss_l.append(test_mse.item())
                 test_mae_l.append(test_mae.item())
+                
             
-            
-            m_train_loss, m_test_loss, m_test_mae = np.mean(np.abs(np.array(train_loss_l))), np.mean(np.abs(np.array(test_loss_l))),np.mean(np.abs(np.array(test_mae_l)))
+            metrics = np.array(metrics)
+            metrics = np.mean(metrics, axis=0)
+
+            # print("Test metrics [MSE, MAE, R2]: ", metrics)
+
+
+            m_train_loss, m_test_loss, m_test_mae = np.mean(np.abs(np.array(train_loss_l))), np.mean(np.abs(np.array(test_mse_loss_l))),np.mean(np.abs(np.array(test_mae_l)))
             print("Epoch: %d, train loss: %1.5f, test loss: %1.5f,  test mae loss: %1.5f" % (epoch, 
                                                                         m_train_loss, 
                                                                         m_test_loss, 
                                                                         m_test_mae))
+        
             
-        return lstm, m_test_mae
+        return lstm, metrics
 
 
 

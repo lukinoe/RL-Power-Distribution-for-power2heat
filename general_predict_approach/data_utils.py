@@ -11,7 +11,6 @@ def encode_minute():
   return list(np.array(["0", "15", "30", "45"]).reshape(1,4))
 
 
-
 def encode_and_bind(original_dataframe, feature_to_encode, categories):
     original_dataframe = original_dataframe.astype(str)  # pd dummies only works for str input
     enc = OneHotEncoder(categories=categories)
@@ -24,7 +23,8 @@ def encode_and_bind(original_dataframe, feature_to_encode, categories):
 
 
 def onehot_build_dataset(data, target):
-  df = data
+  df = data.copy()
+
   for i in [["day", cats(1,31)] , 
             ["month", cats(1,12)], 
             [ "hour", cats(0,23)], 
@@ -35,6 +35,12 @@ def onehot_build_dataset(data, target):
     #df = encode_and_bind(df, i[0])
     if i[0] in data.columns:
       df = encode_and_bind(df, i[0], i[1])
+
+
+  # cols = df.columns.tolist()
+  # cols = cols[-1:] + cols[:-1]
+  # df = df[cols]
+  # df.insert(-1, target, df.pop(target))
 
   del df[target]
   df[target] = data[target]
@@ -57,7 +63,8 @@ def cyclical_encode_dataset(data, target):
   df = data.copy()
 
   for i in ["day", "month", "hour", "weekday", "minute"]:
-    df = cyclical_transform(df, i, True)
+    if i in df.columns:
+      df = cyclical_transform(df, i, True)
 
   del df[target]
   #del df["date"]
@@ -66,3 +73,4 @@ def cyclical_encode_dataset(data, target):
   dataset = df.to_numpy(dtype=float)
 
   return dataset, df
+
