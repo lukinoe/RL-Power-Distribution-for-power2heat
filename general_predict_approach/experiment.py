@@ -12,7 +12,7 @@ import pandas as pd
 plt.rcParams["figure.figsize"] = (20,8)
 
 
-""" CHANGE TO CURRENT WORKING_DIR"""
+""" CHANGE TO CURRENT WORKING_DIR """
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
@@ -24,6 +24,12 @@ experiment = {}
 
 #target = "power_consumption_kwh"
 target = "thermal_consumption_kwh"
+
+test_size = 0.05
+
+
+
+
 
 
 dset = DataSet(start_date="2022-01-01", target=target, scale_target=False, scale_variables=False, time_features=False, dynamic_price=False, demand_price=0.5, feedin_price=0.5).pipeline()
@@ -49,6 +55,37 @@ for i in range(len(features)):
 feature_combinations
 
 
+
+def benchmarkModel(grid, experiment):
+
+  print("Lenght Grid: ", len(grid))
+  res = []
+  for p in grid:
+      print(p, target)
+
+
+      if hasattr(p, 'features'):
+          data_in = data[p["features"]]
+      else:
+          data_in = data
+        
+      
+      model = Model(model=p["model"], dataset=data_in, encoding=p["encoding"], scale=True, target=target, test_size=test_size, model_params=p)
+      
+      metrics = model.results(plot=False)
+      p.update(metrics)
+      res.append(p)
+
+  df = pd.DataFrame(res)
+  model_name = grid[0]["model"]
+  experiment.update({"df_" + model_name : df})
+  print(df.sort_values(by='mse', ascending=True))
+
+  return experiment
+
+
+
+
 """ 
 
   Linear Regression 
@@ -56,26 +93,16 @@ feature_combinations
 """
 
 params_grid = {
-  "model": ["LinearRegression"],
+  "model": ["linear_regression"],
   "features": feature_combinations,
   "encoding": ["onehot","cyclical", None]
 }
 
 grid = ParameterGrid(params_grid) 
 
-print("Lenght Grid: ", len(grid))
-res = []
-for p in grid:
-    print(p, target)
-    model = Model(model="linear_regression", dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=0.05, epochs=200, lstm_params=p)
-    
-    metrics = model.results(plot=False)
-    p.update(metrics)
-    res.append(p)
+experiment = benchmarkModel(grid, experiment)
 
-df = pd.DataFrame(res)
-experiment.update({"df_LinearRegression": df})
-print(df.sort_values(by='mse', ascending=True))
+
 
 
 """ 
@@ -84,36 +111,25 @@ print(df.sort_values(by='mse', ascending=True))
 
 """
 
+
+
 params_grid = {
-  "model": ["SVR"],
+  "model": ["svr"],
   # "kernel": ["rbf", "sigmoid", "poly"],
   # "degree": [3],  # only valid for "poly" kernel
   # "C": [1, 0.8, 0.9],   # default = 1
   # "epsilon": [0.1, 0.03], # default = 0.1
-  "features": feature_combinations,
+  # "features": feature_combinations,
   "kernel": ["rbf"],
   "degree": [3],  # only valid for "poly" kernel
-  "C": [0.8],   # default = 1
-  "epsilon": [0.3], # default = 0.1
+  "C": [0.8, 1],   # default = 1
+  "epsilon": [0.3, 0.1], # default = 0.1
   "encoding": ["cyclical", "onehot", None]
 }
 
 grid = ParameterGrid(params_grid) 
 
-
-print("Lenght Grid: ", len(grid))
-res = []
-for p in grid:
-    print(p, target)
-    model = Model(model="svr", dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=0.05, epochs=200, svr_params=p)
-    
-    metrics = model.results(plot=False)
-    p.update(metrics)
-    res.append(p)
-
-df = pd.DataFrame(res)
-experiment.update({"df_SVR": df})
-print(df.sort_values(by='mse', ascending=True))
+experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -123,33 +139,26 @@ print(df.sort_values(by='mse', ascending=True))
 
 """
 
+
+
+
 params_grid = {
+  "model": ["nn"],
   "epochs": [11],
-  "n_hidden1": [500],
+  "n_hidden1": [100, 250, 500],
   "n_hidden2": [50],
-  "features": feature_combinations,
+  # "features": feature_combinations,
   "batch_size": [64],
   "encoding": ["onehot"],
   "activation1": ["relu"],
-  "activation2": ["sigmoid"],
+  "activation2": ["sigmoid", "relu"],
   "lr": [0.001]
 }
 grid = ParameterGrid(params_grid) 
 
-print(len(grid))
-res = []
-for p in grid:
-    print(p, target)
-    model = Model(model="nn", dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=0.05, nn_params=p)
-    
-    metrics = model.results(plot=False)
-    p.update(metrics)
-    res.append(p)
+experiment = benchmarkModel(grid, experiment)
 
 
-df = pd.DataFrame(res)
-experiment.update({"df_nn": df})
-print(df.sort_values(by='mse', ascending=True))
 
 
 """ 
@@ -160,7 +169,8 @@ print(df.sort_values(by='mse', ascending=True))
 
 
 params_grid = {
-  "n_epochs": [20], 
+  "model": ["DLinear"],
+  "n_epochs": [11], 
   "learning_rate": [0.001], 
   "batch_size": [64], 
   "num_layers": [1], 
@@ -171,26 +181,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-
-
-print(len(grid))
-res = []
-for p in grid:
-    print(p)
-    model = Model(model="DLinear", dataset=data, encoding=p["encoding"], scale=True, target=target, test_size=0.05, epochs=200, DLinear_params=p)
-
-    metrics = model.results()
-    p.update(metrics)
-    res.append(p)
-
-df = pd.DataFrame(res)
-experiment.update({"df_DLinear": df})
-
-
-print(df.sort_values(by='mse', ascending=True))
-
-
-
+experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -204,36 +195,20 @@ print(df.sort_values(by='mse', ascending=True))
 
 
 params_grid = {
-  "n_epochs": [11], 
+  "model": ["lstm"],
+  "n_epochs": [15], 
   "learning_rate": [0.001], 
   "batch_size": [64], 
   "hidden_size": [50,75], 
   "num_layers": [1], 
-  "lookback_len": [48,76,100], 
-  "pred_len": [10],
+  "lookback_len": [76,100], 
+  "pred_len": [10,20],
   "encoding": [None]
 }
 
 grid = ParameterGrid(params_grid) 
 
-
-
-print(len(grid))
-res = []
-for p in grid:
-    print(p)
-    model = Model(model="lstm", dataset=data, encoding=p["encoding"], scale=True, target=target, test_size=0.05, lstm_params=p)
-
-    metrics = model.results()
-    p.update(metrics)
-    res.append(p)
-
-df = pd.DataFrame(res)
-experiment.update({"df_lstm": df})
-
-print(df.sort_values(by='mse', ascending=True))
-
-
+experiment = benchmarkModel(grid, experiment)
 
 
 
