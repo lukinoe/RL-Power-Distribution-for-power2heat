@@ -1,10 +1,10 @@
 import sys
 sys.path.insert(0, 'C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/data')
-import data__, main_, datafactory, data_utils
+import dataTransform, experimentSetup, datafactory, data_utils
 
 from datafactory import DataSet
-from data__ import Transform
-from main_ import Model
+from dataTransform import Transform
+from experimentSetup import Model
 import matplotlib.pyplot as plt
 from itertools import combinations
 from sklearn.model_selection import ParameterGrid
@@ -47,7 +47,7 @@ params_grid = {
   "batch_size": [64], 
   "num_layers": [1], 
   "lookback_len": [48,76,100,200], 
-  "pred_len": [10,20,30],
+  "pred_len": [10,24,30],
   "encoding": [None]
 }
 
@@ -59,7 +59,7 @@ print(len(grid))
 res = []
 for p in grid:
     print(p)
-    model = Model(model="DLinear", dataset=data, encoding=p["encoding"], scale=True, target=target, test_size=0.05, epochs=200, lstm_params=p)
+    model = Model(model="DLinear", dataset=data, encoding=p["encoding"], scale=True, target=target, test_size=0.05, epochs=200, DLinear_params=p)
 
     metrics = model.results()
     p.update(metrics)

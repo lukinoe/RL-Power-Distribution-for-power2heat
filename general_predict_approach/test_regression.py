@@ -1,21 +1,16 @@
 import sys
 sys.path.insert(0, 'C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/data')
-import data__, main_, datafactory, data_utils
-from importlib import reload
-reload(data__)
-reload(main_)
-reload(datafactory)
-reload(data_utils)
+import experimentSetup, datafactory, data_utils
 from datafactory import DataSet
-from data__ import Transform
-from main_ import Model
+from dataTransform import Transform
+from experimentSetup import Model
 import matplotlib.pyplot as plt
 plt.rcParams["figure.figsize"] = (20,8)
 
 
 
-target = "power_consumption_kwh"
-#target = "thermal_consumption_kwh"
+#target = "power_consumption_kwh"
+target = "thermal_consumption_kwh"
 
 experiment = {}
 
@@ -77,4 +72,4 @@ for p in grid:
 
 df = pd.DataFrame(res)
 experiment.update({"df_lstm": df})
-df.sort_values(by='mae', ascending=True)
+print(df.sort_values(by='mse', ascending=True))

@@ -1,14 +1,14 @@
 import sys
 sys.path.insert(0, 'C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/data')
-import data__, main_, datafactory, data_utils
+import data__, experimentSetup, datafactory, data_utils
 from importlib import reload
 reload(data__)
 reload(main_)
 reload(datafactory)
 reload(data_utils)
 from datafactory import DataSet
-from data__ import Transform
-from main_ import Model
+from dataTransform import Transform
+from experimentSetup import Model
 import matplotlib.pyplot as plt
 plt.rcParams["figure.figsize"] = (20,8)
 

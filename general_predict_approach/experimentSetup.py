@@ -1,15 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import math
 from statsmodels.api import OLS
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
 from sklearn.svm import SVR
-from sklearn import ensemble
-from models.lstm import DataLSTM, LSTM, Trainer_LSTM
+from models.LSTM import Trainer_LSTM
 from models.DLinear import Trainer_DLinear
 from models.FFN import FFN
 
@@ -24,7 +21,8 @@ class Model:
 
         nn_params={"batch_size": 64, 'activation1': 'sigmoid', 'activation2': 'selu', 'lr': 0.001, 'n_hidden1': 500, 'n_hidden2': 50},
         svr_params={"kernel": "rbf", "C": 1,"epsilon": 0.1},
-        lstm_params={"n_epochs": 20, "learning_rate":0.001, "batch_size": 64 , "hidden_size": 50, "num_layers": 1, "lookback_len": 100, "pred_len": 24}
+        lstm_params={"n_epochs": 20, "learning_rate":0.001, "batch_size": 64 , "hidden_size": 50, "num_layers": 1, "lookback_len": 100, "pred_len": 24},
+        DLinear_params={"n_epochs": 20, "learning_rate":0.001, "batch_size": 64 , "hidden_size": 50, "num_layers": 1, "lookback_len": 100, "pred_len": 24}
 
     ) -> None:
       self.dataset = dataset
@@ -38,6 +36,9 @@ class Model:
       self.nn_params = nn_params
       self.svr_params = svr_params
       self.lstm_params = lstm_params
+      self.DLinear_params = DLinear_params
+  
+
 
 
       if scale:
@@ -187,9 +188,9 @@ class Model:
     def train_model_DLinear(self, X_train, y_train, X_test, y_test):
         print(X_train.shape, y_test.shape)
 
-        self.lstm_params.update({"input_size": X_train.shape[1]})
-        print(self.lstm_params)
-        trainer = Trainer_DLinear(self.lstm_params)
+        self.DLinear_params.update({"input_size": X_train.shape[1]})
+        print(self.DLinear_params)
+        trainer = Trainer_DLinear(self.DLinear_params)
         regressor, y_pred = trainer.training_loop(X_train, y_train, X_test, y_test)
 
         return regressor, y_pred
