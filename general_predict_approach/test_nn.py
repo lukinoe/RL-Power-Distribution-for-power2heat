@@ -1,31 +1,36 @@
 import sys
 sys.path.insert(0, 'C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/data')
 import data__, main_, datafactory, data_utils
-
+from importlib import reload
+reload(data__)
+reload(main_)
+reload(datafactory)
+reload(data_utils)
 from datafactory import DataSet
 from data__ import Transform
 from main_ import Model
 import matplotlib.pyplot as plt
-from itertools import combinations
-from sklearn.model_selection import ParameterGrid
-import pandas as pd
 plt.rcParams["figure.figsize"] = (20,8)
+
 
 
 target = "power_consumption_kwh"
 #target = "thermal_consumption_kwh"
 
 experiment = {}
+
 dset = DataSet(start_date="2022-01-01", target=target, scale_target=False, scale_variables=False, time_features=False, dynamic_price=False, demand_price=0.5, feedin_price=0.5).pipeline()
+
 dset = dset[["date",target]]
+
 
 t = Transform(dataset=dset, resample="h", target=target, scale_X=True)
 data= t.transform()
+data
 
 
-print(data.head())
+from itertools import combinations
 
-data = data[["month", "hour", target]]
 
 features = list(data.columns)
 del features[-1]
@@ -40,34 +45,42 @@ for i in range(len(features)):
         l.append(target)
         feature_combinations.append(l)
 
+feature_combinations
+
+
+from sklearn.model_selection import ParameterGrid
+import pandas as pd
 
 params_grid = {
-  "n_epochs": [11], 
-  "learning_rate": [0.001], 
-  "batch_size": [64], 
-  "hidden_size": [50,75], 
-  "num_layers": [1], 
-  "lookback_len": [48,76,100], 
-  "pred_len": [10],
-  "encoding": [None]
+  "epochs": [11],
+  "n_hidden1": [500],
+  "n_hidden2": [50],
+  "features": feature_combinations,
+  "batch_size": [64],
+  "encoding": ["onehot"],
+  "activation1": ["relu"],
+  "activation2": ["sigmoid"],
+  "lr": [0.001]
 }
 
+
 grid = ParameterGrid(params_grid) 
+
 
 
 
 print(len(grid))
 res = []
 for p in grid:
-    print(p)
-    model = Model(model="lstm", dataset=data, encoding=p["encoding"], scale=True, target=target, test_size=0.05, epochs=200, lstm_params=p)
-
-    metrics = model.results()
+    print(p, target)
+    model = Model(model="nn", dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=0.05, nn_params=p)
+    
+    metrics = model.results(plot=False)
     p.update(metrics)
     res.append(p)
 
+
+
 df = pd.DataFrame(res)
-experiment.update({"df_lstm": df})
-
-
+experiment.update({"df_nn": df})
 print(df.sort_values(by='mse', ascending=True))

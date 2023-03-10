@@ -2,19 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import math
+from statsmodels.api import OLS
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-#2 Importing the dataset
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
 from sklearn.svm import SVR
 from sklearn import ensemble
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
-from keras.callbacks import EarlyStopping
-
-from lstm import DataLSTM, LSTM, Trainer_LSTM
+from models.lstm import DataLSTM, LSTM, Trainer_LSTM
+from models.DLinear import Trainer_DLinear
+from models.FFN import FFN
 
 
 from data_utils import onehot_build_dataset, cyclical_encode_dataset
@@ -25,7 +22,7 @@ class Model:
 
     def __init__(self, dataset, encoding, scale, model="svr", target="power_consumption", test_size=0.05, epochs=200, verbose=1, 
 
-        nn_params={'activation1': 'sigmoid', 'activation2': 'selu', 'lr': 0.001, 'n_hidden1': 500, 'n_hidden2': 50},
+        nn_params={"batch_size": 64, 'activation1': 'sigmoid', 'activation2': 'selu', 'lr': 0.001, 'n_hidden1': 500, 'n_hidden2': 50},
         svr_params={"kernel": "rbf", "C": 1,"epsilon": 0.1},
         lstm_params={"n_epochs": 20, "learning_rate":0.001, "batch_size": 64 , "hidden_size": 50, "num_layers": 1, "lookback_len": 100, "pred_len": 24}
 
@@ -48,8 +45,12 @@ class Model:
 
     def prepare_data(self):
         dataset = self.dataset
+
+        timeseries = False
+        if self.model in ["lstm", "DLinear"]: 
+            timeseries = True
         
-        if self.model== "lstm":
+        if timeseries:
             X = dataset.values.astype(float)
 
         else:
@@ -62,7 +63,8 @@ class Model:
             dataset = onehot_build_dataset(dataset, self.target)
 
             X = dataset[:,:-1]
-            if self.model== "lstm":
+
+            if timeseries:
                 X = dataset
 
             y = dataset[:,-1].reshape(-1, 1)
@@ -71,7 +73,8 @@ class Model:
             dataset, _ = cyclical_encode_dataset(dataset, self.target)
 
             X = dataset[:,:-1]
-            if self.model== "lstm":
+
+            if timeseries:
                 X = dataset
 
             y = dataset[:,-1].reshape(-1, 1)
@@ -89,6 +92,9 @@ class Model:
 
         X_train, X_test, y_train, y_test = self.prepare_data()
 
+        if self.model =="linear_regression":
+            regressor, y_pred = self.train_model_LinearRegression(X_train, y_train, X_test, y_test)
+
         if self.model== "svr":
             regressor, y_pred = self.train_model_svr(X_train, y_train, X_test, y_test)
 
@@ -98,11 +104,10 @@ class Model:
         if self.model == "lstm":
             regressor, y_pred = self.train_model_lstm(X_train, y_train, X_test, y_test)
 
-        if self.model =="linear_regression":
-            print(y_train, X_train)
-            from statsmodels.api import OLS
-            regressor = OLS(y_train, X_train).fit()
-            y_pred = regressor.predict(X_test)
+        if self.model == "DLinear":
+            regressor, y_pred = self.train_model_DLinear(X_train, y_train, X_test, y_test)
+
+            
             
         return regressor, y_pred, y_test
 
@@ -110,7 +115,7 @@ class Model:
 
         regressor, y_pred, y_test = self.train()
 
-        if self.model != "lstm":
+        if self.model not in ["lstm", "DLinear"]:
 
             metrics_dict = self.get_metrics(y_pred, y_test)
 
@@ -141,41 +146,17 @@ class Model:
                             "r2": y_pred[2]}
 
         return metrics_dict
+    
 
 
-    def train_model_nn(self, X_train, y_train, X_test, y_test):
-        train_data = tf.data.Dataset.from_tensors((X_train, y_train))
-        valid_data = tf.data.Dataset.from_tensors((X_test, y_test))
-
-        early_stopping_monitor = EarlyStopping(
-            monitor='val_loss',
-            min_delta=0,
-            patience=25,
-            verbose=0,
-            mode='auto',
-            baseline=None,
-            restore_best_weights=True
-        )
-        initializer = tf.keras.initializers.GlorotNormal()  # = Xavier Init
-        #optimizer = keras.optimizers.Adam(lr=self.nn_params.lr)
-
-        model = keras.Sequential()
-        model.add(layers.Dense(self.nn_params["n_hidden1"],  activation=self.nn_params["activation1"], kernel_initializer=initializer))
-        model.add(layers.Dense(self.nn_params["n_hidden2"],  activation=self.nn_params["activation2"], kernel_initializer=initializer))
-        model.add(layers.Dense(1, activation="linear", kernel_initializer=initializer))
-        model.compile(loss="mean_squared_error", optimizer="adam", metrics=[
-            [tf.keras.metrics.MeanAbsoluteError()]])
-
-
-        H = model.fit(train_data, validation_data=valid_data, epochs=self.epochs,
-                    batch_size=64, callbacks=[early_stopping_monitor], verbose=self.verbose)
-        model.summary()
-
-        regressor = model
-        y_pred = model.predict(tf.data.Dataset.from_tensors(X_test))
+    def train_model_LinearRegression(self, X_train, y_train, X_test, y_test):
+            
+        regressor = OLS(y_train, X_train).fit()
+        y_pred = regressor.predict(X_test)
 
         return regressor, y_pred
-
+    
+    
     def train_model_svr(self, X_train, y_train, X_test, y_test):
         regressor = SVR(kernel=self.svr_params["kernel"], C=self.svr_params["C"], epsilon=self.svr_params["epsilon"])
         regressor.fit(X_train,y_train)
@@ -183,12 +164,32 @@ class Model:
 
         return regressor, y_pred
 
+
+    def train_model_nn(self, X_train, y_train, X_test, y_test):
+
+        model = FFN(self.nn_params)
+        regressor, y_pred = model.train(X_train, y_train, X_test, y_test)
+
+        return regressor, y_pred
+
+
     def train_model_lstm(self, X_train, y_train, X_test, y_test):
         print(X_train.shape, y_test.shape)
 
         self.lstm_params.update({"input_size": X_train.shape[1]})
         print(self.lstm_params)
         trainer = Trainer_LSTM(self.lstm_params)
+        regressor, y_pred = trainer.training_loop(X_train, y_train, X_test, y_test)
+
+        return regressor, y_pred
+    
+
+    def train_model_DLinear(self, X_train, y_train, X_test, y_test):
+        print(X_train.shape, y_test.shape)
+
+        self.lstm_params.update({"input_size": X_train.shape[1]})
+        print(self.lstm_params)
+        trainer = Trainer_DLinear(self.lstm_params)
         regressor, y_pred = trainer.training_loop(X_train, y_train, X_test, y_test)
 
         return regressor, y_pred
