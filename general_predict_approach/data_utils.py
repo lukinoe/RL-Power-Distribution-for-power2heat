@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 import math
+from itertools import combinations
+
 
 def cats(start, end):
   a = np.array([str(i) for i in range(start, end+1)])
@@ -74,3 +76,16 @@ def cyclical_encode_dataset(data, target):
 
   return dataset, df
 
+
+def get_feature_combinations(features, target):
+
+  features = features[:-1]
+  feature_combinations = []
+  for i in range(len(features)):
+      oc = combinations(features, i + 1)
+      for c in oc:
+          l = list(c)
+          l.append(target)
+          feature_combinations.append(l)
+
+  return feature_combinations

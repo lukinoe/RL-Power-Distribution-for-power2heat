@@ -1,382 +1,382 @@
 ,encoding,features,model,mae,mse,mape,r2
-0,onehot,"['val_last_day', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-1,onehot,"['val_last_week', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-2,onehot,"['mean_24h', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-3,onehot,"['month', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-4,onehot,"['hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-5,onehot,"['weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-6,onehot,"['day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-7,onehot,"['val_last_day', 'val_last_week', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-8,onehot,"['val_last_day', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-9,onehot,"['val_last_day', 'month', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-10,onehot,"['val_last_day', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-11,onehot,"['val_last_day', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-12,onehot,"['val_last_day', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-13,onehot,"['val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-14,onehot,"['val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-15,onehot,"['val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-16,onehot,"['val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-17,onehot,"['val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-18,onehot,"['mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-19,onehot,"['mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-20,onehot,"['mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-21,onehot,"['mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-22,onehot,"['month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-23,onehot,"['month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-24,onehot,"['month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-25,onehot,"['hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-26,onehot,"['hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-27,onehot,"['weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-28,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-29,onehot,"['val_last_day', 'val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-30,onehot,"['val_last_day', 'val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-31,onehot,"['val_last_day', 'val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-32,onehot,"['val_last_day', 'val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-33,onehot,"['val_last_day', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-34,onehot,"['val_last_day', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-35,onehot,"['val_last_day', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-36,onehot,"['val_last_day', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-37,onehot,"['val_last_day', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-38,onehot,"['val_last_day', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-39,onehot,"['val_last_day', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-40,onehot,"['val_last_day', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-41,onehot,"['val_last_day', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-42,onehot,"['val_last_day', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-43,onehot,"['val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-44,onehot,"['val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-45,onehot,"['val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-46,onehot,"['val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-47,onehot,"['val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-48,onehot,"['val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-49,onehot,"['val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-50,onehot,"['val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-51,onehot,"['val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-52,onehot,"['val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-53,onehot,"['mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-54,onehot,"['mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-55,onehot,"['mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-56,onehot,"['mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-57,onehot,"['mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-58,onehot,"['mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-59,onehot,"['month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-60,onehot,"['month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-61,onehot,"['month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-62,onehot,"['hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-63,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-64,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-65,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-66,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-67,onehot,"['val_last_day', 'val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-68,onehot,"['val_last_day', 'val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-69,onehot,"['val_last_day', 'val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-70,onehot,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-71,onehot,"['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-72,onehot,"['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-73,onehot,"['val_last_day', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-74,onehot,"['val_last_day', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-75,onehot,"['val_last_day', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-76,onehot,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-77,onehot,"['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-78,onehot,"['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-79,onehot,"['val_last_day', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-80,onehot,"['val_last_day', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-81,onehot,"['val_last_day', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-82,onehot,"['val_last_day', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-83,onehot,"['val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-84,onehot,"['val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-85,onehot,"['val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-86,onehot,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-87,onehot,"['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-88,onehot,"['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-89,onehot,"['val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-90,onehot,"['val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-91,onehot,"['val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-92,onehot,"['val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-93,onehot,"['mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-94,onehot,"['mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-95,onehot,"['mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-96,onehot,"['mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-97,onehot,"['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-98,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-99,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-100,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-101,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-102,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-103,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-104,onehot,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-105,onehot,"['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-106,onehot,"['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-107,onehot,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-108,onehot,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-109,onehot,"['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-110,onehot,"['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-111,onehot,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-112,onehot,"['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-113,onehot,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-114,onehot,"['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-115,onehot,"['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-116,onehot,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-117,onehot,"['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-118,onehot,"['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-119,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-120,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-121,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-122,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-123,onehot,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-124,onehot,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-125,onehot,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-126,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.24077812684560942,0.18934463484925848,2.8806971717255943,-0.006398908066010511
-127,cyclical,"['val_last_day', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-128,cyclical,"['val_last_week', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-129,cyclical,"['mean_24h', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-130,cyclical,"['month', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-131,cyclical,"['hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-132,cyclical,"['weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-133,cyclical,"['day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-134,cyclical,"['val_last_day', 'val_last_week', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-135,cyclical,"['val_last_day', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-136,cyclical,"['val_last_day', 'month', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-137,cyclical,"['val_last_day', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-138,cyclical,"['val_last_day', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-139,cyclical,"['val_last_day', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-140,cyclical,"['val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-141,cyclical,"['val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-142,cyclical,"['val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-143,cyclical,"['val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-144,cyclical,"['val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-145,cyclical,"['mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-146,cyclical,"['mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-147,cyclical,"['mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-148,cyclical,"['mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-149,cyclical,"['month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-150,cyclical,"['month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-151,cyclical,"['month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-152,cyclical,"['hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-153,cyclical,"['hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-154,cyclical,"['weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-155,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-156,cyclical,"['val_last_day', 'val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-157,cyclical,"['val_last_day', 'val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-158,cyclical,"['val_last_day', 'val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-159,cyclical,"['val_last_day', 'val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-160,cyclical,"['val_last_day', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-161,cyclical,"['val_last_day', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-162,cyclical,"['val_last_day', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-163,cyclical,"['val_last_day', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-164,cyclical,"['val_last_day', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-165,cyclical,"['val_last_day', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-166,cyclical,"['val_last_day', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-167,cyclical,"['val_last_day', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-168,cyclical,"['val_last_day', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-169,cyclical,"['val_last_day', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-170,cyclical,"['val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-171,cyclical,"['val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-172,cyclical,"['val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-173,cyclical,"['val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-174,cyclical,"['val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-175,cyclical,"['val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-176,cyclical,"['val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-177,cyclical,"['val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-178,cyclical,"['val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-179,cyclical,"['val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-180,cyclical,"['mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-181,cyclical,"['mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-182,cyclical,"['mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-183,cyclical,"['mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-184,cyclical,"['mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-185,cyclical,"['mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-186,cyclical,"['month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-187,cyclical,"['month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-188,cyclical,"['month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-189,cyclical,"['hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-190,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-191,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-192,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-193,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-194,cyclical,"['val_last_day', 'val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-195,cyclical,"['val_last_day', 'val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-196,cyclical,"['val_last_day', 'val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-197,cyclical,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-198,cyclical,"['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-199,cyclical,"['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-200,cyclical,"['val_last_day', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-201,cyclical,"['val_last_day', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-202,cyclical,"['val_last_day', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-203,cyclical,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-204,cyclical,"['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-205,cyclical,"['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-206,cyclical,"['val_last_day', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-207,cyclical,"['val_last_day', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-208,cyclical,"['val_last_day', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-209,cyclical,"['val_last_day', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-210,cyclical,"['val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-211,cyclical,"['val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-212,cyclical,"['val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-213,cyclical,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-214,cyclical,"['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-215,cyclical,"['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-216,cyclical,"['val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-217,cyclical,"['val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-218,cyclical,"['val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-219,cyclical,"['val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-220,cyclical,"['mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-221,cyclical,"['mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-222,cyclical,"['mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-223,cyclical,"['mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-224,cyclical,"['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-225,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-226,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-227,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-228,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-229,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-230,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-231,cyclical,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-232,cyclical,"['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-233,cyclical,"['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-234,cyclical,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-235,cyclical,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-236,cyclical,"['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-237,cyclical,"['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-238,cyclical,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-239,cyclical,"['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-240,cyclical,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-241,cyclical,"['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-242,cyclical,"['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-243,cyclical,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-244,cyclical,"['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-245,cyclical,"['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-246,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-247,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-248,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-249,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-250,cyclical,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-251,cyclical,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-252,cyclical,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-253,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.23083797155719,0.1705426922031189,2.045517314791201,0.09353661196421925
-254,,"['val_last_day', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-255,,"['val_last_week', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-256,,"['mean_24h', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-257,,"['month', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-258,,"['hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-259,,"['weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-260,,"['day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-261,,"['val_last_day', 'val_last_week', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-262,,"['val_last_day', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-263,,"['val_last_day', 'month', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-264,,"['val_last_day', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-265,,"['val_last_day', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-266,,"['val_last_day', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-267,,"['val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-268,,"['val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-269,,"['val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-270,,"['val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-271,,"['val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-272,,"['mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-273,,"['mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-274,,"['mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-275,,"['mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-276,,"['month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-277,,"['month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-278,,"['month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-279,,"['hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-280,,"['hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-281,,"['weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-282,,"['val_last_day', 'val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-283,,"['val_last_day', 'val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-284,,"['val_last_day', 'val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-285,,"['val_last_day', 'val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-286,,"['val_last_day', 'val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-287,,"['val_last_day', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-288,,"['val_last_day', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-289,,"['val_last_day', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-290,,"['val_last_day', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-291,,"['val_last_day', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-292,,"['val_last_day', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-293,,"['val_last_day', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-294,,"['val_last_day', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-295,,"['val_last_day', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-296,,"['val_last_day', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-297,,"['val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-298,,"['val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-299,,"['val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-300,,"['val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-301,,"['val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-302,,"['val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-303,,"['val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-304,,"['val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-305,,"['val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-306,,"['val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-307,,"['mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-308,,"['mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-309,,"['mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-310,,"['mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-311,,"['mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-312,,"['mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-313,,"['month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-314,,"['month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-315,,"['month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-316,,"['hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-317,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-318,,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-319,,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-320,,"['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-321,,"['val_last_day', 'val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-322,,"['val_last_day', 'val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-323,,"['val_last_day', 'val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-324,,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-325,,"['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-326,,"['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-327,,"['val_last_day', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-328,,"['val_last_day', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-329,,"['val_last_day', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-330,,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-331,,"['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-332,,"['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-333,,"['val_last_day', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-334,,"['val_last_day', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-335,,"['val_last_day', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-336,,"['val_last_day', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-337,,"['val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-338,,"['val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-339,,"['val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-340,,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-341,,"['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-342,,"['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-343,,"['val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-344,,"['val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-345,,"['val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-346,,"['val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-347,,"['mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-348,,"['mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-349,,"['mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-350,,"['mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-351,,"['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-352,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-353,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-354,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-355,,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-356,,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-357,,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-358,,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-359,,"['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-360,,"['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-361,,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-362,,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-363,,"['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-364,,"['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-365,,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-366,,"['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-367,,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-368,,"['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-369,,"['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-370,,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-371,,"['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-372,,"['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-373,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-374,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-375,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-376,,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-377,,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-378,,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-379,,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
-380,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.21873953748417616,0.17888106900274517,1.081791712726893,0.04921672239952313
+0,onehot,"['val_last_day', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+1,onehot,"['val_last_week', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+2,onehot,"['mean_24h', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+3,onehot,"['month', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+4,onehot,"['hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+5,onehot,"['weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+6,onehot,"['day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+7,onehot,"['val_last_day', 'val_last_week', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+8,onehot,"['val_last_day', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+9,onehot,"['val_last_day', 'month', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+10,onehot,"['val_last_day', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+11,onehot,"['val_last_day', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+12,onehot,"['val_last_day', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+13,onehot,"['val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+14,onehot,"['val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+15,onehot,"['val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+16,onehot,"['val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+17,onehot,"['val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+18,onehot,"['mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+19,onehot,"['mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+20,onehot,"['mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+21,onehot,"['mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+22,onehot,"['month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+23,onehot,"['month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+24,onehot,"['month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+25,onehot,"['hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+26,onehot,"['hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+27,onehot,"['weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+28,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+29,onehot,"['val_last_day', 'val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+30,onehot,"['val_last_day', 'val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+31,onehot,"['val_last_day', 'val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+32,onehot,"['val_last_day', 'val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+33,onehot,"['val_last_day', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+34,onehot,"['val_last_day', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+35,onehot,"['val_last_day', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+36,onehot,"['val_last_day', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+37,onehot,"['val_last_day', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+38,onehot,"['val_last_day', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+39,onehot,"['val_last_day', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+40,onehot,"['val_last_day', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+41,onehot,"['val_last_day', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+42,onehot,"['val_last_day', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+43,onehot,"['val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+44,onehot,"['val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+45,onehot,"['val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+46,onehot,"['val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+47,onehot,"['val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+48,onehot,"['val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+49,onehot,"['val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+50,onehot,"['val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+51,onehot,"['val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+52,onehot,"['val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+53,onehot,"['mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+54,onehot,"['mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+55,onehot,"['mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+56,onehot,"['mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+57,onehot,"['mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+58,onehot,"['mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+59,onehot,"['month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+60,onehot,"['month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+61,onehot,"['month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+62,onehot,"['hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+63,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+64,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+65,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+66,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+67,onehot,"['val_last_day', 'val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+68,onehot,"['val_last_day', 'val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+69,onehot,"['val_last_day', 'val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+70,onehot,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+71,onehot,"['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+72,onehot,"['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+73,onehot,"['val_last_day', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+74,onehot,"['val_last_day', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+75,onehot,"['val_last_day', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+76,onehot,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+77,onehot,"['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+78,onehot,"['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+79,onehot,"['val_last_day', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+80,onehot,"['val_last_day', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+81,onehot,"['val_last_day', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+82,onehot,"['val_last_day', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+83,onehot,"['val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+84,onehot,"['val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+85,onehot,"['val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+86,onehot,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+87,onehot,"['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+88,onehot,"['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+89,onehot,"['val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+90,onehot,"['val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+91,onehot,"['val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+92,onehot,"['val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+93,onehot,"['mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+94,onehot,"['mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+95,onehot,"['mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+96,onehot,"['mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+97,onehot,"['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+98,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+99,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+100,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+101,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+102,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+103,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+104,onehot,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+105,onehot,"['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+106,onehot,"['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+107,onehot,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+108,onehot,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+109,onehot,"['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+110,onehot,"['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+111,onehot,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+112,onehot,"['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+113,onehot,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+114,onehot,"['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+115,onehot,"['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+116,onehot,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+117,onehot,"['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+118,onehot,"['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+119,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+120,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+121,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+122,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+123,onehot,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+124,onehot,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+125,onehot,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+126,onehot,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.3979696434391624,0.5671928397325686,0.957899567413518,0.33623203624576925
+127,cyclical,"['val_last_day', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+128,cyclical,"['val_last_week', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+129,cyclical,"['mean_24h', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+130,cyclical,"['month', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+131,cyclical,"['hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+132,cyclical,"['weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+133,cyclical,"['day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+134,cyclical,"['val_last_day', 'val_last_week', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+135,cyclical,"['val_last_day', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+136,cyclical,"['val_last_day', 'month', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+137,cyclical,"['val_last_day', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+138,cyclical,"['val_last_day', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+139,cyclical,"['val_last_day', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+140,cyclical,"['val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+141,cyclical,"['val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+142,cyclical,"['val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+143,cyclical,"['val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+144,cyclical,"['val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+145,cyclical,"['mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+146,cyclical,"['mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+147,cyclical,"['mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+148,cyclical,"['mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+149,cyclical,"['month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+150,cyclical,"['month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+151,cyclical,"['month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+152,cyclical,"['hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+153,cyclical,"['hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+154,cyclical,"['weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+155,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+156,cyclical,"['val_last_day', 'val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+157,cyclical,"['val_last_day', 'val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+158,cyclical,"['val_last_day', 'val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+159,cyclical,"['val_last_day', 'val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+160,cyclical,"['val_last_day', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+161,cyclical,"['val_last_day', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+162,cyclical,"['val_last_day', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+163,cyclical,"['val_last_day', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+164,cyclical,"['val_last_day', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+165,cyclical,"['val_last_day', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+166,cyclical,"['val_last_day', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+167,cyclical,"['val_last_day', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+168,cyclical,"['val_last_day', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+169,cyclical,"['val_last_day', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+170,cyclical,"['val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+171,cyclical,"['val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+172,cyclical,"['val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+173,cyclical,"['val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+174,cyclical,"['val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+175,cyclical,"['val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+176,cyclical,"['val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+177,cyclical,"['val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+178,cyclical,"['val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+179,cyclical,"['val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+180,cyclical,"['mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+181,cyclical,"['mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+182,cyclical,"['mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+183,cyclical,"['mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+184,cyclical,"['mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+185,cyclical,"['mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+186,cyclical,"['month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+187,cyclical,"['month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+188,cyclical,"['month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+189,cyclical,"['hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+190,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+191,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+192,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+193,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+194,cyclical,"['val_last_day', 'val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+195,cyclical,"['val_last_day', 'val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+196,cyclical,"['val_last_day', 'val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+197,cyclical,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+198,cyclical,"['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+199,cyclical,"['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+200,cyclical,"['val_last_day', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+201,cyclical,"['val_last_day', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+202,cyclical,"['val_last_day', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+203,cyclical,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+204,cyclical,"['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+205,cyclical,"['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+206,cyclical,"['val_last_day', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+207,cyclical,"['val_last_day', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+208,cyclical,"['val_last_day', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+209,cyclical,"['val_last_day', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+210,cyclical,"['val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+211,cyclical,"['val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+212,cyclical,"['val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+213,cyclical,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+214,cyclical,"['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+215,cyclical,"['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+216,cyclical,"['val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+217,cyclical,"['val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+218,cyclical,"['val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+219,cyclical,"['val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+220,cyclical,"['mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+221,cyclical,"['mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+222,cyclical,"['mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+223,cyclical,"['mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+224,cyclical,"['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+225,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+226,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+227,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+228,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+229,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+230,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+231,cyclical,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+232,cyclical,"['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+233,cyclical,"['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+234,cyclical,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+235,cyclical,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+236,cyclical,"['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+237,cyclical,"['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+238,cyclical,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+239,cyclical,"['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+240,cyclical,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+241,cyclical,"['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+242,cyclical,"['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+243,cyclical,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+244,cyclical,"['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+245,cyclical,"['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+246,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+247,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+248,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+249,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+250,cyclical,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+251,cyclical,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+252,cyclical,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+253,cyclical,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.4365577837268252,0.5972340864139339,1.0338589964506975,0.30107570890614643
+254,,"['val_last_day', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+255,,"['val_last_week', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+256,,"['mean_24h', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+257,,"['month', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+258,,"['hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+259,,"['weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+260,,"['day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+261,,"['val_last_day', 'val_last_week', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+262,,"['val_last_day', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+263,,"['val_last_day', 'month', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+264,,"['val_last_day', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+265,,"['val_last_day', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+266,,"['val_last_day', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+267,,"['val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+268,,"['val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+269,,"['val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+270,,"['val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+271,,"['val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+272,,"['mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+273,,"['mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+274,,"['mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+275,,"['mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+276,,"['month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+277,,"['month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+278,,"['month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+279,,"['hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+280,,"['hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+281,,"['weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+282,,"['val_last_day', 'val_last_week', 'mean_24h', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+283,,"['val_last_day', 'val_last_week', 'month', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+284,,"['val_last_day', 'val_last_week', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+285,,"['val_last_day', 'val_last_week', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+286,,"['val_last_day', 'val_last_week', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+287,,"['val_last_day', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+288,,"['val_last_day', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+289,,"['val_last_day', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+290,,"['val_last_day', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+291,,"['val_last_day', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+292,,"['val_last_day', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+293,,"['val_last_day', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+294,,"['val_last_day', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+295,,"['val_last_day', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+296,,"['val_last_day', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+297,,"['val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+298,,"['val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+299,,"['val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+300,,"['val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+301,,"['val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+302,,"['val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+303,,"['val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+304,,"['val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+305,,"['val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+306,,"['val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+307,,"['mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+308,,"['mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+309,,"['mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+310,,"['mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+311,,"['mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+312,,"['mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+313,,"['month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+314,,"['month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+315,,"['month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+316,,"['hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+317,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+318,,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+319,,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+320,,"['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+321,,"['val_last_day', 'val_last_week', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+322,,"['val_last_day', 'val_last_week', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+323,,"['val_last_day', 'val_last_week', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+324,,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+325,,"['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+326,,"['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+327,,"['val_last_day', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+328,,"['val_last_day', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+329,,"['val_last_day', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+330,,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+331,,"['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+332,,"['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+333,,"['val_last_day', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+334,,"['val_last_day', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+335,,"['val_last_day', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+336,,"['val_last_day', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+337,,"['val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+338,,"['val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+339,,"['val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+340,,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+341,,"['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+342,,"['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+343,,"['val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+344,,"['val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+345,,"['val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+346,,"['val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+347,,"['mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+348,,"['mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+349,,"['mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+350,,"['mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+351,,"['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+352,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+353,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+354,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+355,,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+356,,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+357,,"['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+358,,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+359,,"['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+360,,"['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+361,,"['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+362,,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+363,,"['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+364,,"['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+365,,"['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+366,,"['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+367,,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+368,,"['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+369,,"['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+370,,"['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+371,,"['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+372,,"['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+373,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+374,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+375,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+376,,"['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+377,,"['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+378,,"['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+379,,"['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431
+380,,"['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh']",linear_regression,0.457255694414795,0.6648114332303031,1.100357245638378,0.221992062657431

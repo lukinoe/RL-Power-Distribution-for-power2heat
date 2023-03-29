@@ -1,3 +1,3 @@
-,batch_size,encoding,hidden_size,learning_rate,lookback_len,model,n_epochs,num_layers,pred_len,input_size,mae,mse,mape,r2
-0,64,,50,0.001,76,lstm,15,1,10,8,0.19939598441123962,0.17213753703981638,,-0.058797091245651245
-1,64,,75,0.001,76,lstm,15,1,10,8,0.20375748351216316,0.17344347201287746,,-0.08985872566699982
+,batch_size,encoding,features,hidden_size,learning_rate,lookback_len,model,n_epochs,num_layers,pred_len,input_size,mae,mse,mape,r2
+0,64,,"['month', 'hour', 'thermal_consumption_kwh']",75,0.001,76,lstm,10,1,10,8,0.39793480187654495,0.5271115936338902,,-0.06854952126741409
+1,64,,"['month', 'hour', 'thermal_consumption_kwh']",75,0.001,100,lstm,10,1,10,8,0.38826928394181387,0.5192550207887378,,0.3828507491520473

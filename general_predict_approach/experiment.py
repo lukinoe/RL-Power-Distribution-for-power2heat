@@ -3,9 +3,9 @@ import os
 sys.path.insert(0, 'C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/data')
 from datafactory import DataSet
 from dataTransform import Transform
+from data_utils import get_feature_combinations
 from experimentSetup import Model
 import matplotlib.pyplot as plt
-from itertools import combinations
 
 from sklearn.model_selection import ParameterGrid
 import pandas as pd
@@ -26,33 +26,20 @@ experiment = {}
 target = "thermal_consumption_kwh"
 
 test_size = 0.05
+resolution = "h"
 
 
 
-
-
-
-dset = DataSet(start_date="2022-01-01", target=target, scale_target=False, scale_variables=False, time_features=False, dynamic_price=False, demand_price=0.5, feedin_price=0.5).pipeline()
+dset = DataSet(start_date="2022-01-01", target=target, scale_target=False, scale_variables=False, time_features=False).pipeline()
 dset = dset[["date",target]]
-t = Transform(dataset=dset, resample="h", target=target, scale_X=True)
+t = Transform(dataset=dset, resample=resolution, target=target, scale_X=True)
 data = t.transform()
 
+print(data)
 
 
 features = list(data.columns)
-del features[-1]
-
-print(features)
-
-feature_combinations = []
-for i in range(len(features)):
-    oc = combinations(features, i + 1)
-    for c in oc:
-        l = list(c)
-        l.append(target)
-        feature_combinations.append(l)
-
-feature_combinations
+feature_combinations = get_feature_combinations(features, target)
 
 
 
@@ -100,7 +87,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -116,20 +103,17 @@ experiment = benchmarkModel(grid, experiment)
 params_grid = {
   "model": ["svr"],
   # "kernel": ["rbf", "sigmoid", "poly"],
-  # "degree": [3],  # only valid for "poly" kernel
-  # "C": [1, 0.8, 0.9],   # default = 1
-  # "epsilon": [0.1, 0.03], # default = 0.1
-  # "features": feature_combinations,
+  "features": feature_combinations,
   "kernel": ["rbf"],
   "degree": [3],  # only valid for "poly" kernel
   "C": [0.8, 1],   # default = 1
-  "epsilon": [0.3, 0.1], # default = 0.1
+  "epsilon": [0.3, 0.1, 0.03], # default = 0.1
   "encoding": ["cyclical", "onehot", None]
 }
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -145,9 +129,9 @@ experiment = benchmarkModel(grid, experiment)
 params_grid = {
   "model": ["nn"],
   "epochs": [11],
-  "n_hidden1": [100, 250, 500],
+  "n_hidden1": [500],
   "n_hidden2": [50],
-  # "features": feature_combinations,
+  "features": feature_combinations,
   "batch_size": [64],
   "encoding": ["onehot"],
   "activation1": ["relu"],
@@ -156,7 +140,7 @@ params_grid = {
 }
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -174,8 +158,8 @@ params_grid = {
   "learning_rate": [0.001], 
   "batch_size": [64], 
   "num_layers": [1], 
-  "lookback_len": [48,76,100,200], 
-  "pred_len": [10,24,30],
+  "lookback_len": [48,76,100,200,300,400], 
+  "pred_len": [10],
   "encoding": [None]
 }
 
@@ -196,19 +180,20 @@ experiment = benchmarkModel(grid, experiment)
 
 params_grid = {
   "model": ["lstm"],
-  "n_epochs": [15], 
+  "n_epochs": [10], 
+  "features": [["month", "hour", target]],
   "learning_rate": [0.001], 
   "batch_size": [64], 
-  "hidden_size": [50,75], 
+  "hidden_size": [75], 
   "num_layers": [1], 
   "lookback_len": [76,100], 
-  "pred_len": [10,20],
+  "pred_len": [10],
   "encoding": [None]
 }
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
