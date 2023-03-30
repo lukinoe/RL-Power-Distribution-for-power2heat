@@ -79,7 +79,7 @@ class Tree:
 
 
         '''
-        REWARD/PENALTY FOR TANK STATE CHANGE
+        REWARD/PENALTY FOR TANK STATE CHANGE (OPTIONAL)
         '''
         reward += (kwh_increase - self.cool_down)*self.gamma3
         

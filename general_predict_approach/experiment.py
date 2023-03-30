@@ -26,7 +26,7 @@ experiment = {}
 target = "thermal_consumption_kwh"
 
 test_size = 0.10
-shuffle = True
+shuffle = False
 resolution = "h"
 
 
@@ -53,7 +53,7 @@ def benchmarkModel(grid, experiment):
 
       model = Model(model=p["model"], dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=test_size, shuffle=shuffle, model_params=p)
       
-      metrics = model.results(plot=False)
+      metrics = model.results(plot=True)
       p.update(metrics)
       res.append(p)
 
@@ -79,7 +79,7 @@ params_grid = {
   "encoding": ["onehot","cyclical", None]
 }
 
-#grid = ParameterGrid(params_grid) 
+grid = ParameterGrid(params_grid) 
 
 #experiment = benchmarkModel(grid, experiment)
 
@@ -134,7 +134,7 @@ params_grid = {
 }
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -148,13 +148,13 @@ experiment = benchmarkModel(grid, experiment)
 
 params_grid = {
   "model": ["DLinear"],
-  "n_epochs": [15,25,40,50], 
+  "n_epochs": [15,25], 
   "features": [[target]],
-  "learning_rate": [0.001, 0.0005, 0.0001], 
+  "learning_rate": [0.001, 0.0001], 
   "batch_size": [64], 
   "num_layers": [1], 
-  "lookback_len": [75,100,150,200,250,300], 
-  "pred_len": [10,24],
+  "lookback_len": [75,], 
+  "pred_len": [24],
   "encoding": [None]
 }
 
@@ -176,19 +176,19 @@ grid = ParameterGrid(params_grid)
 params_grid = {
   "model": ["lstm"],
   "n_epochs": [10], 
-  "features": [["month", "hour", "weekday", "day_continous", target]],
+  "features": [["month", "hour", "weekday", "day_continuous", target]],
   "learning_rate": [0.001], 
   "batch_size": [64], 
-  "hidden_size": [75], 
+  "hidden_size": [75,100], 
   "num_layers": [1], 
-  "lookback_len": [76,100,200], 
-  "pred_len": [12],
+  "lookback_len": [76,100,200,250,300], 
+  "pred_len": [24],
   "encoding": [None]
 }
 
 grid = ParameterGrid(params_grid) 
 
-#experiment = benchmarkModel(grid, experiment)
+experiment = benchmarkModel(grid, experiment)
 
 
 

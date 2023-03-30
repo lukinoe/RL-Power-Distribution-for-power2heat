@@ -81,7 +81,7 @@ class Model:
 
         
 
-        if timeseries: # Timerseries preprocessing
+        if self.model == "DLinear": # Timerseries preprocessing
             d = TimeSeriesTransform(X,y, lookback_len=self.model_params["lookback_len"], pred_len=self.model_params["pred_len"])
             X,y = d.return_tensors()
             
@@ -147,8 +147,8 @@ class Model:
         else:
             metrics_dict = {"mae": y_pred[1], 
                             "mse": y_pred[0], 
-                            "mape": None, 
-                            "r2": y_pred[2]}
+                            "mape": y_pred[2], 
+                            "r2": y_pred[3]}
 
         return metrics_dict
     

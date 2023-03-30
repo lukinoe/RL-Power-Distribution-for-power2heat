@@ -235,6 +235,14 @@ class dotdict(dict):
     __delattr__ = dict.__delitem__
 
 
+def calculateMAPE(y_pred, y_actual):
+    # Calculate the absolute percentage error for each sample in the batch
+    ape = torch.abs((y_actual - y_pred) / y_actual)
+    # Calculate the mean absolute percentage error across the batch
+    mape = torch.mean(ape)
+    return mape
+
+
 
 class Trainer_DLinear():
 
@@ -303,14 +311,17 @@ class Trainer_DLinear():
                 model.eval()
                 test_preds = model(inpt_test)
 
+                
 
                 test_mse = loss_fn(test_preds, target_test)
                 test_mae = loss_mae(test_preds, target_test)
+                mape = calculateMAPE(test_preds, target_test)
                 r2_ = r2_loss(test_preds, target_test)     # R2 can also be negative if the outputs are even worse than a function predicting the mean
 
+
                 
-                ''' [MSE, MAE, R2]'''
-                metrics.append([test_mse.item(), test_mae.item(), r2_.item()])
+                ''' [MSE, MAE, MAPE, R2]'''
+                metrics.append([test_mse.item(), test_mae.item(), mape.item(), r2_.item()])
 
 
                 test_mse_loss_l.append(test_mse.item())

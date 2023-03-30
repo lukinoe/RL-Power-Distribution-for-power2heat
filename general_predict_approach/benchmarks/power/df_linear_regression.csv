@@ -1,255 +1,382 @@
 ;encoding;features;model;mae;mse;mape;r2
-0;onehot;['val_last_day', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-1;onehot;['val_last_week', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-2;onehot;['mean_24h', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-3;onehot;['month', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-4;onehot;['hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-5;onehot;['weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-6;onehot;['day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-7;onehot;['val_last_day', 'val_last_week', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-8;onehot;['val_last_day', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-9;onehot;['val_last_day', 'month', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-10;onehot;['val_last_day', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-11;onehot;['val_last_day', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-12;onehot;['val_last_day', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-13;onehot;['val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-14;onehot;['val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-15;onehot;['val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-16;onehot;['val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-17;onehot;['val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-18;onehot;['mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-19;onehot;['mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-20;onehot;['mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-21;onehot;['mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-22;onehot;['month', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-23;onehot;['month', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-24;onehot;['month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-25;onehot;['hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-26;onehot;['hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-27;onehot;['weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-28;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-29;onehot;['val_last_day', 'val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-30;onehot;['val_last_day', 'val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-31;onehot;['val_last_day', 'val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-32;onehot;['val_last_day', 'val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-33;onehot;['val_last_day', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-34;onehot;['val_last_day', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-35;onehot;['val_last_day', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-36;onehot;['val_last_day', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-37;onehot;['val_last_day', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-38;onehot;['val_last_day', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-39;onehot;['val_last_day', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-40;onehot;['val_last_day', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-41;onehot;['val_last_day', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-42;onehot;['val_last_day', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-43;onehot;['val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-44;onehot;['val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-45;onehot;['val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-46;onehot;['val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-47;onehot;['val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-48;onehot;['val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-49;onehot;['val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-50;onehot;['val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-51;onehot;['val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-52;onehot;['val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-53;onehot;['mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-54;onehot;['mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-55;onehot;['mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-56;onehot;['mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-57;onehot;['mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-58;onehot;['mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-59;onehot;['month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-60;onehot;['month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-61;onehot;['month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-62;onehot;['hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-63;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-64;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-65;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-66;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-67;onehot;['val_last_day', 'val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-68;onehot;['val_last_day', 'val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-69;onehot;['val_last_day', 'val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-70;onehot;['val_last_day', 'val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-71;onehot;['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-72;onehot;['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-73;onehot;['val_last_day', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-74;onehot;['val_last_day', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-75;onehot;['val_last_day', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-76;onehot;['val_last_day', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-77;onehot;['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-78;onehot;['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-79;onehot;['val_last_day', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-80;onehot;['val_last_day', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-81;onehot;['val_last_day', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-82;onehot;['val_last_day', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-83;onehot;['val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-84;onehot;['val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-85;onehot;['val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-86;onehot;['val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-87;onehot;['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-88;onehot;['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-89;onehot;['val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-90;onehot;['val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-91;onehot;['val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-92;onehot;['val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-93;onehot;['mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-94;onehot;['mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-95;onehot;['mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-96;onehot;['mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-97;onehot;['month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-98;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-99;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-100;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-101;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-102;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-103;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-104;onehot;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-105;onehot;['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-106;onehot;['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-107;onehot;['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-108;onehot;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-109;onehot;['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-110;onehot;['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-111;onehot;['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-112;onehot;['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-113;onehot;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-114;onehot;['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-115;onehot;['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-116;onehot;['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-117;onehot;['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-118;onehot;['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-119;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-120;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-121;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-122;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-123;onehot;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-124;onehot;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-125;onehot;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
+0;onehot;['val_last_day', 'power_consumption_kwh'];linear_regression;0.5042879633409182;0.6706711128584445;2.039508916413798;0.45041575214605023
+1;onehot;['val_last_week', 'power_consumption_kwh'];linear_regression;0.539607893931192;0.7318311893679501;1.6566504019236814;0.4002978717084875
+2;onehot;['mean_24h', 'power_consumption_kwh'];linear_regression;0.8083365161637521;1.2189793100347315;1.0408705479277165;0.00110230721035387
+3;onehot;['month', 'power_consumption_kwh'];linear_regression;0.8451824497579574;1.2273132096516066;1.2173991373849196;-0.005726941679030428
+4;onehot;['hour', 'power_consumption_kwh'];linear_regression;0.38252450831731727;0.4764630952784143;1.9095981547517606;0.6095603242359702
+5;onehot;['weekday', 'power_consumption_kwh'];linear_regression;0.8066553692173295;1.2194285190566454;1.0022478942718804;0.0007342009989717013
+6;onehot;['day_continuous', 'power_consumption_kwh'];linear_regression;0.808038336351316;1.2209306951251402;1.0000392775620917;-0.0004967634617298877
+7;onehot;['val_last_day', 'val_last_week', 'power_consumption_kwh'];linear_regression;0.4379785075371326;0.5786006567055293;2.0845237945128745;0.525863272434657
+8;onehot;['val_last_day', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.5017765740840188;0.6684853830077953;2.048763257663596;0.45220685761182944
+9;onehot;['val_last_day', 'month', 'power_consumption_kwh'];linear_regression;0.518789335891643;0.671605349241087;2.065955294252405;0.4496501882357693
+10;onehot;['val_last_day', 'hour', 'power_consumption_kwh'];linear_regression;0.3670855725698805;0.46278250556645684;2.0206436304901927;0.6207709406810407
+11;onehot;['val_last_day', 'weekday', 'power_consumption_kwh'];linear_regression;0.5035335643367658;0.6697568074318622;2.035251691001322;0.45116498355104606
+12;onehot;['val_last_day', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5044696610970731;0.6707873512825184;2.040093169412089;0.45032050008339
+13;onehot;['val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.5382475222165393;0.7275933759855792;1.6209703984514234;0.40377056560515656
+14;onehot;['val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.556155898681039;0.7341905437993003;1.656793544194453;0.39836448885403897
+15;onehot;['val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.37707291545274657;0.4702709623231582;1.9183280327282375;0.6146344934786587
+16;onehot;['val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.539655351154764;0.7315292616823842;1.652417559964197;0.40054528761293995
+17;onehot;['val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5398350987037464;0.7321283862843501;1.6590620494282966;0.4000543324526098
+18;onehot;['mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.8359169015271938;1.2226912298431794;1.1790620742445732;-0.0019394409981314809
+19;onehot;['mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.38254077217282395;0.4747155073488757;1.9191548249004733;0.6109923924723978
+20;onehot;['mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.8075965290133322;1.2183057383760412;1.037636524392657;0.0016542683226185018
+21;onehot;['mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8085372375161242;1.2192263195700668;1.0442280661335261;0.0008998942137491417
+22;onehot;['month', 'hour', 'power_consumption_kwh'];linear_regression;0.4329329802329497;0.4824739452643192;2.1426888974226905;0.6046347080805541
+23;onehot;['month', 'weekday', 'power_consumption_kwh'];linear_regression;0.8445385517953647;1.226270783583205;1.2063535778333383;-0.0048727212783572504
+24;onehot;['month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8448070314902486;1.2271266316042395;1.2189917807493464;-0.005574049517936164
+25;onehot;['hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.38155757614539365;0.4753192071175098;1.893957753387411;0.6104976881726102
+26;onehot;['hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.38289581969367775;0.47674225651458274;1.915294383903704;0.6093315643936748
+27;onehot;['weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8069270529689668;1.2198351470298905;0.998466038031323;0.0004009880059746562
+28;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.4378166864606498;0.5785542197123617;2.087029041501278;0.5259013254228853
+29;onehot;['val_last_day', 'val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.4445933146238564;0.5788876558709808;2.07266126281837;0.5256280897684361
+30;onehot;['val_last_day', 'val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.3638885803558331;0.45850321437586294;2.0328756060038806;0.6242776237410981
+31;onehot;['val_last_day', 'val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.43786158484234167;0.5780944206419968;2.080945514184062;0.526278109693753
+32;onehot;['val_last_day', 'val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43817542644017915;0.5787073159203564;2.0864051953160927;0.5257758700950697
+33;onehot;['val_last_day', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.5242931795727472;0.6698457522961795;2.098493030255933;0.45109209731005684
+34;onehot;['val_last_day', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.36829003045361774;0.4626743284433078;2.0098612227990764;0.6208595868769495
+35;onehot;['val_last_day', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.5007716169033599;0.6674707962033419;2.044601175271514;0.4530382650112498
+36;onehot;['val_last_day', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5020160663148524;0.6686311022047252;2.0502396476140605;0.4520874474065779
+37;onehot;['val_last_day', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.40876859116743536;0.46678030343307;2.1908987485209575;0.6174949285023882
+38;onehot;['val_last_day', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5184741675599956;0.67072185101226;2.0629751633267217;0.45037417455374373
+39;onehot;['val_last_day', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5187557450304743;0.6716428745696221;2.0662838097079486;0.44961943794838843
+40;onehot;['val_last_day', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.3661640915809048;0.46180389749553546;2.005084376612376;0.6215728651568226
+41;onehot;['val_last_day', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3675610336495335;0.4630064994699662;2.0253804147850483;0.6205873879401758
+42;onehot;['val_last_day', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.503741525051222;0.669867683515349;2.035857610909994;0.45107412568080263
+43;onehot;['val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.5430045954788748;0.7283440565651861;1.6050249109790147;0.40315541726521464
+44;onehot;['val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.3773516538562287;0.4679723126065235;1.9204892231190354;0.616518131600796
+45;onehot;['val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.5386196270550411;0.7274911299338015;1.6183408414017229;0.4038543515598293
+46;onehot;['val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5383822969274766;0.7277297716877069;1.6224412610307395;0.40365879557670714
+47;onehot;['val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.42290716018002866;0.4755085094007262;2.109585543676671;0.6103425636250579
+48;onehot;['val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5559397577856056;0.7339135365904385;1.6518008869078673;0.3985914835696508
+49;onehot;['val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5559883818177137;0.7341433718888222;1.6588817415791444;0.3984031440733302
+50;onehot;['val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.37640154192048964;0.46927697764896276;1.9052837004599412;0.6154490183762913
+51;onehot;['val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.377526752045306;0.4705531235825982;1.9233584533391923;0.6144032752547488
+52;onehot;['val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5399070829707969;0.731817842839864;1.6548717823711994;0.40030880857673645
+53;onehot;['mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.4192551770317104;0.47795867412920223;2.0860138806747495;0.6083347658929048
+54;onehot;['mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.8355847559081117;1.2219700760483387;1.1703623350723493;-0.0013484885054328988
+55;onehot;['mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8357253854550147;1.2226499356045852;1.180868172773762;-0.0019056022616428248
+56;onehot;['mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.38224201757943976;0.4740396520851441;1.9043759505476083;0.6115462248943624
+57;onehot;['mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.38280428785943643;0.4748520590868738;1.922915587536895;0.610880494579702
+58;onehot;['mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8077624618000622;1.2185275928205284;1.0350488721110047;0.0014724687703955297
+59;onehot;['month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4321760648555595;0.48138421935363523;2.131208787388994;0.6055276885347705
+60;onehot;['month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43240006768398254;0.48222079269569146;2.1432982276224646;0.6048421550114775
+61;onehot;['month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.844137756870494;1.2260397851051765;1.2076702800002064;-0.004683428609612905
+62;onehot;['hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3818987545173014;0.47554993487227176;1.898646156922678;0.6103086173491786
+63;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.4472304193281857;0.5790973459085172;2.0871370564692335;0.5254562583903546
+64;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.36505111669931656;0.4579311955222041;2.0207608510571404;0.624746366982635
+65;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.4376660526174764;0.578036858703375;2.0834651918848097;0.5263252790650528
+66;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4380167993308695;0.578666617823605;2.089262738637169;0.5258092203206324
+67;onehot;['val_last_day', 'val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.4006417516807649;0.46188170433203496;2.161551933741526;0.6215091060193025
+68;onehot;['val_last_day', 'val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.44438885365679687;0.578399765578663;2.0707918722572662;0.5260278935085971
+69;onehot;['val_last_day', 'val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.44458375792976257;0.5789062190599503;2.0738643449357577;0.5256128780856127
+70;onehot;['val_last_day', 'val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.3629878822459877;0.45763575237829246;2.0180501648845617;0.6249884691023135
+71;onehot;['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.36439725610376267;0.458724858464374;2.0372738926141722;0.6240959965659594
+72;onehot;['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4381049128769582;0.578200765309096;2.0831624349792834;0.5261909651116166
+73;onehot;['val_last_day', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.40305966507644503;0.46531713748383363;2.1618469367235695;0.618693925957742
+74;onehot;['val_last_day', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5239430788214666;0.6688115918110703;2.0949624743127337;0.45193954444393836
+75;onehot;['val_last_day', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5242467712371923;0.6698647024215556;2.099312471856377;0.4510765685505771
+76;onehot;['val_last_day', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.36778250502584897;0.4619453456928169;1.997420431966788;0.6214569548400924
+77;onehot;['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3686457217377478;0.46280638640310945;2.013663347332406;0.6207513714295876
+78;onehot;['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.501035675179273;0.6675996426228179;2.0468358937864077;0.45293268127403685
+79;onehot;['val_last_day', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4082593182574393;0.46584076091741755;2.179941412053732;0.6182648405455518
+80;onehot;['val_last_day', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.40843577545629006;0.4666500008931374;2.1918412892335906;0.617601705463598
+81;onehot;['val_last_day', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5184245579140342;0.6707563015609906;2.0632842368426028;0.4503459439075309
+82;onehot;['val_last_day', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3666429760322744;0.4619914188285266;2.009759726367485;0.6214192000163796
+83;onehot;['val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.4088164009257891;0.4707817649507048;2.05028120496276;0.6142159141295863
+84;onehot;['val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5429259699759217;0.7282202878576814;1.6021244175823774;0.4032568400501202
+85;onehot;['val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5429693828393876;0.7283606629273809;1.6061828626292491;0.40314180911227426
+86;onehot;['val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.37710053081642814;0.4674018829255077;1.9089024389032057;0.6169855725881653
+87;onehot;['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.37766609051233;0.46811765604565336;1.9231365872928985;0.6163990293118451
+88;onehot;['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.538768170949489;0.7276282583005496;1.6198733974170243;0.403741981146293
+89;onehot;['val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.42244719700389827;0.4745693177283966;2.0995385968806235;0.6111121881681936
+90;onehot;['val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.42238665706421863;0.4752969214748431;2.110116709981183;0.6105159502356812
+91;onehot;['val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5557596727150942;0.7338549919021439;1.6537544796959434;0.3986394582592794
+92;onehot;['val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3767878990761933;0.4695193459739813;1.9093666264201157;0.6152504086388877
+93;onehot;['mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41907896789494686;0.47723136960163726;2.078414225420969;0.6089307586292536
+94;onehot;['mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4189665802107549;0.4778631930512438;2.086720887901366;0.6084130082614936
+95;onehot;['mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8353469037878001;1.2218991859074222;1.1717654845921395;-0.0012903972830307087
+96;onehot;['mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3825194774571241;0.47414903271331327;1.907469069480357;0.6114565924812323
+97;onehot;['month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4316329111273719;0.4810859844802678;2.131887563575932;0.6057720783488254
+98;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.39425692821733943;0.4601883433392625;2.1283072434250796;0.6228967377656464
+99;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.44705165909346095;0.5785796613506696;2.085002238901845;0.5258804771659891
+100;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4472458065056428;0.5791176745347023;2.0888628325096756;0.5254396000126227
+101;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.3645012595745918;0.45729904487100337;2.009102125673149;0.6252643854771096
+102;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3653614090678852;0.45806753652786697;2.023815627762556;0.6246346417754324
+103;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43790414938331274;0.5781473658480252;2.0858314084971923;0.5262347235232818
+104;onehot;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.40023849020534935;0.4610563156736721;2.150068770452066;0.6221854742067741
+105;onehot;['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.40038992075683516;0.4617734296510528;2.162733800631606;0.6215978321593858
+106;onehot;['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.44436644049423646;0.5784160340434877;2.071388856905458;0.5260145622470696
+107;onehot;['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.36348543581176945;0.45782730637432845;2.022350604842639;0.6248314993792758
+108;onehot;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.402852457383539;0.4645438391916466;2.1523507181442434;0.619327608476834
+109;onehot;['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4028529743224549;0.4652526110070362;2.1630758924558866;0.6187468024489721
+110;onehot;['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5238977615114865;0.6688132916115592;2.0959206614049015;0.4519381515353199
+111;onehot;['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3681787451520959;0.4620522162704765;2.0008759094584603;0.6213693792983483
+112;onehot;['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4079087465781418;0.46567688169896065;2.1803594331417075;0.6183991320563799
+113;onehot;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4087710433175449;0.47017892273260353;2.043722696259764;0.6147099157060039
+114;onehot;['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.40853843927048666;0.47071509220175084;2.0508108919631676;0.6142705493925098
+115;onehot;['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5428880936830258;0.7282340874700488;1.6032437755879483;0.4032455319000624
+116;onehot;['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3774290219390811;0.4675267822488642;1.910719701889305;0.6168832233153724
+117;onehot;['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.42192883563503425;0.47431954040413016;2.099981977932888;0.6113168692410116
+118;onehot;['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4187849050233893;0.47710454219371373;2.0792061415631755;0.6090346878790074
+119;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.39414614424873773;0.4595276405987392;2.118281247268773;0.6234381533891074
+120;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.3941354435319895;0.4601439492539428;2.129803020451688;0.6229331166844961
+121;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.447064365273085;0.5785950662538147;2.085993608719449;0.525867853553691
+122;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.36490764532819625;0.45741604079331954;2.0121752035529594;0.6251685126793471
+123;onehot;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39999076964474023;0.46091944873149393;2.1513028573549606;0.6222976303948533
+124;onehot;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4026341239960324;0.46445105488436866;2.153197258456801;0.6194036409654119
+125;onehot;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4084681326977025;0.4700875639695827;2.0439758050113013;0.6147847800263795
 126;onehot;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.39402728866149533;0.4594605719926897;2.119986250910094;0.6234931130387831
-127;cyclical;['val_last_day', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-128;cyclical;['val_last_week', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-129;cyclical;['mean_24h', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-130;cyclical;['month', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-131;cyclical;['hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-132;cyclical;['weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-133;cyclical;['day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-134;cyclical;['val_last_day', 'val_last_week', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-135;cyclical;['val_last_day', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-136;cyclical;['val_last_day', 'month', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-137;cyclical;['val_last_day', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-138;cyclical;['val_last_day', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-139;cyclical;['val_last_day', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-140;cyclical;['val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-141;cyclical;['val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-142;cyclical;['val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-143;cyclical;['val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-144;cyclical;['val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-145;cyclical;['mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-146;cyclical;['mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-147;cyclical;['mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-148;cyclical;['mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-149;cyclical;['month', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-150;cyclical;['month', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-151;cyclical;['month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-152;cyclical;['hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-153;cyclical;['hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-154;cyclical;['weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-155;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-156;cyclical;['val_last_day', 'val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-157;cyclical;['val_last_day', 'val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-158;cyclical;['val_last_day', 'val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-159;cyclical;['val_last_day', 'val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-160;cyclical;['val_last_day', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-161;cyclical;['val_last_day', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-162;cyclical;['val_last_day', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-163;cyclical;['val_last_day', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-164;cyclical;['val_last_day', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-165;cyclical;['val_last_day', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-166;cyclical;['val_last_day', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-167;cyclical;['val_last_day', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-168;cyclical;['val_last_day', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-169;cyclical;['val_last_day', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-170;cyclical;['val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-171;cyclical;['val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-172;cyclical;['val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-173;cyclical;['val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-174;cyclical;['val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-175;cyclical;['val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-176;cyclical;['val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-177;cyclical;['val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-178;cyclical;['val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-179;cyclical;['val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-180;cyclical;['mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-181;cyclical;['mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-182;cyclical;['mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-183;cyclical;['mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-184;cyclical;['mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-185;cyclical;['mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-186;cyclical;['month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-187;cyclical;['month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-188;cyclical;['month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-189;cyclical;['hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-190;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-191;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-192;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-193;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-194;cyclical;['val_last_day', 'val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-195;cyclical;['val_last_day', 'val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-196;cyclical;['val_last_day', 'val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-197;cyclical;['val_last_day', 'val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-198;cyclical;['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-199;cyclical;['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-200;cyclical;['val_last_day', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-201;cyclical;['val_last_day', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-202;cyclical;['val_last_day', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-203;cyclical;['val_last_day', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-204;cyclical;['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-205;cyclical;['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-206;cyclical;['val_last_day', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-207;cyclical;['val_last_day', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-208;cyclical;['val_last_day', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-209;cyclical;['val_last_day', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-210;cyclical;['val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-211;cyclical;['val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-212;cyclical;['val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-213;cyclical;['val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-214;cyclical;['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-215;cyclical;['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-216;cyclical;['val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-217;cyclical;['val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-218;cyclical;['val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-219;cyclical;['val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-220;cyclical;['mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-221;cyclical;['mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-222;cyclical;['mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-223;cyclical;['mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-224;cyclical;['month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-225;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-226;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-227;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-228;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-229;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-230;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-231;cyclical;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-232;cyclical;['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-233;cyclical;['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-234;cyclical;['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-235;cyclical;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-236;cyclical;['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-237;cyclical;['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-238;cyclical;['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-239;cyclical;['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-240;cyclical;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-241;cyclical;['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-242;cyclical;['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-243;cyclical;['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-244;cyclical;['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-245;cyclical;['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-246;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-247;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-248;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-249;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-250;cyclical;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-251;cyclical;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
-252;cyclical;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
+127;cyclical;['val_last_day', 'power_consumption_kwh'];linear_regression;0.5042879633409182;0.6706711128584445;2.039508916413798;0.45041575214605023
+128;cyclical;['val_last_week', 'power_consumption_kwh'];linear_regression;0.539607893931192;0.7318311893679501;1.6566504019236814;0.4002978717084875
+129;cyclical;['mean_24h', 'power_consumption_kwh'];linear_regression;0.8083365161637521;1.2189793100347315;1.0408705479277165;0.00110230721035387
+130;cyclical;['month', 'power_consumption_kwh'];linear_regression;0.8341701123497095;1.2231770151542447;1.153659734971896;-0.002337519802602994
+131;cyclical;['hour', 'power_consumption_kwh'];linear_regression;0.4879078323111199;0.6124727227163018;2.009634902388898;0.4981066663055379
+132;cyclical;['weekday', 'power_consumption_kwh'];linear_regression;0.8082372008964287;1.220046110361713;1.0053251596613053;0.00022811322156601754
+133;cyclical;['day_continuous', 'power_consumption_kwh'];linear_regression;0.808038336351316;1.2209306951251402;1.0000392775620917;-0.0004967634617298877
+134;cyclical;['val_last_day', 'val_last_week', 'power_consumption_kwh'];linear_regression;0.4379785075371326;0.5786006567055293;2.0845237945128745;0.525863272434657
+135;cyclical;['val_last_day', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.5017765740840188;0.6684853830077953;2.048763257663596;0.45220685761182944
+136;cyclical;['val_last_day', 'month', 'power_consumption_kwh'];linear_regression;0.5167314222089403;0.6713821455154035;2.0674319620629706;0.44983309346211053
+137;cyclical;['val_last_day', 'hour', 'power_consumption_kwh'];linear_regression;0.4300007163829875;0.5391389428497492;2.108759740318592;0.5582003388635702
+138;cyclical;['val_last_day', 'weekday', 'power_consumption_kwh'];linear_regression;0.504675968000328;0.6702955216425249;2.0375545883900195;0.45072353193847625
+139;cyclical;['val_last_day', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5044696610970731;0.6707873512825184;2.040093169412089;0.45032050008339
+140;cyclical;['val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.5382475222165393;0.7275933759855792;1.6209703984514234;0.40377056560515656
+141;cyclical;['val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.5527212915163596;0.7330618813320418;1.6782586644561082;0.39928937603235426
+142;cyclical;['val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.44912119186569227;0.5582974192264982;1.9483794181372058;0.5425008452851646
+143;cyclical;['val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.5398029878344206;0.7318400202439919;1.6541981899038647;0.4002906352101886
+144;cyclical;['val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5398350987037464;0.7321283862843501;1.6590620494282966;0.4000543324526098
+145;cyclical;['mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.8271264363199472;1.2202802917663491;1.1311007002850086;3.621229030370543e-05
+146;cyclical;['mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.4856917083143866;0.6104182344109902;2.0298922210514827;0.4997902253382016
+147;cyclical;['mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.8087784388750604;1.2187422362511284;1.0452476049086954;0.00129657831365515
+148;cyclical;['mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8085372375161242;1.2192263195700668;1.0442280661335261;0.0008998942137491417
+149;cyclical;['month', 'hour', 'power_consumption_kwh'];linear_regression;0.4922927562110299;0.6100071865400154;2.1973726165964274;0.5001270602348753
+150;cyclical;['month', 'weekday', 'power_consumption_kwh'];linear_regression;0.8344420870785174;1.2229027326087747;1.1528832552350006;-0.002112757823800715
+151;cyclical;['month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8342772833741006;1.2234933157979246;1.1594205849935801;-0.0025967136876827723
+152;cyclical;['hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.48791674726449813;0.6116307313407157;2.009213391883481;0.4987966396590626
+153;cyclical;['hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.48782995059619677;0.6126758897524277;2.0176978621288875;0.4979401802282384
+154;cyclical;['weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.808479818819137;1.2204766311020687;1.000864339779271;-0.00012467879934785486
+155;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.4378166864606498;0.5785542197123617;2.087029041501278;0.5259013254228853
+156;cyclical;['val_last_day', 'val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.44535951621457087;0.5789807378461443;2.097507493531475;0.5255518133546645
+157;cyclical;['val_last_day', 'val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.40713675608558914;0.5116078797144274;2.0681497117534553;0.580760783671395
+158;cyclical;['val_last_day', 'val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.4381209287793595;0.5785264458542181;2.0795643438796287;0.5259240848270779
+159;cyclical;['val_last_day', 'val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43817542644017915;0.5787073159203564;2.0864051953160927;0.5257758700950697
+160;cyclical;['val_last_day', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.5189865095167148;0.669055247767682;2.0937596043780586;0.45173987955144146
+161;cyclical;['val_last_day', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.43093882725977456;0.5400187418091489;2.1068184161395656;0.5574793839273966
+162;cyclical;['val_last_day', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.5021530576318335;0.6681017774991918;2.0461060160586086;0.4525212047499072
+163;cyclical;['val_last_day', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5020160663148524;0.6686311022047252;2.0502396476140605;0.4520874474065779
+164;cyclical;['val_last_day', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.43454795538914043;0.5384054047087473;2.226535487509577;0.5588014397605159
+165;cyclical;['val_last_day', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5169805142429234;0.6710873208341537;2.0659692836805403;0.4500746887799749
+166;cyclical;['val_last_day', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5168101000438559;0.6714656920338256;2.067753146052549;0.4497646309182385
+167;cyclical;['val_last_day', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4300529874180383;0.5385241559426672;2.1069242027002324;0.5587041285653199
+168;cyclical;['val_last_day', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43006798419986125;0.5393111274385014;2.1129659638461096;0.5580592414823246
+169;cyclical;['val_last_day', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5048695165189223;0.6704056485266221;2.0381787444933095;0.45063328800280555
+170;cyclical;['val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.5427486785103636;0.7280666495321854;1.6284979579825842;0.4033827396183891
+171;cyclical;['val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.4471157516400862;0.5553541096305264;1.9623446239870823;0.5449127526410804
+172;cyclical;['val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.5383611311176457;0.72765650036664;1.6176424928015425;0.4037188380671406
+173;cyclical;['val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5383822969274766;0.7277297716877069;1.6224412610307395;0.40365879557670714
+174;cyclical;['val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.4558452504323588;0.5577278840839972;2.0910101918108106;0.5429675532392075
+175;cyclical;['val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5528362143725511;0.7330821220923023;1.6758167681414684;0.39927278965672175
+176;cyclical;['val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5527698762952782;0.7332860052901917;1.6807338566800993;0.39910571671767026
+177;cyclical;['val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.44941980269453913;0.5578912653894533;1.946390516930594;0.5428336697452699
+178;cyclical;['val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4492398492905405;0.5585425553818536;1.953210865434846;0.5422999674376179
+179;cyclical;['val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5400368099434105;0.732132859613643;1.6565845955929548;0.4000506667642153
+180;cyclical;['mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.49055758735400096;0.608036824550811;2.167712916963687;0.5017416816060294
+181;cyclical;['mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.8274500978785412;1.2201275374764107;1.1302475775866965;0.00016138743193827576
+182;cyclical;['mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8272731949398408;1.220507912563039;1.1356759676399897;-0.00015031252334396505
+183;cyclical;['mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.48598862267856147;0.6098048635017363;2.0304523658081837;0.5002928546946102
+184;cyclical;['mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.48563937888509;0.610507720261307;2.034731725996754;0.49971689578397305
+185;cyclical;['mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8089647593257956;1.2189741081551602;1.0449227331780755;0.0011065699123202766
+186;cyclical;['month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4926745295358572;0.6094818630544961;2.196576706708339;0.5005575387617327
+187;cyclical;['month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4922620949474107;0.6101427272050586;2.2027466162202556;0.5000159908701401
+188;cyclical;['month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8345405017048602;1.2232005428222033;1.1583745597282233;-0.002356799648493002
+189;cyclical;['hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.48785269845586043;0.6117867173938045;2.0174490142085904;0.4986688162356008
+190;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.4466553630676477;0.5790131105603934;2.108921221721472;0.5255252853986061
+191;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.4076436373867777;0.5117620386536291;2.0638193650734458;0.5806344574840481
+192;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.43797058948739753;0.5784803405068838;2.0820530248236606;0.5259618660467411
+193;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4380167993308695;0.578666617823605;2.089262738637169;0.5258092203206324
+194;cyclical;['val_last_day', 'val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.4123932203689121;0.5114783000560659;2.1601612248010227;0.580866968264279
+195;cyclical;['val_last_day', 'val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.44540233819874536;0.5789356374294434;2.0929029887601827;0.5255887710797182
+196;cyclical;['val_last_day', 'val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.44545436429855445;0.5790620621255846;2.0992594056279574;0.5254851718338184
+197;cyclical;['val_last_day', 'val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4073920391942932;0.5112676436430956;2.0658012643542882;0.5810395915427505
+198;cyclical;['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4072673672585645;0.5117845850306894;2.0720571982184466;0.5806159817610881
+199;cyclical;['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43833245173226587;0.5786308664340447;2.081538343851904;0.5258385169463026
+200;cyclical;['val_last_day', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.43457773365471936;0.5386359484655694;2.2174574440078785;0.5586125197149654
+201;cyclical;['val_last_day', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5193542987901207;0.6687878546364329;2.0926201474924766;0.45195899597095235
+202;cyclical;['val_last_day', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5191173240414954;0.6691876627422997;2.0943931466415293;0.4516313715467958
+203;cyclical;['val_last_day', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4310120133674077;0.5394427297762224;2.1058953760301655;0.5579513993963818
+204;cyclical;['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43097046279720386;0.5401212669648953;2.110254659762009;0.5573953692598097
+205;cyclical;['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5023865165898499;0.6682354767671205;2.046982831240683;0.45241164432573744
+206;cyclical;['val_last_day', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.434899951753265;0.5380049385402917;2.2251473094455454;0.5591296034368125
+207;cyclical;['val_last_day', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4345406985360304;0.5385286200920003;2.229037597647371;0.558700470399482
+208;cyclical;['val_last_day', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5170616643620288;0.6711665028132348;2.0662710938357147;0.45000980277611624
+209;cyclical;['val_last_day', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43008759087504506;0.5386696817336112;2.11095034691783;0.5585848768474124
+210;cyclical;['val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.45211188151776693;0.5547959813302072;2.058118042695145;0.5453701132105995
+211;cyclical;['val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5428096610731601;0.7281278691449823;1.6256158017807376;0.4033325729506918
+212;cyclical;['val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5428405457006701;0.7281930870704859;1.6299389324850098;0.4032791298489281
+213;cyclical;['val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4475821345430819;0.5551100579144856;1.963332356570705;0.5451127418402962
+214;cyclical;['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4471918036072269;0.5554784664677225;1.9662331547993601;0.54481084791084
+215;cyclical;['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5385060522656582;0.7277929543585054;1.619170405911055;0.40360702027292183
+216;cyclical;['val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.45614810973124265;0.5574948534171503;2.0902325039056384;0.5431585111935766
+217;cyclical;['val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4558905530152744;0.5578995657004139;2.095587460746071;0.5428268680207453
+218;cyclical;['val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.552863665711375;0.7333035056052348;1.6777914272226297;0.3990913760113304
+219;cyclical;['val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.44952244177303396;0.5581078626133122;1.952003664455152;0.5426561782444739
+220;cyclical;['mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.49079214982119695;0.6076252884839862;2.1673807699797867;0.5020789165568336
+221;cyclical;['mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4903576519758033;0.6081257678277779;2.171623995493091;0.501668796665801
+222;cyclical;['mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8275807174206488;1.2203430356396614;1.134056049559836;-1.5203439046596046e-05
+223;cyclical;['mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.48594933782359667;0.609865964609213;2.035497689514433;0.5002427851365929
+224;cyclical;['month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.49250351435180145;0.6095830124955407;2.201854479250628;0.5004746514293107
+225;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.4118411237844564;0.5113711629778434;2.1455681618020175;0.5809547621910238
+226;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.44671741609685334;0.5789719484823201;2.1040456438286523;0.5255590158356032
+227;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.44680627768288483;0.5791154218092237;2.1113128608905507;0.525441446017936
+228;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.40790105342975397;0.5114606769604056;2.0629757341604247;0.5808814095837089
+229;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.40771767333325265;0.5118778198064516;2.0667620178646295;0.580539580134227
+230;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4381799815379779;0.5785898473200383;2.0841914048492582;0.5258721302307973
+231;cyclical;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.41261693412707795;0.5112718556629767;2.158663024308711;0.5810361399854463
+232;cyclical;['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.412492328488346;0.5116072952491272;2.1625023435845434;0.5807612626139294
+233;cyclical;['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4455029635873013;0.5790152821214891;2.094713835030784;0.5255235059037858
+234;cyclical;['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4075252042767714;0.5114267856137834;2.069855236331259;0.5809091819894158
+235;cyclical;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4348681205761441;0.5382415503767312;2.2162355489529895;0.5589357108780459
+236;cyclical;['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4345313761131642;0.5387334119369032;2.2200295756861474;0.5585326528658359
+237;cyclical;['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5194958992947525;0.668910064056725;2.0932543289099086;0.4518588509504733
+238;cyclical;['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4310260742965075;0.5395233422414728;2.1090643507272593;0.55788534117465
+239;cyclical;['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4348071727470829;0.5381082332001672;2.2275276086910663;0.5590449581958492
+240;cyclical;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4524271308130224;0.5546520282675295;2.057933689151865;0.5454880761497528
+241;cyclical;['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.45206599840839434;0.5549115928254158;2.0612786569606896;0.5452753748874195
+242;cyclical;['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5429035848752765;0.7282542791801275;1.6270116008711795;0.4032289857188065
+243;cyclical;['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4476202054288097;0.5552201872776603;1.9671939793545439;0.545022495873135
+244;cyclical;['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4561251544553492;0.5576454943084355;2.094791414084589;0.5430350678853058
+245;cyclical;['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4906660296958708;0.6076901628125709;2.171490924554102;0.5020257550170018
+246;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4120733747480244;0.5111749445589787;2.144496277851908;0.5811155541948528
+247;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41195289894510556;0.5114779770110865;2.147960888864067;0.5808672329848381
+248;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4468829500002149;0.5790716011628105;2.106536403254111;0.5254773550298759
+249;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.40796633103531843;0.5115638565871091;2.0655706018515643;0.5807968586071595
+250;cyclical;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41269221352056173;0.5113875639890453;2.161003322336807;0.5809413223138133
+251;cyclical;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43476537905847584;0.5383203371376596;2.2188162273336784;0.5588711487373551
+252;cyclical;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.45241690835578896;0.5547552594078138;2.0612352278488375;0.5454034829601841
 253;cyclical;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.41214214406723415;0.5112707551226573;2.1468703049652444;0.581037041827813
+254;;['val_last_day', 'power_consumption_kwh'];linear_regression;0.5042879633409182;0.6706711128584445;2.039508916413798;0.45041575214605023
+255;;['val_last_week', 'power_consumption_kwh'];linear_regression;0.539607893931192;0.7318311893679501;1.6566504019236814;0.4002978717084875
+256;;['mean_24h', 'power_consumption_kwh'];linear_regression;0.8083365161637521;1.2189793100347315;1.0408705479277165;0.00110230721035387
+257;;['month', 'power_consumption_kwh'];linear_regression;0.8064235025893679;1.2205566669878212;0.9968735843416006;-0.00019026454059889453
+258;;['hour', 'power_consumption_kwh'];linear_regression;0.7931818258092295;1.2183178677647195;0.9929422242687846;0.0016443288443467319
+259;;['weekday', 'power_consumption_kwh'];linear_regression;0.8046425228699743;1.2203366703881815;0.9922668822217969;-9.987407105116475e-06
+260;;['day_continuous', 'power_consumption_kwh'];linear_regression;0.808038336351316;1.2209306951251402;1.0000392775620917;-0.0004967634617298877
+261;;['val_last_day', 'val_last_week', 'power_consumption_kwh'];linear_regression;0.4379785075371326;0.5786006567055293;2.0845237945128745;0.525863272434657
+262;;['val_last_day', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.5017765740840188;0.6684853830077953;2.048763257663596;0.45220685761182944
+263;;['val_last_day', 'month', 'power_consumption_kwh'];linear_regression;0.503615587131216;0.6706808430996033;2.0374141765805076;0.45040777865924553
+264;;['val_last_day', 'hour', 'power_consumption_kwh'];linear_regression;0.497575861235038;0.6703813741246012;2.02224545858897;0.4506531797630453
+265;;['val_last_day', 'weekday', 'power_consumption_kwh'];linear_regression;0.5017901647805559;0.6705021477054092;2.0323059462568587;0.4505542113472356
+266;;['val_last_day', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5044696610970731;0.6707873512825184;2.040093169412089;0.45032050008339
+267;;['val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.5382475222165393;0.7275933759855792;1.6209703984514234;0.40377056560515656
+268;;['val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.539163907211924;0.7318126982083671;1.65529431614501;0.4003130243665288
+269;;['val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.5318754254942016;0.7309906588069273;1.637877419007142;0.4009866479914098
+270;;['val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.5388282002299098;0.7317250713212428;1.6545451190918348;0.40038483058559615
+271;;['val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5398350987037464;0.7321283862843501;1.6590620494282966;0.4000543324526098
+272;;['mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.8074234430016064;1.2190019223677535;1.037559222780728;0.0010837774395051625
+273;;['mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.7940358763052026;1.2164739316791218;1.0192390504909448;0.0031553499801383333
+274;;['mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.80591389890404;1.2188739695404949;1.031825185093171;0.0011886289188390853
+275;;['mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8085372375161242;1.2192263195700668;1.0442280661335261;0.0008998942137491417
+276;;['month', 'hour', 'power_consumption_kwh'];linear_regression;0.7876136895545327;1.217015247628154;0.9979002700410625;0.0027117663621825105
+277;;['month', 'weekday', 'power_consumption_kwh'];linear_regression;0.8053708637609643;1.2204613466073453;0.9930808453671709;-0.0001121538562343094
+278;;['month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8067008080952749;1.2209899518706224;0.9944207440625937;-0.0005453216495983071
+279;;['hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.7953337547081191;1.2173842616929063;1.0003793523889861;0.0024093762437829014
+280;;['hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.7934349982653245;1.2187012688758225;0.9852096808618639;0.0013301492006554394
+281;;['weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8048692660539764;1.2207735312315786;0.98761210650266;-0.00036797485196737867
+282;;['val_last_day', 'val_last_week', 'mean_24h', 'power_consumption_kwh'];linear_regression;0.4378166864606498;0.5785542197123617;2.087029041501278;0.5259013254228853
+283;;['val_last_day', 'val_last_week', 'month', 'power_consumption_kwh'];linear_regression;0.4377139776517407;0.5785910814314555;2.083577648080849;0.5258711189330358
+284;;['val_last_day', 'val_last_week', 'hour', 'power_consumption_kwh'];linear_regression;0.43355509844740747;0.5783030005521346;2.0712973911862607;0.5261071880142103
+285;;['val_last_day', 'val_last_week', 'weekday', 'power_consumption_kwh'];linear_regression;0.43679380885236585;0.5784646168951946;2.0810298849383235;0.5259747508260885
+286;;['val_last_day', 'val_last_week', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43817542644017915;0.5787073159203564;2.0864051953160927;0.5257758700950697
+287;;['val_last_day', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.500867305324999;0.6684837393942744;2.046057314189999;0.45220820447780186
+288;;['val_last_day', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.49504343414102087;0.6682504550688574;2.032643710905788;0.4523993702937471
+289;;['val_last_day', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.4989444212904005;0.6682754664263054;2.041566664788056;0.45237887463230086
+290;;['val_last_day', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5020160663148524;0.6686311022047252;2.0502396476140605;0.4520874474065779
+291;;['val_last_day', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.49515525915322606;0.6702287379705492;2.0175143336011354;0.45077825809773375
+292;;['val_last_day', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5016853968994599;0.6704840435386288;2.032041665106477;0.4505690468824066
+293;;['val_last_day', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5038052366637782;0.6707925024852237;2.0380158503619388;0.45031627890879333
+294;;['val_last_day', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4983095687492249;0.6705020476865075;2.02526989241733;0.4505542933081428
+295;;['val_last_day', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.49776974284561887;0.6704872166511393;2.0228375756842816;0.45056644666209145
+296;;['val_last_day', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5019700143026;0.670614133559595;2.032877120540607;0.4504624440707523
+297;;['val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.5382820362203193;0.727595008513139;1.6210760857892104;0.40376922782362124
+298;;['val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.5308378442603016;0.7266403380335835;1.6019400278710985;0.40455153654006293
+299;;['val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.5381526054298292;0.7275806875221871;1.6207235890897715;0.40378096321954016
+300;;['val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5383822969274766;0.7277297716877069;1.6224412610307395;0.40365879557670714
+301;;['val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.528390730932542;0.7305435473024037;1.6319689114351088;0.4013530353833956
+302;;['val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5391203480837115;0.7318049058668211;1.6551833503206583;0.40031940983339254
+303;;['val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5394170603410285;0.7321065765350305;1.657772679547777;0.4000722045428875
+304;;['val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.5334190129188426;0.7313809764593315;1.6437831299516215;0.4006668005590275
+305;;['val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.532156060827586;0.731267808647914;1.6406436430259208;0.4007595363953067
+306;;['val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5390539962550961;0.7320195750030776;1.6569531844820276;0.40014349831204477
+307;;['mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.7876094410174869;1.2148644250607008;1.0181080074635542;0.004474266908781277
+308;;['mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.8062169916768761;1.2189122252804063;1.0330631496798326;0.0011572800928015825
+309;;['mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.807631594976648;1.219239347635001;1.0395412413805198;0.0008892183114616037
+310;;['mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.7962429644149459;1.2151512673503662;1.031444603076284;0.004239212795079439
+311;;['mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.7942076526105991;1.2166769773748063;1.015967083493969;0.002988963335770811
+312;;['mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8060749122547523;1.2191108075736365;1.0320974183121612;0.000994551002239108
+313;;['month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.7905409898254766;1.2166267669984483;0.9982409534638218;0.003030108438632828
+314;;['month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.7878781066200694;1.217410974838428;0.9914816614344395;0.002387486044983733
+315;;['month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8055503470677556;1.2208828768218722;0.9901910611574675;-0.0004575785531639731
+316;;['hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.7955572686936674;1.2177984702314963;0.9948556035016782;0.0020699513248156887
+317;;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'power_consumption_kwh'];linear_regression;0.43751699991197035;0.5785426847808135;2.086044532583378;0.5259107777707759
+318;;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'power_consumption_kwh'];linear_regression;0.4333825448046892;0.5782607809080448;2.073932768586761;0.5261417850781018
+319;;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'power_consumption_kwh'];linear_regression;0.4365841932190262;0.5784116441073279;2.0834877816766064;0.5260181595986122
+320;;['val_last_day', 'val_last_week', 'mean_24h', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4380167993308695;0.578666617823605;2.089262738637169;0.5258092203206324
+321;;['val_last_day', 'val_last_week', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.4316764982104384;0.578163102724758;2.0678988881117215;0.5262218278738391
+322;;['val_last_day', 'val_last_week', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.4366603092181521;0.5784339712077846;2.080766467253909;0.5259998635627819
+323;;['val_last_day', 'val_last_week', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4379222339462282;0.5786966440679934;2.0854754644672258;0.525784615189113
+324;;['val_last_day', 'val_last_week', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.43430329387103633;0.5785138901282812;2.073283300191359;0.5259343736691987
+325;;['val_last_day', 'val_last_week', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4337627341451329;0.578404014531307;2.0731408715084374;0.526024411686586
+326;;['val_last_day', 'val_last_week', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43698865722274216;0.5785696353714752;2.0828726570181004;0.5258886929965638
+327;;['val_last_day', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.4931075746851668;0.6681851539804957;2.029261273590471;0.4524528815436626
+328;;['val_last_day', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.49900802854696946;0.6682862463252801;2.0416826655490743;0.4523700409990097
+329;;['val_last_day', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5011211292038227;0.6686240065517715;2.047851132171102;0.45209326196906163
+330;;['val_last_day', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4957024269154645;0.6683931668538096;2.034241528052764;0.4522824245248164
+331;;['val_last_day', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.49530343459309817;0.6683833985456967;2.0347555787796274;0.4522904292057458
+332;;['val_last_day', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.49918426089695406;0.6684144230113369;2.043709303130433;0.4522650060776475
+333;;['val_last_day', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4957110007179825;0.6702888044100038;2.0192475422823857;0.45072903640275386
+334;;['val_last_day', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4953443970823541;0.6703418838115697;2.018164244665559;0.45068554026518837
+335;;['val_last_day', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.501845937425591;0.6705931959584921;2.032564860871202;0.450479601475527
+336;;['val_last_day', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4985004268657657;0.6706088413232508;2.0258545060719784;0.45046678081595415
+337;;['val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.5264641576349375;0.725961771683036;1.5929342358871597;0.40510759057345525
+338;;['val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.5380666826658523;0.727558216843118;1.6205596594613;0.40379937691146484
+339;;['val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5384269836566814;0.7277321706947774;1.6225796340553076;0.4036568297003318
+340;;['val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.532549230008696;0.7268974662021187;1.6070985036430352;0.4043408317871712
+341;;['val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5309659369932763;0.7267667905039622;1.6033538130501064;0.40444791453444806
+342;;['val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5382836320966479;0.7277164598895727;1.6221849554576748;0.4036697039853516
+343;;['val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.5304575376176984;0.7309213171077874;1.6375198812373561;0.4010434703367234
+344;;['val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5286622088952595;0.7308325915349364;1.6348966902294066;0.4011161768784035
+345;;['val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.539308439879676;0.7320871626304423;1.6574974556695685;0.40008811334818195
+346;;['val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5336768260666979;0.7316638429012056;1.6462273129710236;0.40043500447042324
+347;;['mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.7905391951710176;1.2142538800274358;1.024453630590952;0.004974580589294231
+348;;['mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.787782793460958;1.2150785588496356;1.0150052188012506;0.004298794080034862
+349;;['mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.8063460622838712;1.2191434043062386;1.0333078694873392;0.0009678394734045082
+350;;['mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.796398447950415;1.2153754092253304;1.028624747521191;0.004055538798387159
+351;;['month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.7907015719426818;1.2170389346793895;0.992547040970969;0.002692355908999855
+352;;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'power_consumption_kwh'];linear_regression;0.43157523466918235;0.5781325922809772;2.0699404154222507;0.526246829784575
+353;;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'power_consumption_kwh'];linear_regression;0.43647548270887443;0.5783864551368262;2.0832471830680754;0.5260388008058181
+354;;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43772577190809475;0.5786540122650145;2.088278936526493;0.5258195499983297
+355;;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.4341218248194261;0.5784728161686522;2.0755018876607862;0.5259680318971682
+356;;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4335879109984621;0.5783677057188128;2.0759038611074336;0.5260541650948101
+357;;['val_last_day', 'val_last_week', 'mean_24h', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43677397610518237;0.578522078324511;2.0856438607285175;0.5259276638175592
+358;;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.43231629266725424;0.5782843453854075;2.069109584565751;0.5261224750685917
+359;;['val_last_day', 'val_last_week', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4318752584647785;0.5782704555702008;2.06913298745797;0.5261338571357432
+360;;['val_last_day', 'val_last_week', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4368402380250685;0.5785360453148615;2.0825938774983297;0.5259162185089132
+361;;['val_last_day', 'val_last_week', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43450435964839373;0.5786149264126575;2.075148537944253;0.5258515790634817
+362;;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.49358507624415576;0.6682489455664514;2.0300642461600042;0.45240060726180564
+363;;['val_last_day', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4933378518488687;0.6683225223352207;2.031303277548093;0.4523403144709751
+364;;['val_last_day', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4992214173918506;0.6684206222849163;2.043775060370453;0.4522599260569906
+365;;['val_last_day', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4959537957916896;0.6685267386776348;2.036318953648435;0.45217296853525
+366;;['val_last_day', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4958817272368078;0.6703998521748594;2.0198393868348608;0.450638037847495
+367;;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.5286090363216963;0.7262528586662306;1.598323890834607;0.40486905812789153
+368;;['val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5265885945438428;0.726101654296374;1.594490341297503;0.40499296318103406
+369;;['val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5381832881821084;0.7276907473739902;1.6220001863532958;0.403690774213763
+370;;['val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5326725064625526;0.727023114232552;1.6085090403747475;0.40423786898323333
+371;;['val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5306678242647047;0.7312046913310858;1.6400362550304362;0.4008112581445076
+372;;['mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.7906373176539362;1.2144808334776618;1.0207808240538112;0.0047886026354969635
+373;;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'power_consumption_kwh'];linear_regression;0.43221401216280936;0.5782538165419552;2.071218439796144;0.5261474920570155
+374;;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4317805759773354;0.5782442557843538;2.0713981871027296;0.5261553266598105
+375;;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4366502139731869;0.5784938123923278;2.0853811053590547;0.5259508264538811
+376;;['val_last_day', 'val_last_week', 'mean_24h', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.43433176638803556;0.5785789508661517;2.0777474882192584;0.5258810593754983
+377;;['val_last_day', 'val_last_week', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4325032617100403;0.5783882513093964;2.070526573431951;0.5260373289246947
+378;;['val_last_day', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.49379376697157906;0.6683833028030194;2.0321345022342006;0.452290507662483
+379;;['val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.5287205567934466;0.7263869786856858;1.5998316409809579;0.40475915291712383
+380;;['val_last_day', 'val_last_week', 'mean_24h', 'month', 'hour', 'weekday', 'day_continuous', 'power_consumption_kwh'];linear_regression;0.4323998927403196;0.5783617471491199;2.0727740985247087;0.5260590478696608
