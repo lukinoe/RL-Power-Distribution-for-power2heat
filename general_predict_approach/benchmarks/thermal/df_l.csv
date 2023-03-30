@@ -1,3 +1,0 @@
-,batch_size,encoding,hidden_size,learning_rate,lookback_len,model,n_epochs,num_layers,pred_len,input_size,mae,mse,mape,r2
-0,64,,50,0.001,76,lstm,11,1,10,8,0.20135591179132462,0.1704173292964697,,-0.054986074566841125
-1,64,,75,0.001,76,lstm,11,1,10,8,0.21901289001107216,0.16766349878162146,,-0.06832754611968994

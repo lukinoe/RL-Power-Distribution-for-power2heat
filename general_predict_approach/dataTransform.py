@@ -19,23 +19,29 @@ class Transform:
         dataset = self.dataset
         target = self.target
 
+        
+
         d = dataset.copy()
 
         d['date'] = pd.to_datetime(d['date'])
         d = d.resample(self.resample, on='date').sum()
 
+        resampleFactor = 1
+        if self.resample == "h": resampleFactor = 1
+        if self.resample == "15min": resampleFactor = 4
+
         val_last_day = []
         mean_24_hours = []
         val_last_week = []
         for i in range(len(d)):
-            if i < 24:
-                val_last_day.append(d[target].mean())
-                mean_24_hours.append(d[target].mean())
-                val_last_week.append(d[target].mean())
+            if i < 24*resampleFactor:
+                val_last_day.append(d[self.target].mean())
+                mean_24_hours.append(d[self.target].mean())
+                val_last_week.append(d[self.target].mean())
             else:
-                val_last_day.append(d[target].iloc[i-24])
-                val_last_week.append(d[target].iloc[i-(24*7)])
-                mean_24_hours.append(d[target].iloc[i-24:i].mean())
+                val_last_day.append(d[self.target].iloc[i-24*resampleFactor])
+                val_last_week.append(d[self.target].iloc[i-(24*resampleFactor*7)])
+                mean_24_hours.append(d[self.target].iloc[i-24*resampleFactor:i].mean())
                 
 
         d["val_last_day"] = val_last_day

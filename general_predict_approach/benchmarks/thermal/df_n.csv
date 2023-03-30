@@ -1,2 +1,0 @@
-,activation1,activation2,batch_size,encoding,epochs,lr,model,n_hidden1,n_hidden2,mae,mse,mape,r2
-0,relu,sigmoid,64,onehot,11,0.001,nn,500,50,0.27479501159887443,0.22110060880307336,4.168801886801238,-0.1751873056730271

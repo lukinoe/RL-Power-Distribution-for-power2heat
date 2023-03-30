@@ -3,6 +3,10 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 import math
 from itertools import combinations
+import torch
+from torch.autograd import Variable
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def cats(start, end):
@@ -89,3 +93,56 @@ def get_feature_combinations(features, target):
           feature_combinations.append(l)
 
   return feature_combinations
+
+
+
+class TimeSeriesTransform():
+
+    def __init__(self, X, y, lookback_len=100, pred_len=24) -> None:
+        
+        self.lookback_len = lookback_len
+        self.pred_len = pred_len
+        self.generate_sequences(X,y)
+        
+
+    def split_sequences(self,input_sequences, output_sequence):
+
+
+        print("***",input_sequences.shape, output_sequence.shape)
+        n_steps_in = self.lookback_len
+        n_steps_out = self.pred_len
+
+        X, y = list(), list() # instantiate X and y
+        for i in range(len(input_sequences)):
+            # find the end of the input, output sequence
+            end_ix = i + n_steps_in
+            out_end_ix = end_ix + n_steps_out - 1
+            # check if we are beyond the dataset
+            if out_end_ix > len(input_sequences): break
+            # gather input and output of the pattern
+            seq_x, seq_y = input_sequences[i:end_ix], output_sequence[end_ix-1:out_end_ix, -1]
+            X.append(seq_x), y.append(seq_y)
+
+        return np.array(X), np.array(y)
+
+    def generate_sequences(self, X, y):
+        print("***",X.shape, y.shape)
+        self.X, self.y = self.split_sequences(X, y)
+
+        
+
+    def return_tensors(self):
+
+        X_tensors = Variable(torch.Tensor(self.X).to(device))
+        y_tensors = Variable(torch.Tensor(self.y).to(device))
+
+
+
+        X_tensors = torch.reshape(X_tensors,   
+                                            (X_tensors.shape[0], self.lookback_len, 
+                                            X_tensors.shape[2]))
+
+
+        return X_tensors, y_tensors
+
+

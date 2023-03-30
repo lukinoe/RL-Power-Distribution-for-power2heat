@@ -25,7 +25,8 @@ experiment = {}
 #target = "power_consumption_kwh"
 target = "thermal_consumption_kwh"
 
-test_size = 0.05
+test_size = 0.10
+shuffle = True
 resolution = "h"
 
 
@@ -50,14 +51,7 @@ def benchmarkModel(grid, experiment):
   for p in grid:
       print(p, target)
 
-
-      if hasattr(p, 'features'):
-          data_in = data[p["features"]]
-      else:
-          data_in = data
-        
-      
-      model = Model(model=p["model"], dataset=data_in, encoding=p["encoding"], scale=True, target=target, test_size=test_size, model_params=p)
+      model = Model(model=p["model"], dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=test_size, shuffle=shuffle, model_params=p)
       
       metrics = model.results(plot=False)
       p.update(metrics)
@@ -85,7 +79,7 @@ params_grid = {
   "encoding": ["onehot","cyclical", None]
 }
 
-grid = ParameterGrid(params_grid) 
+#grid = ParameterGrid(params_grid) 
 
 #experiment = benchmarkModel(grid, experiment)
 
@@ -106,9 +100,9 @@ params_grid = {
   "features": feature_combinations,
   "kernel": ["rbf"],
   "degree": [3],  # only valid for "poly" kernel
-  "C": [0.8, 1],   # default = 1
-  "epsilon": [0.3, 0.1, 0.03], # default = 0.1
-  "encoding": ["cyclical", "onehot", None]
+  "C": [1, 0.8],   # default = 1
+  "epsilon": [0.3, 0.1,0.03], # default = 0.1
+  "encoding": ["onehot", "cyclical", None]
 }
 
 grid = ParameterGrid(params_grid) 
@@ -128,19 +122,19 @@ grid = ParameterGrid(params_grid)
 
 params_grid = {
   "model": ["nn"],
-  "epochs": [11],
+  "epochs": [20],
   "n_hidden1": [500],
   "n_hidden2": [50],
   "features": feature_combinations,
   "batch_size": [64],
-  "encoding": ["onehot"],
+  "encoding": ["onehot", "cyclical", None],
   "activation1": ["relu"],
-  "activation2": ["sigmoid", "relu"],
+  "activation2": ["sigmoid"],
   "lr": [0.001]
 }
 grid = ParameterGrid(params_grid) 
 
-#experiment = benchmarkModel(grid, experiment)
+experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -154,18 +148,19 @@ grid = ParameterGrid(params_grid)
 
 params_grid = {
   "model": ["DLinear"],
-  "n_epochs": [11], 
-  "learning_rate": [0.001], 
+  "n_epochs": [15,25,40,50], 
+  "features": [[target]],
+  "learning_rate": [0.001, 0.0005, 0.0001], 
   "batch_size": [64], 
   "num_layers": [1], 
-  "lookback_len": [48,76,100,200,300,400], 
-  "pred_len": [10],
+  "lookback_len": [75,100,150,200,250,300], 
+  "pred_len": [10,24],
   "encoding": [None]
 }
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -181,13 +176,13 @@ experiment = benchmarkModel(grid, experiment)
 params_grid = {
   "model": ["lstm"],
   "n_epochs": [10], 
-  "features": [["month", "hour", target]],
+  "features": [["month", "hour", "weekday", "day_continous", target]],
   "learning_rate": [0.001], 
   "batch_size": [64], 
   "hidden_size": [75], 
   "num_layers": [1], 
-  "lookback_len": [76,100], 
-  "pred_len": [10],
+  "lookback_len": [76,100,200], 
+  "pred_len": [12],
   "encoding": [None]
 }
 
@@ -198,14 +193,18 @@ grid = ParameterGrid(params_grid)
 
 
 """ SAVE EXPERIMENTS """
-
+# dfMerge = pd.DataFrame()
+# cols_ = ["features", "batch_size", "encoding", "mse", "mape", "mae", "r2"]
+# dfMerge.columns = ["model", "features", "batch_size", "encoding", "mse", "mape", "mae", "r2"]
 for i,e in enumerate(experiment.items()):
+    
     label = e[0]
     df = e[1]
+
     print(label)
     print(df.sort_values(by='mse', ascending=True))
 
     if target == "power_consumption_kwh":
-        df.to_csv("benchmarks/power/" + label +  ".csv")
+        df.to_csv("benchmarks/power/" + label +  ".csv", sep=";")
     if target == "thermal_consumption_kwh":
-        df.to_csv("benchmarks/thermal/" + label+  ".csv")
+        df.to_csv("benchmarks/thermal/" + label+  ".csv", sep=";")

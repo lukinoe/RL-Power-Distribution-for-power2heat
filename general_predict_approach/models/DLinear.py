@@ -116,13 +116,72 @@ def r2_loss(output, target):
     return r2
 
 
+# class DataDLinear():
+
+#     def __init__(self, X_train, y_train, X_test, y_test, lookback_len=100, pred_len=24) -> None:
+        
+#         self.lookback_len = lookback_len
+#         self.pred_len = pred_len
+#         self.generate_sequences(X_train, y_train, X_test, y_test)
+        
+
+#     def split_sequences(self,input_sequences, output_sequence):
+
+
+#         print("***",input_sequences.shape, output_sequence.shape)
+#         n_steps_in = self.lookback_len
+#         n_steps_out = self.pred_len
+
+#         X, y = list(), list() # instantiate X and y
+#         for i in range(len(input_sequences)):
+#             # find the end of the input, output sequence
+#             end_ix = i + n_steps_in
+#             out_end_ix = end_ix + n_steps_out - 1
+#             # check if we are beyond the dataset
+#             if out_end_ix > len(input_sequences): break
+#             # gather input and output of the pattern
+#             seq_x, seq_y = input_sequences[i:end_ix], output_sequence[end_ix-1:out_end_ix, -1]
+#             X.append(seq_x), y.append(seq_y)
+
+#         return np.array(X), np.array(y)
+
+#     def generate_sequences(self, X_train, y_train, X_test, y_test):
+#         print("***",X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+#         self.X_train, self.y_train = self.split_sequences(X_train, y_train)
+#         self.X_test, self.y_test = self.split_sequences(X_test, y_test)
+
+        
+
+#     def return_tensors(self):
+
+#         X_train_tensors = Variable(torch.Tensor(self.X_train).to(device))
+#         X_test_tensors = Variable(torch.Tensor(self.X_test).to(device))
+
+#         y_train_tensors = Variable(torch.Tensor(self.y_train).to(device))
+#         y_test_tensors = Variable(torch.Tensor(self.y_test).to(device))
+
+
+#         X_train_tensors_final = torch.reshape(X_train_tensors,   
+#                                             (X_train_tensors.shape[0], self.lookback_len, 
+#                                             X_train_tensors.shape[2]))
+#         X_test_tensors_final = torch.reshape(X_test_tensors,  
+#                                             (X_test_tensors.shape[0], self.lookback_len, 
+#                                             X_test_tensors.shape[2])) 
+
+#         print("Training Shape:", X_train_tensors_final.shape, y_train_tensors.shape)
+#         print("Testing Shape:", X_test_tensors_final.shape, y_test_tensors.shape) 
+
+#         return X_train_tensors_final, y_train_tensors,X_test_tensors_final, y_test_tensors,
+
+
+
 class DataDLinear():
 
-    def __init__(self, X_train, y_train, X_test, y_test, lookback_len=100, pred_len=24) -> None:
+    def __init__(self, X, y, lookback_len=100, pred_len=24) -> None:
         
         self.lookback_len = lookback_len
         self.pred_len = pred_len
-        self.generate_sequences(X_train, y_train, X_test, y_test)
+        self.generate_sequences(X,y)
         
 
     def split_sequences(self,input_sequences, output_sequence):
@@ -145,33 +204,27 @@ class DataDLinear():
 
         return np.array(X), np.array(y)
 
-    def generate_sequences(self, X_train, y_train, X_test, y_test):
-        print("***",X_train.shape, X_test.shape, y_train.shape, y_test.shape)
-        self.X_train, self.y_train = self.split_sequences(X_train, y_train)
-        self.X_test, self.y_test = self.split_sequences(X_test, y_test)
+    def generate_sequences(self, X, y):
+        print("***",X.shape, y.shape)
+        self.X, self.y = self.split_sequences(X, y)
 
         
 
     def return_tensors(self):
 
-        X_train_tensors = Variable(torch.Tensor(self.X_train).to(device))
-        X_test_tensors = Variable(torch.Tensor(self.X_test).to(device))
-
-        y_train_tensors = Variable(torch.Tensor(self.y_train).to(device))
-        y_test_tensors = Variable(torch.Tensor(self.y_test).to(device))
+        X_tensors = Variable(torch.Tensor(self.X).to(device))
+        y_tensors = Variable(torch.Tensor(self.y).to(device))
 
 
-        X_train_tensors_final = torch.reshape(X_train_tensors,   
-                                            (X_train_tensors.shape[0], self.lookback_len, 
-                                            X_train_tensors.shape[2]))
-        X_test_tensors_final = torch.reshape(X_test_tensors,  
-                                            (X_test_tensors.shape[0], self.lookback_len, 
-                                            X_test_tensors.shape[2])) 
 
-        print("Training Shape:", X_train_tensors_final.shape, y_train_tensors.shape)
-        print("Testing Shape:", X_test_tensors_final.shape, y_test_tensors.shape) 
+        X_tensors = torch.reshape(X_tensors,   
+                                            (X_tensors.shape[0], self.lookback_len, 
+                                            X_tensors.shape[2]))
 
-        return X_train_tensors_final, y_train_tensors,X_test_tensors_final, y_test_tensors,
+
+        return X_tensors, y_tensors
+
+
 
 
 
@@ -208,8 +261,8 @@ class Trainer_DLinear():
 
     def training_loop(self, X_train, y_train, X_test, y_test):
 
-        d = DataDLinear(X_train, y_train, X_test, y_test, lookback_len=self.params["lookback_len"], pred_len=self.params["pred_len"])
-        X_train, y_train, X_test, y_test = d.return_tensors()
+        # d = DataDLinear(X_train, y_train, X_test, y_test, lookback_len=self.params["lookback_len"], pred_len=self.params["pred_len"])
+        # X_train, y_train, X_test, y_test = d.return_tensors()
 
         model = self.init_network()
 
