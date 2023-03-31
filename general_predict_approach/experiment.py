@@ -1,7 +1,12 @@
 import sys
 import os
-sys.path.insert(0, 'C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/data')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+_data_path = os.path.join(script_dir, '..', 'data')
+sys.path.insert(0, _data_path)
+
 from datafactory import DataSet
+
+
 from dataTransform import Transform
 from data_utils import get_feature_combinations
 from experimentSetup import Model
@@ -53,7 +58,7 @@ def benchmarkModel(grid, experiment):
 
       model = Model(model=p["model"], dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=test_size, shuffle=shuffle, model_params=p)
       
-      metrics = model.results(plot=True)
+      metrics = model.results(plot=False)
       p.update(metrics)
       res.append(p)
 
@@ -148,12 +153,12 @@ grid = ParameterGrid(params_grid)
 
 params_grid = {
   "model": ["DLinear"],
-  "n_epochs": [15,25], 
+  "n_epochs": [7,15,25], 
   "features": [[target]],
   "learning_rate": [0.001, 0.0001], 
   "batch_size": [64], 
   "num_layers": [1], 
-  "lookback_len": [75,], 
+  "lookback_len": [75,150,250], 
   "pred_len": [24],
   "encoding": [None]
 }
@@ -179,9 +184,9 @@ params_grid = {
   "features": [["month", "hour", "weekday", "day_continuous", target]],
   "learning_rate": [0.001], 
   "batch_size": [64], 
-  "hidden_size": [75,100], 
+  "hidden_size": [150], 
   "num_layers": [1], 
-  "lookback_len": [76,100,200,250,300], 
+  "lookback_len": [76,250,], 
   "pred_len": [24],
   "encoding": [None]
 }

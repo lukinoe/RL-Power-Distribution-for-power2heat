@@ -3,13 +3,13 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 from datetime import date
-
+import os
 
 class DataSet:
     def __init__(self, start_date="2022-01-01", target="i_power", scale_target=False, scale_variables=False, time_features=False, dynamic_price=False, resample=None, demand_price=0.42, feedin_price=0.5) -> None:
         
 
-        self.df = pd.read_csv("C:/Users/lukas/OneDrive - Johannes Kepler Universität Linz/Projekte/DLinear/data/raw_2023.csv", sep=',', parse_dates={'date' : ['time']}, infer_datetime_format=True, index_col='date')
+        self.df = pd.read_csv(os.path.dirname(os.path.abspath(__file__)) + "/raw_2023.csv", sep=',', parse_dates={'date' : ['time']}, infer_datetime_format=True, index_col='date')
         self.start_date = start_date
         self.target = target
         self.scale_target = scale_target

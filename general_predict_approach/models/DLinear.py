@@ -108,6 +108,82 @@ class Model(nn.Module):
         return x  
 
 
+
+# class Model(nn.Module):
+#     """
+#     DLinear
+#     """
+#     def __init__(self, configs):
+#         super(Model, self).__init__()
+#         self.seq_len = configs.seq_len
+#         self.pred_len = configs.pred_len
+
+#         print(configs)
+
+#         # Decompsition Kernel Size
+#         kernel_size = 25
+#         self.decompsition = series_decomp(kernel_size)
+#         self.individual = configs.individual
+#         self.channels = 1
+
+#         if self.individual:
+#             self.Linear_Seasonal = nn.ModuleList()
+#             self.Linear_Trend = nn.ModuleList()
+#             self.Linear_Decoder = nn.ModuleList()
+#             for i in range(self.channels):
+#                 self.Linear_Seasonal.append(nn.Linear(self.seq_len,self.pred_len))
+#                 self.Linear_Seasonal[i].weight = nn.Parameter((1/self.seq_len)*torch.ones([self.pred_len,self.seq_len]))
+#                 self.Linear_Trend.append(nn.Linear(self.seq_len,self.pred_len))
+#                 self.Linear_Trend[i].weight = nn.Parameter((1/self.seq_len)*torch.ones([self.pred_len,self.seq_len]))
+#                 self.Linear_Decoder.append(nn.Linear(self.seq_len,self.pred_len))
+#         else:
+#             self.Linear_Seasonal = nn.Linear(self.seq_len,self.pred_len)
+#             self.Linear_Trend = nn.Linear(self.seq_len,self.pred_len)
+#             self.Linear_Decoder = nn.Linear(self.seq_len,self.pred_len)
+#             self.Linear_Seasonal.weight = nn.Parameter((1/self.seq_len)*torch.ones([self.pred_len,self.seq_len]))
+#             self.Linear_Trend.weight = nn.Parameter((1/self.seq_len)*torch.ones([self.pred_len,self.seq_len]))
+
+#         print(self.pred_len,configs.enc_in)
+#         self.time_layer = nn.Linear(self.pred_len*configs.enc_in,500)
+#         self.sigm = nn.Sigmoid()
+#         self.time_layer1 = nn.Linear(500,self.pred_len)
+
+
+#     def forward(self, x):
+#         # x: [Batch, Input length, Channel]
+
+#         # x_context = x[:,-1,:-1]
+#         # x_context = x.reshape((x.shape[0], 1, x_context.shape[1]))
+    
+
+
+#         # x = x[:,:,-1]
+#         # x= x.reshape((x.shape[0], x.shape[1], 1))
+        
+
+#         seasonal_init, trend_init = self.decompsition(x)
+#         seasonal_init, trend_init = seasonal_init.permute(0,2,1), trend_init.permute(0,2,1)
+#         if self.individual:
+#             seasonal_output = torch.zeros([seasonal_init.size(0),seasonal_init.size(1),self.pred_len],dtype=seasonal_init.dtype).to(seasonal_init.device)
+#             trend_output = torch.zeros([trend_init.size(0),trend_init.size(1),self.pred_len],dtype=trend_init.dtype).to(trend_init.device)
+#             for i in range(self.channels):
+#                 seasonal_output[:,i,:] = self.Linear_Seasonal[i](seasonal_init[:,i,:])
+#                 trend_output[:,i,:] = self.Linear_Trend[i](trend_init[:,i,:])
+#         else:
+#             seasonal_output = self.Linear_Seasonal(seasonal_init)
+#             trend_output = self.Linear_Trend(trend_init)
+
+#         x = seasonal_output + trend_output
+#         x = x.permute(0,2,1) # to [Batch, Output length, Channel]
+
+#         x = x.flatten(start_dim=1)
+#         x = self.time_layer(x)
+#         x = self.sigm(x)
+#         x = self.time_layer1(x)
+
+#         return x  
+
+
 def r2_loss(output, target):
     target_mean = torch.mean(target)
     ss_tot = torch.sum((target - target_mean) ** 2)
@@ -115,63 +191,6 @@ def r2_loss(output, target):
     r2 = 1 - ss_res / ss_tot
     return r2
 
-
-# class DataDLinear():
-
-#     def __init__(self, X_train, y_train, X_test, y_test, lookback_len=100, pred_len=24) -> None:
-        
-#         self.lookback_len = lookback_len
-#         self.pred_len = pred_len
-#         self.generate_sequences(X_train, y_train, X_test, y_test)
-        
-
-#     def split_sequences(self,input_sequences, output_sequence):
-
-
-#         print("***",input_sequences.shape, output_sequence.shape)
-#         n_steps_in = self.lookback_len
-#         n_steps_out = self.pred_len
-
-#         X, y = list(), list() # instantiate X and y
-#         for i in range(len(input_sequences)):
-#             # find the end of the input, output sequence
-#             end_ix = i + n_steps_in
-#             out_end_ix = end_ix + n_steps_out - 1
-#             # check if we are beyond the dataset
-#             if out_end_ix > len(input_sequences): break
-#             # gather input and output of the pattern
-#             seq_x, seq_y = input_sequences[i:end_ix], output_sequence[end_ix-1:out_end_ix, -1]
-#             X.append(seq_x), y.append(seq_y)
-
-#         return np.array(X), np.array(y)
-
-#     def generate_sequences(self, X_train, y_train, X_test, y_test):
-#         print("***",X_train.shape, X_test.shape, y_train.shape, y_test.shape)
-#         self.X_train, self.y_train = self.split_sequences(X_train, y_train)
-#         self.X_test, self.y_test = self.split_sequences(X_test, y_test)
-
-        
-
-#     def return_tensors(self):
-
-#         X_train_tensors = Variable(torch.Tensor(self.X_train).to(device))
-#         X_test_tensors = Variable(torch.Tensor(self.X_test).to(device))
-
-#         y_train_tensors = Variable(torch.Tensor(self.y_train).to(device))
-#         y_test_tensors = Variable(torch.Tensor(self.y_test).to(device))
-
-
-#         X_train_tensors_final = torch.reshape(X_train_tensors,   
-#                                             (X_train_tensors.shape[0], self.lookback_len, 
-#                                             X_train_tensors.shape[2]))
-#         X_test_tensors_final = torch.reshape(X_test_tensors,  
-#                                             (X_test_tensors.shape[0], self.lookback_len, 
-#                                             X_test_tensors.shape[2])) 
-
-#         print("Training Shape:", X_train_tensors_final.shape, y_train_tensors.shape)
-#         print("Testing Shape:", X_test_tensors_final.shape, y_test_tensors.shape) 
-
-#         return X_train_tensors_final, y_train_tensors,X_test_tensors_final, y_test_tensors,
 
 
 
@@ -259,7 +278,7 @@ class Trainer_DLinear():
         d.seq_len = self.params["lookback_len"]
         d.pred_len = self.params["pred_len"]
         d.individual = False
-        channels = self.params["input_size"]
+        d.enc_in = self.params["input_size"]
 
         model = Model(d)
         model.to(device)

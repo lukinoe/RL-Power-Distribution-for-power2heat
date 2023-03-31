@@ -145,7 +145,8 @@ class Model:
 
 
         else:
-            metrics_dict = {"mae": y_pred[1], 
+            metrics_dict = {"parameterCount": sum(dict((p.data_ptr(), p.numel()) for p in regressor.parameters()).values()),
+                            "mae": y_pred[1], 
                             "mse": y_pred[0], 
                             "mape": y_pred[2], 
                             "r2": y_pred[3]}
@@ -192,7 +193,7 @@ class Model:
     def train_model_DLinear(self, X_train, y_train, X_test, y_test):
         print(X_train.shape, y_test.shape)
 
-        self.model_params.update({"input_size": X_train.shape[1]})
+        self.model_params.update({"input_size": X_train.shape[2]})
         print(self.model_params)
         trainer = Trainer_DLinear(self.model_params)
         regressor, y_pred = trainer.training_loop(X_train, y_train, X_test, y_test)

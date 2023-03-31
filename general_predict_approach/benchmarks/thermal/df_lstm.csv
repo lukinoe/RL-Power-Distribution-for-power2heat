@@ -1,11 +1,3 @@
-;batch_size;encoding;features;hidden_size;learning_rate;lookback_len;model;n_epochs;num_layers;pred_len;input_size;mae;mse;mape;r2
-0;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];75;0.001;76;lstm;10;1;24;5;0.45843061432242393;0.6454827133566141;1.3345157839357853;0.21255630627274513
-1;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];75;0.001;100;lstm;10;1;24;5;0.4784621099630992;0.6721213459968567;1.3510820428530375;0.20463311274846394
-2;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];75;0.001;200;lstm;10;1;24;5;0.40944600105285645;0.5479032578212875;1.0709617648805891;0.32618899430547443
-3;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];75;0.001;250;lstm;10;1;24;5;0.40120186714025646;0.5168082198271384;1.0620092016000013;0.36358371606239903
-4;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];75;0.001;300;lstm;10;1;24;5;0.4011174490054448;0.5260285300513109;1.1197268118460972;0.34210821986198425
-5;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];100;0.001;76;lstm;10;1;24;5;0.4226579014211893;0.6262676352635026;1.1195942126214504;0.255665834993124
-6;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];100;0.001;100;lstm;10;1;24;5;0.42017117540041604;0.6320063134034475;0.9533844828605652;0.27170957724253336
-7;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];100;0.001;200;lstm;10;1;24;5;0.3938635821853365;0.5485691779426166;1.0312994590827398;0.3407837918826512
-8;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];100;0.001;250;lstm;10;1;24;5;0.39638390907874477;0.5208329925170312;1.089342277783614;0.3628887992638808
-9;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];100;0.001;300;lstm;10;1;24;5;0.4136100982626279;0.5348578232030073;1.177986388405164;0.33336444199085236
+;batch_size;encoding;features;hidden_size;learning_rate;lookback_len;model;n_epochs;num_layers;pred_len;input_size;parameterCount;mae;mse;mape;r2
+0;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];150;0.001;76;lstm;10;1;24;5;367824;0.40033498778939247;0.6106679989024997;1.0126287676393986;0.286106713116169
+1;64;;['month', 'hour', 'weekday', 'day_continuous', 'thermal_consumption_kwh'];150;0.001;250;lstm;10;1;24;5;994224;0.4089456338148851;0.5048202161605542;1.1321648267599254;0.3730598046229436
