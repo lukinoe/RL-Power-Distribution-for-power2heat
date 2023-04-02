@@ -86,7 +86,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-#experiment = benchmarkModel(grid, experiment)
+experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -193,7 +193,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
