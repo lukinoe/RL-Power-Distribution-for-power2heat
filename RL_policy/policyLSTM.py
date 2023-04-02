@@ -192,7 +192,7 @@ env = Environment(levels=seq_len, max_storage_tank=16, optimum_storage=8, gamma1
 model = LSTMRL(input_size=input_size, hidden_size=1000, output_size=output_size, learning_rate=0.001, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset)
 
 
-for i in range(100):
+for i in range(10000):
 
     states, actions, rewards = model.sample_trajectories(num_trajectories=200, sequence_length=seq_len,num_inputs=input_size, env=env)
 
