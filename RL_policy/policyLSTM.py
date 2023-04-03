@@ -67,7 +67,8 @@ class LSTMRL:
 
                 # Forward pass
                 self.model.zero_grad()
-                probs = self.model(states_batch.to(self.device))  # Just use the output from forward()
+                probs = self.model(states_batch.to(self.device))  
+
 
                 policy_gradients = torch.zeros(batch_size, seq_len)
                 for t in range(seq_len):
@@ -77,8 +78,11 @@ class LSTMRL:
                     probs_selected = probs_t.gather(1, actions.unsqueeze(1)).squeeze(1)
                     policy_gradients[:, t] = -torch.log(probs_selected) * rewards
 
-                # Sum over time and batch dimensions to get total loss
-                loss = -policy_gradients.mean(dim=1).sum()
+                ''' 
+                Sum over time and batch dimensions to get total loss
+                Calculates a scalar of the loss which is passed to the LSTM where BPTT happens.
+                '''
+                loss = -policy_gradients.mean(dim=1).sum()      
 
 
                 # Calculate loss and backpropagate
@@ -96,14 +100,13 @@ class LSTMRL:
         self.model.eval()
         with torch.no_grad():
             states = self.data[0:num_samples].to(self.device)
-            outputs = self.model(states)
-            _, predicted = torch.max(outputs.data, 1)
-            actions = torch.max(predicted.cpu(), dim=1)
+            probs = self.model(states)
+            max_probs, max_indices = torch.max(probs, dim=2)
 
-            print("actions", states.shape)
+            actions = max_indices
 
             '''
-            ! no simulation of states implemented !
+            no simulation of states implemented !
             '''
 
             return actions, states[:,:,-1]
@@ -140,13 +143,8 @@ class LSTMRL:
         actions = torch.zeros((num_trajectories, sequence_length), dtype=torch.int64)
         rewards = torch.zeros((num_trajectories, sequence_length))
 
-        # Sample the initial states for each trajectory
-            
+        # Sample the initial states for each trajectory            
         self.data = self.sequentialize_dataset(num_trajectories=num_trajectories)
-        # initial_states = dset[:,0,:]
-
-        # states[:, 0, :] = initial_states
-
         states = self.data.to(self.device)
 
         # Sample actions for each state in each trajectory
@@ -172,15 +170,6 @@ class LSTMRL:
                 else:
                     rewards[trajectory, t] = env.reward(action=actions[trajectory, t], s=states[trajectory, t, :])
 
-        # Compute the discounted rewards for each trajectory
-        # for trajectory in range(num_trajectories):
-        #     discounted_rewards = []
-        #     Gt = 0
-        #     for reward in reversed(rewards[trajectory]):
-        #         Gt = reward + gamma * Gt
-        #         discounted_rewards.append(Gt)
-        #     discounted_rewards.reverse()
-        #     rewards[trajectory] = torch.tensor(discounted_rewards)
 
         rewards = self.discount_rewards(rewards, gamma)
 
@@ -198,10 +187,10 @@ class LSTMRL:
 
 
 batch_size = 16
-seq_len = 100
+seq_len = 24
 input_size= 6
 output_size= 2
-episodes = 1000
+episodes = 100
 
 dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample=None,dynamic_price=False, demand_price=0.5, feedin_price=0.5).pipeline()
 dataset = dataset[["i_m1sum" , "demand_price", "feedin_price", "power_consumption_kwh", "thermal_consumption_kwh",  "kwh_eq_state"]]
@@ -213,13 +202,9 @@ model = LSTMRL(input_size=input_size, hidden_size=1000, output_size=output_size,
 
 for i in range(episodes):
 
-    states, actions, rewards = model.sample_trajectories(num_trajectories=500, sequence_length=seq_len,num_inputs=input_size, env=env)
+    states, actions, rewards = model.sample_trajectories(num_trajectories=100, sequence_length=seq_len,num_inputs=input_size, env=env)
 
     print(actions[0])
-
-    # print(states.shape,actions.shape, rewards.shape)
-    # print(states[2,:,-1], actions[2])
-
 
     dataset = TensorDataset(states, actions, rewards)
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
