@@ -12,6 +12,10 @@ sys.path.insert(0, _data_path)
 from datafactory import DataSet
 from policyGradient import Environment
 
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
 class LSTMPolicy(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(LSTMPolicy, self).__init__()
@@ -20,9 +24,16 @@ class LSTMPolicy(nn.Module):
         self.output_size = output_size
         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
         self.fc = nn.Linear(hidden_size, output_size)
+        self.sigmoid = nn.Sigmoid()
+        self.device = device
+
+    def init_hidden(self, batch_size):
+        return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
+                torch.zeros(1, batch_size, self.hidden_size).to(self.device))
     
     def forward(self, x):
-        out, _ = self.lstm(x)
+        hidden = self.init_hidden(x.size(0))
+        out, _ = self.lstm(x,hidden)
 
         out = self.fc(out)
         out = torch.softmax(out, dim=-1)
@@ -54,23 +65,21 @@ class LSTMRL:
                 batch_size = states_batch.shape[0]
                 seq_len = states_batch.shape[1]
 
-
                 # Forward pass
                 self.model.zero_grad()
-                outputs = self.model(states_batch)
-                log_probs = F.log_softmax(outputs, dim=2)
+                probs = self.model(states_batch.to(self.device))  # Just use the output from forward()
 
                 policy_gradients = torch.zeros(batch_size, seq_len)
                 for t in range(seq_len):
                     actions = actions_batch[:, t]
                     rewards = rewards_batch[:, t]
-                    log_probs_t = log_probs[:, t, :]
-                    log_probs_selected = log_probs_t.gather(1, actions.unsqueeze(1)).squeeze(1)
-                    policy_gradients[:, t] = -log_probs_selected * rewards
+                    probs_t = probs[:, t, :]
+                    probs_selected = probs_t.gather(1, actions.unsqueeze(1)).squeeze(1)
+                    policy_gradients[:, t] = -torch.log(probs_selected) * rewards
 
                 # Sum over time and batch dimensions to get total loss
-                # loss = policy_gradients.sum()
-                loss = policy_gradients.mean(dim=1).sum()
+                loss = -policy_gradients.mean(dim=1).sum()
+
 
                 # Calculate loss and backpropagate
                 loss.backward()
@@ -98,6 +107,14 @@ class LSTMRL:
             '''
 
             return actions, states[:,:,-1]
+
+    def discount_rewards(self, rewards, gamma):
+        n = rewards.size(1)
+        discounts = torch.tensor([gamma**i for i in range(n)]).unsqueeze(0).to(self.device)
+        rewards_discounted = rewards * discounts
+        rewards_discounted = torch.flip(rewards_discounted, [1]).cumsum(1)
+        rewards_discounted = torch.flip(rewards_discounted, [1])
+        return rewards_discounted
 
 
     def sample_trajectories(self, num_trajectories, sequence_length, num_inputs, env, gamma=0.99):
@@ -136,9 +153,8 @@ class LSTMRL:
         lstm_output = self.model.forward(states) # out: (num_traj, 2)
         lstm_output = lstm_output.detach()
 
-        log_probs = F.log_softmax(lstm_output.squeeze(), dim=1)
-        action_dist = torch.distributions.Categorical(logits=log_probs)
-
+        probs = lstm_output.squeeze()
+        action_dist = torch.distributions.Categorical(probs=probs)
 
         # Sample from Distribution of PolicyLSTM Outputs
         actions = action_dist.sample()
@@ -157,14 +173,16 @@ class LSTMRL:
                     rewards[trajectory, t] = env.reward(action=actions[trajectory, t], s=states[trajectory, t, :])
 
         # Compute the discounted rewards for each trajectory
-        for trajectory in range(num_trajectories):
-            discounted_rewards = []
-            Gt = 0
-            for reward in reversed(rewards[trajectory]):
-                Gt = reward + gamma * Gt
-                discounted_rewards.append(Gt)
-            discounted_rewards.reverse()
-            rewards[trajectory] = torch.tensor(discounted_rewards)
+        # for trajectory in range(num_trajectories):
+        #     discounted_rewards = []
+        #     Gt = 0
+        #     for reward in reversed(rewards[trajectory]):
+        #         Gt = reward + gamma * Gt
+        #         discounted_rewards.append(Gt)
+        #     discounted_rewards.reverse()
+        #     rewards[trajectory] = torch.tensor(discounted_rewards)
+
+        rewards = self.discount_rewards(rewards, gamma)
 
         return states, actions, rewards
     
@@ -180,9 +198,10 @@ class LSTMRL:
 
 
 batch_size = 16
-seq_len = 24
+seq_len = 100
 input_size= 6
 output_size= 2
+episodes = 1000
 
 dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample=None,dynamic_price=False, demand_price=0.5, feedin_price=0.5).pipeline()
 dataset = dataset[["i_m1sum" , "demand_price", "feedin_price", "power_consumption_kwh", "thermal_consumption_kwh",  "kwh_eq_state"]]
@@ -192,9 +211,11 @@ env = Environment(levels=seq_len, max_storage_tank=16, optimum_storage=8, gamma1
 model = LSTMRL(input_size=input_size, hidden_size=1000, output_size=output_size, learning_rate=0.001, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset)
 
 
-for i in range(10000):
+for i in range(episodes):
 
-    states, actions, rewards = model.sample_trajectories(num_trajectories=200, sequence_length=seq_len,num_inputs=input_size, env=env)
+    states, actions, rewards = model.sample_trajectories(num_trajectories=500, sequence_length=seq_len,num_inputs=input_size, env=env)
+
+    print(actions[0])
 
     # print(states.shape,actions.shape, rewards.shape)
     # print(states[2,:,-1], actions[2])
