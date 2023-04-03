@@ -187,7 +187,7 @@ class LSTMRL:
 
 
 batch_size = 16
-seq_len = 24
+seq_len = 100
 input_size= 6
 output_size= 2
 episodes = 100
@@ -202,7 +202,7 @@ model = LSTMRL(input_size=input_size, hidden_size=1000, output_size=output_size,
 
 for i in range(episodes):
 
-    states, actions, rewards = model.sample_trajectories(num_trajectories=100, sequence_length=seq_len,num_inputs=input_size, env=env)
+    states, actions, rewards = model.sample_trajectories(num_trajectories=500, sequence_length=seq_len,num_inputs=input_size, env=env)
 
     print(actions[0])
 
