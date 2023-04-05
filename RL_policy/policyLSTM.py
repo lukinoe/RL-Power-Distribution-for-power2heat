@@ -93,7 +93,8 @@ class LSTMRL:
                 running_loss += loss.item() * states_batch.shape[0]
 
             epoch_loss = running_loss / len(dataset)
-            print(f"Epoch {epoch+1}/{self.num_epochs}, Loss: {epoch_loss:.4f}")
+        
+            return print(f"Loss: {epoch_loss:.4f}")
 
 
     def predict(self, num_samples):
@@ -101,7 +102,7 @@ class LSTMRL:
         with torch.no_grad():
             states = self.data[0:num_samples].to(self.device)
             probs = self.model(states)
-            max_probs, max_indices = torch.max(probs, dim=2)
+            max_probs, max_indices = torch.max(probs, dim=-1)
 
             actions = max_indices
 
@@ -114,7 +115,7 @@ class LSTMRL:
     def discount_rewards(self, rewards, gamma):
         n = rewards.size(1)
         discounts = torch.tensor([gamma**i for i in range(n)]).unsqueeze(0).to(self.device)
-        rewards_discounted = rewards * discounts
+        rewards_discounted = rewards.to(self.device) * discounts
         rewards_discounted = torch.flip(rewards_discounted, [1]).cumsum(1)
         rewards_discounted = torch.flip(rewards_discounted, [1])
         return rewards_discounted
@@ -161,7 +162,7 @@ class LSTMRL:
             for trajectory in range(num_trajectories):
                 # Update the states for the next time step
                 if t < sequence_length - 1:
-                    states[trajectory, t+1, :] = env.step(s=states[trajectory, t, :], a=actions[trajectory, t])
+                    states[trajectory, t+1, :] = env.step(s=states[trajectory, t, :], s_new=states[trajectory, t+1, :], a=actions[trajectory, t])
 
                 # Compute the discounted rewards for the current actions
                 if t == sequence_length - 1:
@@ -179,32 +180,45 @@ class LSTMRL:
     
     def sequentialize_dataset(self, num_trajectories):
         df = self.dataset
+        upperBound = len(df) - self.seq_len
         sequences = np.zeros((num_trajectories, self.seq_len, self.input_size))
         for i in range(num_trajectories):
-            sequences[i] = df.iloc[i:i+self.seq_len]
+            u = np.random.randint(low=0, high=upperBound)
+            sequences[i] = df.iloc[u:u+self.seq_len]
+            ''' set storage state constant to first state '''
+            sequences[i,:,-1] = sequences[i,0,-1]  
+
 
         return torch.tensor(sequences, dtype=torch.float32)
 
 
 batch_size = 16
-seq_len = 100
+seq_len = 96
 input_size= 6
 output_size= 2
-episodes = 100
+episodes = 1000
 
 dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample=None,dynamic_price=False, demand_price=0.5, feedin_price=0.5).pipeline()
 dataset = dataset[["i_m1sum" , "demand_price", "feedin_price", "power_consumption_kwh", "thermal_consumption_kwh",  "kwh_eq_state"]]
 
 
-env = Environment(levels=seq_len, max_storage_tank=16, optimum_storage=8, gamma1=0.5, gamma2=0.5, gamma3=0.5)
+print(dataset.kwh_eq_state.mean())
+
+
+env = Environment(levels=seq_len, max_storage_tank=16, optimum_storage=8, gamma1=0.5, gamma2=0.9, gamma3=0.5)
 model = LSTMRL(input_size=input_size, hidden_size=1000, output_size=output_size, learning_rate=0.001, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset)
 
 
 for i in range(episodes):
 
-    states, actions, rewards = model.sample_trajectories(num_trajectories=500, sequence_length=seq_len,num_inputs=input_size, env=env)
+    print("Episode " + str(i))
 
-    print(actions[0])
+    states, actions, rewards = model.sample_trajectories(num_trajectories=300, sequence_length=seq_len,num_inputs=input_size, env=env)
+
+
+
+
+    print(actions[0], states[0,:,-1])
 
     dataset = TensorDataset(states, actions, rewards)
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
@@ -212,7 +226,6 @@ for i in range(episodes):
     model.train(loader)
 
 
-
-
-policy_actions, states = model.predict(num_samples=10)
-print(policy_actions, states)
+''' Attention: wrong states; no implementation of step'''
+policy_actions, states = model.predict(num_samples=1)
+    

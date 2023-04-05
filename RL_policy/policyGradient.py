@@ -17,22 +17,32 @@ class Environment:
 
 
 
-    def step(self, s, a):
+    def step(self, s, s_new, a, exploit=True):
         '''
-        action = [0; max_storage]
+        action = element of [0; max_storage]
+        s = ["i_m1sum" , "demand_price", "feedin_price", "power_consumption_kwh", "thermal_consumption_kwh",  "kwh_eq_state"]
         '''
 
         state = s[-1]
-        thermal_consumption = s[0]
+        thermal_consumption = s[-2]
+        power_consumption = s[-3]
+        pv_excess = s[0]
+        
+        if a == 1 and exploit:
+            a = pv_excess - power_consumption - thermal_consumption 
+            a = a.clip(min=0)
 
         heat_increase = a - self.cool_down
+        
         s_1 = state + heat_increase - thermal_consumption
         
         if s_1 > self.max_storage_tank:
             s_1 = self.max_storage_tank
+        if s_1 < 0:
+            s_1 = 0
 
 
-        s_next = s
+        s_next = s_new
         s_next[-1] = s_1
 
          
@@ -83,7 +93,7 @@ class Environment:
         '''
         REWARD/PENALTY FOR TANK STATE CHANGE (OPTIONAL)
         '''
-        reward += (kwh_increase - self.cool_down)*self.gamma3
+        # reward += (kwh_increase - self.cool_down)*self.gamma3
         
         
         return reward

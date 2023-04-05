@@ -75,6 +75,7 @@ class DataSet:
         
         data["mean_temperature"] = (data.i_temp1 + data.i_temp2 + data.i_temp3) / 3 
         data["kwh_eq_state"] = (data.mean_temperature - input_temperature)*leistung_pro_grad
+        data["kwh_eq_state"] = data["kwh_eq_state"].clip(lower=0)
 
 
         data["thermal_consumption_kwh"] = data["kwh_eq_state"].diff() - data["i_power"]
