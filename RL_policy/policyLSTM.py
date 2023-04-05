@@ -192,7 +192,7 @@ class LSTMRL:
         return torch.tensor(sequences, dtype=torch.float32)
 
 
-batch_size = 16
+batch_size = 64
 seq_len = 96
 input_size= 6
 output_size= 2
