@@ -192,7 +192,7 @@ class LSTMRL:
         return torch.tensor(sequences, dtype=torch.float32)
 
 
-batch_size = 64
+batch_size = 16
 seq_len = 96
 input_size= 6
 output_size= 2
@@ -205,7 +205,7 @@ dataset = dataset[["i_m1sum" , "demand_price", "feedin_price", "power_consumptio
 print(dataset.kwh_eq_state.mean())
 
 
-env = Environment(levels=seq_len, max_storage_tank=16, optimum_storage=8, gamma1=0.5, gamma2=0.9, gamma3=0.5)
+env = Environment(levels=seq_len, max_storage_tank=16, optimum_storage=9, gamma1=0.0, gamma2=1, gamma3=0.5)
 model = LSTMRL(input_size=input_size, hidden_size=2000, output_size=output_size, learning_rate=0.001, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset)
 
 
