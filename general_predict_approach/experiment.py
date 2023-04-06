@@ -38,6 +38,7 @@ resolution = "h"
 
 dset = DataSet(start_date="2022-01-01", target=target, scale_target=False, scale_variables=False, time_features=False).pipeline()
 dset = dset[["date",target]]
+print(dset)
 t = Transform(dataset=dset, resample=resolution, target=target, scale_X=True)
 data = t.transform()
 
@@ -112,7 +113,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-#experiment = benchmarkModel(grid, experiment)
+experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -127,19 +128,20 @@ grid = ParameterGrid(params_grid)
 
 params_grid = {
   "model": ["nn"],
-  "epochs": [20],
-  "n_hidden1": [500],
+  "epochs": [15,20],
+  "n_hidden1": [500,200, 100],
   "n_hidden2": [50],
   "features": feature_combinations,
   "batch_size": [64],
   "encoding": ["onehot", "cyclical", None],
-  "activation1": ["relu"],
+  "activation1": ["relu", "sigmoid"],
   "activation2": ["sigmoid"],
-  "lr": [0.001]
+  "lr": [0.001, 0.0001]
 }
+
 grid = ParameterGrid(params_grid) 
 
-#experiment = benchmarkModel(grid, experiment)
+experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -155,10 +157,10 @@ params_grid = {
   "model": ["DLinear"],
   "n_epochs": [7,15,25], 
   "features": [[target]],
-  "learning_rate": [0.001, 0.0001], 
+  "learning_rate": [0.01, 0.001, 0.0001], 
   "batch_size": [64], 
   "num_layers": [1], 
-  "lookback_len": [75,150,250], 
+  "lookback_len": [75,100,150,200,250,300], 
   "pred_len": [24],
   "encoding": [None]
 }
@@ -180,20 +182,20 @@ experiment = benchmarkModel(grid, experiment)
 
 params_grid = {
   "model": ["lstm"],
-  "n_epochs": [10], 
-  "features": [["month", "hour", "weekday", "day_continuous", target]],
+  "n_epochs": [11], 
+  "features": feature_combinations, #[["month", "hour", "weekday", "day_continuous", target]],
   "learning_rate": [0.001], 
   "batch_size": [64], 
-  "hidden_size": [150], 
+  "hidden_size": [75,100, 150], 
   "num_layers": [1], 
-  "lookback_len": [76,100, 150, 250,], 
-  "pred_len": [24],
-  "encoding": [None]
+  "lookback_len": [100,200,300], 
+  "pred_len": [24,96],
+  "encoding": ["onehot", "cyclical", None]
 }
 
 grid = ParameterGrid(params_grid) 
 
-#experiment = benchmarkModel(grid, experiment)
+experiment = benchmarkModel(grid, experiment)
 
 
 

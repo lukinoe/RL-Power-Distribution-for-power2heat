@@ -31,8 +31,8 @@ class DataSet:
         self.add_prices()
 
     def order_df(self):
-        self.df = self.df.iloc[::-1].reset_index(drop=True)  # reverse order: starting from lowest - to highest
-    
+        self.df = self.df.iloc[::-1]  # reverse order: starting from lowest - to highest
+            
 
     def transform_units(self):
 
