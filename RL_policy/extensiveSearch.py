@@ -81,7 +81,7 @@ class Tree:
         '''
         REWARD/PENALTY FOR TANK STATE CHANGE (OPTIONAL)
         '''
-        reward += (kwh_increase - self.cool_down)*self.gamma3
+        # reward += (kwh_increase - self.cool_down)*self.gamma3
         
         
         return reward
@@ -110,7 +110,7 @@ class Tree:
             pv_excess = seq_row.i_m1sum
             demand_price = seq_row.demand_price
             feedin_price = seq_row.feedin_price
-            power_consumption = seq_row.power_consumption
+            power_consumption = seq_row.power_consumption_kwh
             thermal_consumption = abs(seq_row.thermal_consumption_kwh)
 
 
@@ -204,7 +204,7 @@ class Experiment(Tree):
         _s_idx = self.df[self.df.date == self.start_date].index[0]
 
         for i in range(n_samples):
-            _seq = self.df[_s_idx:_s_idx+100][["i_m1sum" ,"power_consumption", "thermal_consumption_kwh", "demand_price", "feedin_price", "kwh_eq_state"]]
+            _seq = self.df[_s_idx:_s_idx+100][["i_m1sum" ,"power_consumption_kwh", "thermal_consumption_kwh", "demand_price", "feedin_price", "kwh_eq_state"]]
 
 
             rewards, states, tree, f_level_idx = self.simulate(self.levels,_seq, exploit=exploit)
@@ -264,7 +264,7 @@ class Experiment_Concat(Experiment):
         _s_idx = self.df[self.df.date == self.start_date].index[0]
 
         for i in range(n_samples):
-            _seq = self.df[_s_idx:_s_idx+100][["i_m1sum" ,"power_consumption", "thermal_consumption_kwh", "demand_price", "feedin_price", "kwh_eq_state"]]
+            _seq = self.df[_s_idx:_s_idx+100][["i_m1sum" ,"power_consumption_kwh", "thermal_consumption_kwh", "demand_price", "feedin_price", "kwh_eq_state"]]
             #_seq.i_m1sum /= 1000
             #_seq.power_consumption /= 1000
 

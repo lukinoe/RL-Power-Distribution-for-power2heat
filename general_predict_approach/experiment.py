@@ -165,7 +165,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-#experiment = benchmarkModel(grid, experiment)
+experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -186,7 +186,7 @@ params_grid = {
   "batch_size": [64], 
   "hidden_size": [150], 
   "num_layers": [1], 
-  "lookback_len": [76,250,], 
+  "lookback_len": [76,100, 150, 250,], 
   "pred_len": [24],
   "encoding": [None]
 }

@@ -25,9 +25,14 @@ class DataSet:
         self.factor_temperature = 10
         self.factor_kwh = 1000
 
+        self.order_df()
         self.transform_units()
         self.add_attributes()
         self.add_prices()
+
+    def order_df(self):
+        self.df = self.df.iloc[::-1].reset_index(drop=True)  # reverse order: starting from lowest - to highest
+    
 
     def transform_units(self):
 
