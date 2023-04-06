@@ -216,7 +216,7 @@ for i in range(episodes):
     states, actions, rewards = model.sample_trajectories(num_trajectories=300, sequence_length=seq_len,num_inputs=input_size, env=env)
 
 
-
+    
 
     print(actions[0], states[0,:,-1])
 
