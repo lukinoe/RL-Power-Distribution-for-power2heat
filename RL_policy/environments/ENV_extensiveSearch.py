@@ -1,0 +1,56 @@
+class Environment:
+
+    def __init__(self, levels, max_storage_tank, optimum_storage, gamma1, gamma2, gamma3) -> None:
+        self.levels = levels
+        self.max_storage_tank = max_storage_tank
+        self.optimum_storage = optimum_storage
+        self.gamma1 = gamma1
+        self.gamma2 = gamma2
+        self.gamma3 = gamma3
+        self.cool_down = 0.1
+        
+        
+    def step(self, a, s, thermal_consumption):
+        '''
+        action = [0; max_storage]
+        '''
+
+        s_1 = s + a - thermal_consumption - self.cool_down
+        s_1 = s_1.clip(min=0, max=self.max_storage_tank)
+            
+        return s_1
+
+
+    def reward(self, action, pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state):
+
+                
+        if state+action > self.max_storage_tank:
+            action = self.max_storage_tank - state
+        
+        '''
+        FINANCIAL REWARD
+        '''
+
+        consumption = power_consumption    # not thermal consumption because heat will be fed in via the action  
+        availableExcess = (pv_excess - consumption).clip(min=0) 
+        feedInAdvantage = (demand_price - feedin_price).clip(min=0)
+
+        reward = 0
+
+        if action == 0:
+            reward += (availableExcess * feedin_price)
+
+        else:
+            if availableExcess > 0: # no excess power
+                reward += (availableExcess * feedInAdvantage)
+
+        reward = reward * self.gamma1
+
+        
+        '''
+        PENALTY FOR DISTANCE TO OPTIMUM
+        '''
+        reward -= abs(state - self.optimum_storage)*self.gamma2
+        
+        
+        return reward

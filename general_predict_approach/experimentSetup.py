@@ -87,7 +87,7 @@ class Model:
             
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=self.test_size, random_state=42, shuffle=self.shuffle)
-        print("SHapezzz", X_train.shape, X_test.shape, y_train.shape, y_test.shape )
+        print("Shapes", X_train.shape, X_test.shape, y_train.shape, y_test.shape )
 
         return X_train, X_test, y_train, y_test
 
@@ -136,8 +136,8 @@ class Model:
             print(np.mean(y_pred), np.std(y_pred))
 
             if plot:
-                plt.plot(y_pred[:500], label="Prediction")
-                plt.plot(y_test[:500], label="real")
+                plt.plot(y_pred[:200], label="Prediction")
+                plt.plot(y_test[:200], label="real")
                 plt.xlabel('timesteps')
                 plt.ylabel('kwH')
                 plt.legend()

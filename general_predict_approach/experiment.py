@@ -24,7 +24,6 @@ os.chdir(dname)
 
 
 
-
 experiment = {}
 
 #target = "power_consumption_kwh"
@@ -32,11 +31,12 @@ target = "thermal_consumption_kwh"
 
 test_size = 0.10
 shuffle = False
+order = False
 resolution = "h"
 
 
 
-dset = DataSet(start_date="2022-01-01", target=target, scale_target=False, scale_variables=False, time_features=False).pipeline()
+dset = DataSet(start_date="2022-01-01", target=target, scale_target=False, scale_variables=False, order=order, time_features=False).pipeline()
 dset = dset[["date",target]]
 print(dset)
 t = Transform(dataset=dset, resample=resolution, target=target, scale_X=True)
@@ -72,7 +72,6 @@ def benchmarkModel(grid, experiment):
 
 
 
-
 """ 
 
   Linear Regression 
@@ -91,13 +90,11 @@ experiment = benchmarkModel(grid, experiment)
 
 
 
-
 """ 
 
   SVR
 
 """
-
 
 
 params_grid = {
@@ -113,7 +110,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -128,15 +125,15 @@ experiment = benchmarkModel(grid, experiment)
 
 params_grid = {
   "model": ["nn"],
-  "epochs": [15,20],
-  "n_hidden1": [500,200, 100],
+  "epochs": [20],
+  "n_hidden1": [500, 200, 100],
   "n_hidden2": [50],
   "features": feature_combinations,
   "batch_size": [64],
   "encoding": ["onehot", "cyclical", None],
   "activation1": ["relu", "sigmoid"],
   "activation2": ["sigmoid"],
-  "lr": [0.001, 0.0001]
+  "lr": [0.001]
 }
 
 grid = ParameterGrid(params_grid) 
@@ -195,7 +192,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 

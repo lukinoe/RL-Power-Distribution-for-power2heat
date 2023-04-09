@@ -6,7 +6,7 @@ from datetime import date
 import os
 
 class DataSet:
-    def __init__(self, start_date="2022-01-01", target="i_power", scale_target=False, scale_variables=False, time_features=False, dynamic_price=False, resample=None, demand_price=0.42, feedin_price=0.5) -> None:
+    def __init__(self, start_date="2022-01-01", target="i_power", scale_target=False, scale_variables=False, time_features=False, dynamic_price=False, order=True, resample=None, demand_price=0.42, feedin_price=0.5) -> None:
         
 
         self.df = pd.read_csv(os.path.dirname(os.path.abspath(__file__)) + "/raw_2023.csv", sep=',', parse_dates={'date' : ['time']}, infer_datetime_format=True, index_col='date')
@@ -15,6 +15,7 @@ class DataSet:
         self.scale_target = scale_target
         self.scale_variables = scale_variables
         self.time_features_ = time_features
+        self.order = order
         self.scaler = StandardScaler()
         self.resample = resample
 
@@ -26,12 +27,14 @@ class DataSet:
         self.factor_kwh = 1000
 
         self.order_df()
+
         self.transform_units()
         self.add_attributes()
         self.add_prices()
 
     def order_df(self):
-        self.df = self.df.iloc[::-1]  # reverse order: starting from lowest - to highest
+        if self.order:
+            self.df = self.df.iloc[::-1]  # reverse order: starting from lowest - to highest
             
 
     def transform_units(self):

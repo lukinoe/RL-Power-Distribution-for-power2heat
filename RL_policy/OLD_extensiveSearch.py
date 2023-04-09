@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-from environments.ENV_extensiveSearch import Environment
-
 
 
 class Tree:
@@ -15,8 +13,6 @@ class Tree:
         self.gamma3 = gamma3
         self.cool_down = 0.1
 
-        self.env = Environment(levels, max_storage_tank, optimum_storage, gamma1, gamma2, gamma3)
-
 
     def build_trees(self, levels):
 
@@ -29,6 +25,66 @@ class Tree:
         states = np.zeros(len(tree))
 
         return tree, states, res_sum
+
+
+    def step(self, s, thermal_consumption, a):
+        '''
+        action = [0; max_storage]
+        '''
+        heat_increase = a - self.cool_down
+        s_1 = s + heat_increase - thermal_consumption
+        
+        if s_1 > self.max_storage_tank:
+            s_1 = self.max_storage_tank
+            
+        return s_1
+
+
+    def reward(self, action, pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state):
+
+        
+        kwh_increase = action
+        
+        if state+kwh_increase > self.max_storage_tank:
+            kwh_increase = self.max_storage_tank - state
+        
+        '''
+        FINANCIAL PENALTY
+        '''
+        
+        # diff = pv_excess - kwh_increase - power_consumption - thermal_consumption    
+            
+        # if diff < 0:
+        #     reward = -(diff * demand_price + (kwh_increase - diff) * feedin_price)
+        # else:
+        #     reward = -(kwh_increase * feedin_price)  + diff * feedin_price
+        
+        consumption = power_consumption + thermal_consumption    
+        diff = pv_excess - consumption    
+            
+        if diff < 0:
+            reward = -(kwh_increase * demand_price) - (abs(diff) * demand_price) -  (pv_excess * feedin_price)              # - heat*d - abs(diff)*d - "consumption_via_pv"*f
+        else:
+            if diff - kwh_increase > 0:
+                reward =  -(kwh_increase * feedin_price)  - (consumption * feedin_price) + (diff * feedin_price)            # - heat*f - consumption*f + diff*f
+            else:
+                reward = -(abs(diff - kwh_increase) * demand_price) - (diff * feedin_price) + (consumption* feedin_price)   # - heat_1 * d - heat_2*f + consumption*f
+            
+        reward = reward * self.gamma1
+        
+        '''
+        PENALTY FOR DISTANCE TO OPTIMUM
+        '''
+        reward -= abs(state - self.optimum_storage)*self.gamma2
+
+
+        '''
+        REWARD/PENALTY FOR TANK STATE CHANGE (OPTIONAL)
+        '''
+        # reward += (kwh_increase - self.cool_down)*self.gamma3
+        
+        
+        return reward
 
 
 
@@ -77,15 +133,15 @@ class Tree:
                 reward(action, pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state)
                 '''
                 
-                res_sum[r*2 +1] = result_root + self.env.reward(left, pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state_root)
-                res_sum[r*2 +2] = result_root + self.env.reward(right,pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state_root)
+                res_sum[r*2 +1] = result_root + self.reward(left, pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state_root)
+                res_sum[r*2 +2] = result_root + self.reward(right,pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state_root)
                 
                 '''
-                step(a, s, thermal_consumption)
+                step(s, thermal_consumption, a)
                 '''
                 
-                states[r*2 +1] = self.env.step(left, state_root, thermal_consumption)
-                states[r*2 +2] = self.env.step(right, state_root, thermal_consumption)
+                states[r*2 +1] = self.step(state_root, thermal_consumption, left)
+                states[r*2 +2] = self.step(state_root, thermal_consumption, right)
                 
                 
                 r +=1
@@ -183,55 +239,6 @@ class Experiment(Tree):
             res.append([_states[:-1], _seq, rewards])
 
         return np.array(res)
-    
-
-
-    def pipe_mypv(self):
-
-        df = self.df
-        levels = self.levels
-
-
-        reward_list = []
-
-        _s_idx = df[df.date == self.start_date].index[0]
-
-        for i in range(self.n_samples):
-            _seq = df[_s_idx:_s_idx+100][["i_m1sum" ,"power_consumption_kwh", "thermal_consumption_kwh", "demand_price", "feedin_price", "kwh_eq_state"]]
-
-            reward_ = 0
-            state = _seq["kwh_eq_state"].iloc[0]
-
-            for i in range(levels):
-
-                seq_row = _seq.iloc[i]
-
-                pv_excess = seq_row.i_m1sum
-                demand_price = seq_row.demand_price
-                feedin_price = seq_row.feedin_price
-                power_consumption = seq_row.power_consumption_kwh
-                thermal_consumption = abs(seq_row.thermal_consumption_kwh)
-
-
-                action_ =  pv_excess - power_consumption - thermal_consumption  
-
-                if action_ < 0: 
-                    action_ = 0
-
-                if state + action_ > self.max_storage_tank:
-                    action_ = self.max_storage_tank - state
-                
-                reward_tmp = self.env.reward(action_, pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state)
-                
-                reward_ += reward_tmp
-                
-                state = self.env.step(action_, state, thermal_consumption)
-
-            reward_list.append(reward_)
-
-            _s_idx += 96
-        
-        return np.array(reward_list)
         
 
 
@@ -258,6 +265,8 @@ class Experiment_Concat(Experiment):
 
         for i in range(n_samples):
             _seq = self.df[_s_idx:_s_idx+100][["i_m1sum" ,"power_consumption_kwh", "thermal_consumption_kwh", "demand_price", "feedin_price", "kwh_eq_state"]]
+            #_seq.i_m1sum /= 1000
+            #_seq.power_consumption /= 1000
 
             seq_splits = np.array_split(_seq, n_trees)
 
@@ -299,8 +308,23 @@ class Experiment_Concat(Experiment):
         return states, sequences
 
 
+# class Dataset:
 
+#     def __init__(self) -> None:
+#         df = pd.read_csv("../data/dset_08-12.csv")
+#         #df.i_m1sum /= 1000
+#         #df.power_consumption /= 1000
+#         print(df)
+#         self.df = df
 
-        
-        
-    
+#     def get_data(self):
+#         return self.df
+
+#     def set_prices(self, demand_price, feedin_price):
+#         self.df.demand_price = demand_price
+#         self.df.feedin_price = feedin_price
+
+#     def get_seq(self, size=20, start_index="2022-04-08 10:45:00"):
+#         _s_idx = self.df[self.df.date == start_index].index[0]
+
+#         return self.df[_s_idx:_s_idx+size][["i_m1sum" ,"power_consumption", "thermal_consumption_kwh", "demand_price", "feedin_price", "kwh_eq_state"]]
