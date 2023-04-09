@@ -192,32 +192,41 @@ class LSTMRL:
         return torch.tensor(sequences, dtype=torch.float32)
 
 
-batch_size = 16
-seq_len = 96
+batch_size = 64
+seq_len = 20
 input_size= 6
 output_size= 2
 episodes = 1000
 
-dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample=None,dynamic_price=False, demand_price=0.5, feedin_price=0.5).pipeline()
+max_storage_tank = 18.52
+
+args = {
+    "max_storage_tank": max_storage_tank,
+    "optimum_storage": max_storage_tank * 0.9,
+    "gamma1": 0,    # financial
+    "gamma2": 1,      # distance optimum
+    "gamma3": 0.0,      # tank change
+    "demand_price": 0.5,
+    "feedin_price": 0.2
+}
+
+
+
+dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample=None,dynamic_price=False, demand_price=args["demand_price"], feedin_price=args["feedin_price"]).pipeline()
 dataset = dataset[["i_m1sum" , "demand_price", "feedin_price", "power_consumption_kwh", "thermal_consumption_kwh",  "kwh_eq_state"]]
 
 
-print(dataset.kwh_eq_state.mean())
+env = Environment(levels=seq_len, max_storage_tank=args["max_storage_tank"], optimum_storage=args["optimum_storage"], gamma1=args["gamma1"], gamma2=args["gamma2"], gamma3=args["gamma3"])
+model = LSTMRL(input_size=input_size, hidden_size=1000, output_size=output_size, learning_rate=0.001, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset)
 
-
-env = Environment(levels=seq_len, max_storage_tank=16, optimum_storage=9, gamma1=0.0, gamma2=1, gamma3=0.5)
-model = LSTMRL(input_size=input_size, hidden_size=2000, output_size=output_size, learning_rate=0.001, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset)
 
 
 for i in range(episodes):
 
     print("Episode " + str(i))
 
-    states, actions, rewards = model.sample_trajectories(num_trajectories=300, sequence_length=seq_len,num_inputs=input_size, env=env)
-
-
+    states, actions, rewards = model.sample_trajectories(num_trajectories=1000, sequence_length=seq_len,num_inputs=input_size, env=env)
     
-
     print(actions[0], states[0,:,-1])
 
     dataset = TensorDataset(states, actions, rewards)
