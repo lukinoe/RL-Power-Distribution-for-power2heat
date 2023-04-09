@@ -116,7 +116,7 @@ class Model:
             
         return regressor, y_pred, y_test
 
-    def results(self, plot=True):
+    def results(self, plot=True, plot_samples=100, plot_days=False):
 
         regressor, y_pred, y_test = self.train()
 
@@ -136,11 +136,20 @@ class Model:
             print(np.mean(y_pred), np.std(y_pred))
 
             if plot:
-                plt.plot(y_pred[:200], label="Prediction")
-                plt.plot(y_test[:200], label="real")
+
+                plt.plot(y_pred[:plot_samples], label="Prediction")
+                plt.plot(y_test[:plot_samples], label="real")
                 plt.xlabel('timesteps')
                 plt.ylabel('kwH')
                 plt.legend()
+
+                if plot_days:
+                    days = int(plot_samples /24)
+                    xtick_labels = ['Day {}'.format(i+1) for i in range(days)]
+                    xtick_positions = [24*i for i in range(days)]
+                    plt.xticks(xtick_positions, xtick_labels)
+                    plt.xlabel('Days')
+
                 plt.show()
 
 

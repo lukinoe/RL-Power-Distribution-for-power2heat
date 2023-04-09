@@ -26,8 +26,8 @@ os.chdir(dname)
 
 experiment = {}
 
-#target = "power_consumption_kwh"
-target = "thermal_consumption_kwh"
+target = "power_consumption_kwh"
+#target = "thermal_consumption_kwh"
 
 test_size = 0.10
 shuffle = False
@@ -110,7 +110,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-#experiment = benchmarkModel(grid, experiment)
+experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -179,14 +179,14 @@ experiment = benchmarkModel(grid, experiment)
 
 params_grid = {
   "model": ["lstm"],
-  "n_epochs": [11], 
+  "n_epochs": [15], 
   "features": feature_combinations, #[["month", "hour", "weekday", "day_continuous", target]],
   "learning_rate": [0.001], 
   "batch_size": [64], 
-  "hidden_size": [75,100, 150], 
+  "hidden_size": [75,100,150], 
   "num_layers": [1], 
-  "lookback_len": [100,200,300], 
-  "pred_len": [24,96],
+  "lookback_len": [100,200], 
+  "pred_len": [24],
   "encoding": ["onehot", "cyclical", None]
 }
 

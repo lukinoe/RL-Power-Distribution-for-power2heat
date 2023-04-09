@@ -54,8 +54,9 @@ p = {
   "encoding": "onehot"
 }
 
+
 grid = ParameterGrid(p) 
 
 model = Model(model=p["model"], dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=test_size, shuffle=shuffle, model_params=p)
       
-metrics = model.results(plot=True)
+metrics = model.results(plot=True, plot_days=True, plot_samples=24*7)
