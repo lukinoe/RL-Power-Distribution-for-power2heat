@@ -1,3 +1,13 @@
+def clip(scalar, min=None, max=None):       # way faster than numpy array.clip()
+    if min and scalar < min:
+        return min
+    elif max and scalar > max:
+        return max
+    else:
+        return scalar
+
+
+
 class Environment:
 
     def __init__(self, levels, max_storage_tank, optimum_storage, gamma1, gamma2, gamma3) -> None:
@@ -16,26 +26,27 @@ class Environment:
         '''
 
         s_1 = s + a - thermal_consumption - self.cool_down
-        s_1 = s_1.clip(min=0, max=self.max_storage_tank)
+        s_1 = clip(s_1, min=0, max=self.max_storage_tank)
             
         return s_1
 
 
     def reward(self, action, pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state):
 
+        reward = 0
+
+        max_increase = self.max_storage_tank - state
+        action = clip(action, max=max_increase)
+
+
+        consumption = power_consumption   
+        availableExcess = clip((pv_excess - consumption), min=0) 
+        feedInAdvantage = clip((demand_price - feedin_price), min=0)
                 
-        if state+action > self.max_storage_tank:
-            action = self.max_storage_tank - state
         
         '''
         FINANCIAL REWARD
         '''
-
-        consumption = power_consumption    # not thermal consumption because heat will be fed in via the action  
-        availableExcess = (pv_excess - consumption).clip(min=0) 
-        feedInAdvantage = (demand_price - feedin_price).clip(min=0)
-
-        reward = 0
 
         if action == 0:
             reward += (availableExcess * feedin_price)

@@ -69,7 +69,7 @@ class Tree:
                 right = tree[r*2 +2]
 
                 if exploit: 
-                    right = pv_excess - power_consumption - thermal_consumption 
+                    right = pv_excess - power_consumption
                     if right < 0: right = 0
                     
                 
@@ -213,13 +213,13 @@ class Experiment(Tree):
                 thermal_consumption = abs(seq_row.thermal_consumption_kwh)
 
 
-                action_ =  pv_excess - power_consumption - thermal_consumption  
+                action_ =  pv_excess - power_consumption 
 
                 if action_ < 0: 
                     action_ = 0
 
-                if state + action_ > self.max_storage_tank:
-                    action_ = self.max_storage_tank - state
+                # if state + action_ > self.max_storage_tank:
+                #     action_ = self.max_storage_tank - state
                 
                 reward_tmp = self.env.reward(action_, pv_excess, demand_price, feedin_price, power_consumption, thermal_consumption, state)
                 

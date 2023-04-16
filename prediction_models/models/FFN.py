@@ -46,6 +46,7 @@ class FFN():
         nn_params = self.nn_params
 
         model = self.initModel(n_features)
+        print("Parameter Count: ", sum(dict((p.data_ptr(), p.numel()) for p in model.parameters()).values()))
         
         loss_fn = nn.MSELoss()
         optimizer = optim.Adam(model.parameters(), lr=nn_params["lr"])

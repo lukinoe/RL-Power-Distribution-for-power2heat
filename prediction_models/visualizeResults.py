@@ -54,9 +54,37 @@ p = {
   "encoding": "onehot"
 }
 
+if target == "power_consumption_kwh":
+  p = {
+    "model": "nn",
+    "epochs": 80,
+    "n_hidden1": 200,
+    "n_hidden2": 50,
+    "features": ['val_last_day', 'mean_24h', 'month', 'hour', target],
+    "batch_size": 64,
+    "encoding": "cyclical",
+    "activation1": "relu",
+    "activation2": "sigmoid",
+    "lr": 0.001
+  }
 
-grid = ParameterGrid(p) 
+if target == "thermal_consumption_kwh":
+  p = {
+    "model": "nn",
+    "epochs": 60,
+    "n_hidden1": 200,
+    "n_hidden2": 50,
+    "features": ['val_last_day', 'mean_24h', 'month', 'hour', target],
+    "batch_size": 64,
+    "encoding": "cyclical",
+    "activation1": "relu",
+    "activation2": "sigmoid",
+    "lr": 0.001
+  }
+
 
 model = Model(model=p["model"], dataset=data[p["features"]], encoding=p["encoding"], scale=True, target=target, test_size=test_size, shuffle=shuffle, model_params=p)
       
 metrics = model.results(plot=True, plot_days=True, plot_samples=24*7)
+
+print(metrics)

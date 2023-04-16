@@ -66,20 +66,6 @@ class DataSet:
 
         power_consumption = data.i_m1sum - data.i_meterfeed - data.i_power - +data.i_metercons - data.i_boostpower #+ data.i_m2sum
         data["power_consumption_kwh"] = power_consumption.clip(lower=0)
-
-
-        # data["on_off"] = np.where(data['i_power'] > 0, 1, 0)
-
-        # temp_diff_off = data[data.on_off == 0][["i_temp1", "i_temp2", "i_temp3"]].diff()
-
-        # m_diff = (temp_diff_off.i_temp1 + temp_diff_off.i_temp2 + temp_diff_off.i_temp3) / 3 
-
-        # idx_temp = m_diff[m_diff < 0].index
-        # data["thermal_consumption"] = 0
-        # data.thermal_consumption[idx_temp] = abs(m_diff[m_diff < 0])   # only positive values
-        
-
-        # data["thermal_consumption_kwh"] = data.thermal_consumption * leistung_pro_grad 
         
         data["mean_temperature"] = (data.i_temp1 + data.i_temp2 + data.i_temp3) / 3 
         data["kwh_eq_state"] = (data.mean_temperature - input_temperature)*leistung_pro_grad
@@ -104,7 +90,7 @@ class DataSet:
         data["demand_price"] = self.demand_price
         data["feedin_price"] = self.feedin_price
 
-        if self.dynamic_price:
+        if self.dynamic_price: # arbitrary assumptions
 
             data.demand_price[(data.index.hour > 0) & (data.index.hour <= 6)  ] = 0.30
             data.demand_price[(data.index.hour > 6) & (data.index.hour <= 12)  ] = 0.45
@@ -143,11 +129,11 @@ class DataSet:
         self.df.sort_index()
 
     def resampler(self):
-        self.df['date_'] = pd.to_datetime(self.df.index)
-        self.df = self.df.resample(self.resample, on='date_').sum()
+        self.df['date'] = pd.to_datetime(self.df.index)
+        self.df = self.df.resample(self.resample, on='date').sum()
         if self.resample == "h":
             self.df.kwh_eq_state = self.df.kwh_eq_state / 4
-
+        
 
     def pipeline(self):
         self.preprocess()
@@ -171,7 +157,6 @@ class DataSet:
         if self.scale_target:
             self.scale_col(self.target)
 
-        #self.df["date"] = self.df.index
         if self.resample:
             self.resampler()
             

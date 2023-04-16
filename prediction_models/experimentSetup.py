@@ -116,7 +116,7 @@ class Model:
             
         return regressor, y_pred, y_test
 
-    def results(self, plot=True, plot_samples=100, plot_days=False):
+    def results(self, plot=True, plot_samples=100, plot_days=False, plot_clip=False):
 
         regressor, y_pred, y_test = self.train()
 
@@ -124,7 +124,7 @@ class Model:
 
             metrics_dict = self.get_metrics(y_pred, y_test)
 
-            print("scaled MAE: ", mean_absolute_error(y_test, y_pred))
+            # print("scaled MAE: ", mean_absolute_error(y_test, y_pred))
             
             """ ATTENTION: the result dict for the benchmarks is not inverse scaled!"""
 
@@ -132,13 +132,14 @@ class Model:
             if self.scale:
                 y_test, y_pred = self.sc_y.inverse_transform(y_test.reshape(-1, 1)), self.sc_y.inverse_transform(y_pred.reshape(-1, 1))
             
-            print("y_pred mean and std:")
-            print(np.mean(y_pred), np.std(y_pred))
 
             if plot:
 
-                plt.plot(y_pred[:plot_samples], label="Prediction")
-                plt.plot(y_test[:plot_samples], label="real")
+                _pred = y_pred[:plot_samples]
+                _y_test = y_test[:plot_samples]
+
+                plt.plot(_pred, label="Prediction")
+                plt.plot(_y_test, label="real")
                 plt.xlabel('timesteps')
                 plt.ylabel('kwH')
                 plt.legend()

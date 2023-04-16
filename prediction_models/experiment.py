@@ -31,7 +31,7 @@ target = "power_consumption_kwh"
 
 test_size = 0.10
 shuffle = False
-order = False
+order = True
 resolution = "h"
 
 
@@ -86,7 +86,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -110,7 +110,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -138,7 +138,7 @@ params_grid = {
 
 grid = ParameterGrid(params_grid) 
 
-experiment = benchmarkModel(grid, experiment)
+#experiment = benchmarkModel(grid, experiment)
 
 
 
@@ -157,7 +157,7 @@ params_grid = {
   "learning_rate": [0.01, 0.001, 0.0001], 
   "batch_size": [64], 
   "num_layers": [1], 
-  "lookback_len": [75,100,150,200,250,300], 
+  "lookback_len": [75,100,150,200,250,300,350,400,500], 
   "pred_len": [24],
   "encoding": [None]
 }
