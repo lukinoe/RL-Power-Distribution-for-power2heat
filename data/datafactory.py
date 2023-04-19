@@ -61,6 +61,7 @@ class DataSet:
         leistung_pro_grad = liter_in_tank * 4186 / 3600 / 1000 
         '''
         '''
+        
 
         data = self.df.copy()
 
@@ -133,7 +134,8 @@ class DataSet:
         self.df = self.df.resample(self.resample, on='date').sum()
         if self.resample == "h":
             self.df.kwh_eq_state = self.df.kwh_eq_state / 4
-        
+            self.df.demand_price = self.df.demand_price / 4
+            self.df.feedin_price = self.df.feedin_price / 4
 
     def pipeline(self):
         self.preprocess()
