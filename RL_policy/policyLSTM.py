@@ -13,45 +13,88 @@ _data_path = os.path.join(script_dir, '..', 'data')
 sys.path.insert(0, _data_path)
 from datafactory import DataSet
 from policyGradient import Environment
-from utils import plot_rewards_loss
+from utils import plot_rewards_loss, plot_states
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-class LSTMPolicy(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
-        super(LSTMPolicy, self).__init__()
-        self.input_size = input_size
-        self.hidden_size = hidden_size
-        self.output_size = output_size
-        self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
-        self.fc = nn.Linear(hidden_size, output_size)
-        self.sigmoid = nn.Sigmoid()
-        self.device = device
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size):
+#         super(PolicyNet, self).__init__()
+#         self.input_size = input_size
+#         self.hidden_size = hidden_size
+#         self.output_size = output_size
+#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
+#         self.fc = nn.Linear(hidden_size, output_size)
+#         self.sigmoid = nn.Sigmoid()
+#         self.device = device
 
-    def init_hidden(self, batch_size):
-        return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
-                torch.zeros(1, batch_size, self.hidden_size).to(self.device))
+#     def init_hidden(self, batch_size):
+#         return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
+#                 torch.zeros(1, batch_size, self.hidden_size).to(self.device))
     
-    def forward(self, x):
-        hidden = self.init_hidden(x.size(0))
-        out, _ = self.lstm(x,hidden)
+#     def forward(self, x):
+#         hidden = self.init_hidden(x.size(0))
+#         out, _ = self.lstm(x,hidden)
 
+#         out = self.fc(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
+
+class PolicyNet(nn.Module):
+    def __init__(self, input_size, hidden_size=512, output_size=2, nhead=4, num_layers=2):
+        super(PolicyNet, self).__init__()
+        d_model = hidden_size
+
+        self.embedding = nn.Linear(input_size, d_model)
+        self.transformer = nn.Transformer(d_model, nhead, num_layers)
+        self.fc = nn.Linear(d_model, output_size)
+
+    def forward(self, x):
+        x = self.embedding(x)
+        x = x.transpose(0, 1)
+
+        # Create target sequence by shifting input sequence by one time step
+        tgt = torch.zeros_like(x)
+        tgt[:, :-1, :] = x[:, 1:, :]
+
+        out = self.transformer(x, tgt)
+
+        out = out.transpose(0, 1)
         out = self.fc(out)
         out = torch.softmax(out, dim=-1)
-
         return out
 
+    
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size):
+#         super(PolicyNet, self).__init__()
+#         self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=3, padding=1, dilation=1)
+#         self.fc1 = nn.Linear(hidden_size, hidden_size)
+#         self.fc2 = nn.Linear(hidden_size, output_size)
+#         self.device = device
+
+#     def forward(self, x):
+#         x = x.transpose(1, 2)
+#         out = F.relu(self.conv1(x))
+#         out = out.transpose(1, 2)
+#         out = F.relu(self.fc1(out))
+#         out = self.fc2(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
     
 
 
 class LSTMRL:
-    def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset):
+    def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, epsilon=0.1):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = LSTMPolicy(input_size, hidden_size, output_size).to(self.device)
+        self.model = PolicyNet(input_size, hidden_size, output_size).to(self.device)
         self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
         self.loss_fn = nn.CrossEntropyLoss()
+        self.epsilon = epsilon
         self.batch_size = batch_size
         self.input_size = input_size
         self.num_epochs = num_epochs
@@ -75,7 +118,7 @@ class LSTMRL:
                 #print(probs.shape, states_batch.shape, actions_batch.shape, rewards_batch.shape)
 
 
-                policy_gradients = torch.zeros(batch_size, seq_len)
+                policy_gradients = torch.zeros(batch_size, seq_len).to(self.device)
                 for t in range(seq_len):
                     actions = actions_batch[:, t]
                     rewards = rewards_batch[:, t]
@@ -167,24 +210,33 @@ class LSTMRL:
         # Sample from Distribution of PolicyLSTM Outputs
         actions = action_dist.sample()
 
+        uniform_dist = torch.distributions.Uniform(0, 1)
+        random_actions = uniform_dist.sample((num_trajectories, sequence_length))
+
+
+
         for t in range(sequence_length):
             for trajectory in range(num_trajectories):
+
+
+                # Epsilon-greedy action selection
+                if random_actions[trajectory, t] < self.epsilon:
+                    actions[trajectory, t] = torch.randint(0, probs.shape[-1], (1,)).item()
+
+
                 # Update the states for the next time step
                 if t < sequence_length - 1:
-                    a = actions[trajectory, t]
-                    if a == 1: 
-                        a = states[trajectory, t, :][0]  # a = excess power
-                    states[trajectory, t+1, -1] = env.step(s=states[trajectory, t, :], a=actions[trajectory, t])
+                    
+                    s_1 = env.step(s=states[trajectory, t, :], a=actions[trajectory, t])
+                    states[trajectory, t+1, -1] = s_1
 
-                # Compute the discounted rewards for the current actions
-                if t == sequence_length - 1:
-                    # If this is the last time step, set the reward to zero
-                    rewards[trajectory, t] = 0
-                else:
-                    rewards[trajectory, t] = env.reward(action=actions[trajectory, t], s=states[trajectory, t, :])
+                if actions[trajectory, t] not in [0,1]:
+                    print("error")
 
+                rewards[trajectory, t] = env.reward(action=actions[trajectory, t], s=states[trajectory, t, :])
 
         # rewards = self.discount_rewards(rewards, gamma)
+
 
         return states, actions, rewards, states_const
     
@@ -219,14 +271,15 @@ class LSTMRL:
         return torch.tensor(sequences, dtype=torch.float32)
 
 
-batch_size = 8
-seq_len = 96
+batch_size = 16
+seq_len = 24
 input_size= 5
-hidden_size = 1000
+hidden_size = 512
 lr = 0.00001
 output_size= 2
-episodes = 30
+episodes = 1000
 num_trajectories = 300 # max days: ~ 430
+epsilon = 0.1
 
 '''
 NUM_TRAJECTORIES: important parameter; case = 100: batch_size = 64 --> only 2 updates per epoch --> 64 + 36
@@ -236,12 +289,12 @@ max_storage_tank = 18.52
 
 args = {
     "max_storage_tank": max_storage_tank,
-    "optimum_storage": max_storage_tank * 0.7,
+    "optimum_storage": max_storage_tank * 0.6,
     "gamma1": 0,    # financial
     "gamma2": 1,      # distance optimum
     "gamma3": 0.0,      # tank change
     "demand_price": 0.5,
-    "feedin_price": 0.2
+    "feedin_price": 0.1
 }
 
 
@@ -250,10 +303,10 @@ dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False,
 dataset["excess"] = (dataset.i_m1sum - dataset.power_consumption_kwh).clip(lower=0)
 dataset = dataset[["date", "excess", "demand_price", "feedin_price", "thermal_consumption_kwh", "kwh_eq_state"]]
 
-print(dataset)
+print(dataset.excess[dataset.excess > 0])
 
 env = Environment(levels=seq_len, max_storage_tank=args["max_storage_tank"], optimum_storage=args["optimum_storage"], gamma1=args["gamma1"], gamma2=args["gamma2"], gamma3=args["gamma3"])
-model = LSTMRL(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset)
+model = LSTMRL(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, epsilon=epsilon)
 
 
 rewards_list, loss_list = [], []
@@ -263,7 +316,9 @@ for i in range(episodes):
 
     states, actions, rewards, states_const = model.sample_trajectories(num_trajectories=num_trajectories, sequence_length=seq_len,num_inputs=input_size, env=env)
     
-    print(actions[0], states[0,:,-1],)
+    j = 250
+
+    print(actions[j], states[j,:,-1], torch.round(rewards[j]*100) / 100, rewards[j].sum(), np.array(actions).mean())
     mean_reward = rewards.mean().detach().item()
     print("Reward Mean: ",mean_reward)
 
@@ -277,6 +332,7 @@ for i in range(episodes):
     rewards_list.append(mean_reward)
 
 plot_rewards_loss(rewards_list, loss_list)
+plot_states(states[j], actions[j], args["optimum_storage"])
 
 
 ''' Attention: wrong states; no implementation of step'''

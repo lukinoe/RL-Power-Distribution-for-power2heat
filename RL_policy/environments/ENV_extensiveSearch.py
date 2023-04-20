@@ -42,7 +42,7 @@ class Environment:
         consumption = power_consumption   
         availableExcess = clip((pv_excess - consumption), min=0) 
         feedInAdvantage = clip((demand_price - feedin_price), min=0)
-                
+        
         
         '''
         FINANCIAL REWARD
