@@ -90,7 +90,8 @@ class Environment:
         if state > self.optimum_storage and action == 0:
             reward += 1
 
-        # if state <
+        distance_to_optimum = abs(state - self.optimum_storage)
+        reward += torch.exp(-self.gaussian_a * distance_to_optimum**2)*self.gamma2 *10
 
         
         

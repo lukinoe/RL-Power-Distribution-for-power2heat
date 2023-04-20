@@ -43,48 +43,48 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 #         return out
 
-class PolicyNet(nn.Module):
-    def __init__(self, input_size, hidden_size=512, output_size=2, nhead=4, num_layers=2):
-        super(PolicyNet, self).__init__()
-        d_model = hidden_size
-
-        self.embedding = nn.Linear(input_size, d_model)
-        self.transformer = nn.Transformer(d_model, nhead, num_layers)
-        self.fc = nn.Linear(d_model, output_size)
-
-    def forward(self, x):
-        x = self.embedding(x)
-        x = x.transpose(0, 1)
-
-        # Create target sequence by shifting input sequence by one time step
-        tgt = torch.zeros_like(x)
-        tgt[:, :-1, :] = x[:, 1:, :]
-
-        out = self.transformer(x, tgt)
-
-        out = out.transpose(0, 1)
-        out = self.fc(out)
-        out = torch.softmax(out, dim=-1)
-        return out
-
-    
 # class PolicyNet(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size):
+#     def __init__(self, input_size, hidden_size=512, output_size=2, nhead=4, num_layers=2):
 #         super(PolicyNet, self).__init__()
-#         self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=3, padding=1, dilation=1)
-#         self.fc1 = nn.Linear(hidden_size, hidden_size)
-#         self.fc2 = nn.Linear(hidden_size, output_size)
-#         self.device = device
+#         d_model = hidden_size
+
+#         self.embedding = nn.Linear(input_size, d_model)
+#         self.transformer = nn.Transformer(d_model, nhead, num_layers)
+#         self.fc = nn.Linear(d_model, output_size)
 
 #     def forward(self, x):
-#         x = x.transpose(1, 2)
-#         out = F.relu(self.conv1(x))
-#         out = out.transpose(1, 2)
-#         out = F.relu(self.fc1(out))
-#         out = self.fc2(out)
-#         out = torch.softmax(out, dim=-1)
+#         x = self.embedding(x)
+#         x = x.transpose(0, 1)
 
+#         # Create target sequence by shifting input sequence by one time step
+#         tgt = torch.zeros_like(x)
+#         tgt[:, :-1, :] = x[:, 1:, :]
+
+#         out = self.transformer(x, tgt)
+
+#         out = out.transpose(0, 1)
+#         out = self.fc(out)
+#         out = torch.softmax(out, dim=-1)
 #         return out
+
+    
+class PolicyNet(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(PolicyNet, self).__init__()
+        self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=3, padding=1, dilation=1)
+        self.fc1 = nn.Linear(hidden_size, hidden_size)
+        self.fc2 = nn.Linear(hidden_size, output_size)
+        self.device = device
+
+    def forward(self, x):
+        x = x.transpose(1, 2)
+        out = F.relu(self.conv1(x))
+        out = out.transpose(1, 2)
+        out = F.relu(self.fc1(out))
+        out = self.fc2(out)
+        out = torch.softmax(out, dim=-1)
+
+        return out
     
 
 
@@ -124,7 +124,7 @@ class LSTMRL:
                     rewards = rewards_batch[:, t]
                     probs_t = probs[:, t, :]
                     probs_selected = probs_t.gather(1, actions.unsqueeze(1)).squeeze(1)    # get the probability of the chosen action
-                    policy_gradients[:, t] = -torch.log(probs_selected) * rewards
+                    policy_gradients[:, t] = -torch.log(probs_selected) * rewards.to(self.device)
 
                 ''' 
                 Sum over time and batch dimensions to get total loss
@@ -277,7 +277,7 @@ input_size= 5
 hidden_size = 512
 lr = 0.00001
 output_size= 2
-episodes = 1000
+episodes = 150
 num_trajectories = 300 # max days: ~ 430
 epsilon = 0.1
 
