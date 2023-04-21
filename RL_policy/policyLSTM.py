@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.optim.lr_scheduler import StepLR
 from torch.utils.data import TensorDataset, DataLoader
 import matplotlib.pyplot as plt
 import numpy as np
@@ -19,29 +20,29 @@ from utils import plot_rewards_loss, plot_states
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-# class PolicyNet(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size):
-#         super(PolicyNet, self).__init__()
-#         self.input_size = input_size
-#         self.hidden_size = hidden_size
-#         self.output_size = output_size
-#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
-#         self.fc = nn.Linear(hidden_size, output_size)
-#         self.sigmoid = nn.Sigmoid()
-#         self.device = device
+class PolicyNet(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(PolicyNet, self).__init__()
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
+        self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
+        self.fc = nn.Linear(hidden_size, output_size)
+        self.sigmoid = nn.Sigmoid()
+        self.device = device
 
-#     def init_hidden(self, batch_size):
-#         return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
-#                 torch.zeros(1, batch_size, self.hidden_size).to(self.device))
+    def init_hidden(self, batch_size):
+        return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
+                torch.zeros(1, batch_size, self.hidden_size).to(self.device))
     
-#     def forward(self, x):
-#         hidden = self.init_hidden(x.size(0))
-#         out, _ = self.lstm(x,hidden)
+    def forward(self, x):
+        hidden = self.init_hidden(x.size(0))
+        out, _ = self.lstm(x,hidden)
 
-#         out = self.fc(out)
-#         out = torch.softmax(out, dim=-1)
+        out = self.fc(out)
+        out = torch.softmax(out, dim=-1)
 
-#         return out
+        return out
 
 # class PolicyNet(nn.Module):
 #     def __init__(self, input_size, hidden_size=512, output_size=2, nhead=4, num_layers=2):
@@ -68,24 +69,70 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #         return out
 
     
-class PolicyNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
-        super(PolicyNet, self).__init__()
-        self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=3, padding=1, dilation=1)
-        self.fc1 = nn.Linear(hidden_size, hidden_size)
-        self.fc2 = nn.Linear(hidden_size, output_size)
-        self.device = device
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size):
+#         super(PolicyNet, self).__init__()
+#         self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=3, padding=1, dilation=1)
+#         self.fc1 = nn.Linear(hidden_size, hidden_size)
+#         self.fc2 = nn.Linear(hidden_size, output_size)
+#         self.device = device
 
-    def forward(self, x):
-        x = x.transpose(1, 2)
-        out = F.relu(self.conv1(x))
-        out = out.transpose(1, 2)
-        out = F.relu(self.fc1(out))
-        out = self.fc2(out)
-        out = torch.softmax(out, dim=-1)
+#     def forward(self, x):
+#         x = x.transpose(1, 2)
+#         out = F.relu(self.conv1(x))
+#         out = out.transpose(1, 2)
+#         out = F.relu(self.fc1(out))
+#         out = self.fc2(out)
+#         out = torch.softmax(out, dim=-1)
 
-        return out
+#         return out
     
+
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size):
+#         super(PolicyNet, self).__init__()
+#         self.conv1 = nn.Conv2d(1, hidden_size, kernel_size=(input_size, 3), padding=(0, 1), dilation=1)
+#         self.fc1 = nn.Linear(hidden_size * 1, hidden_size)  # Adjust input dimensions based on conv1 output
+#         self.fc2 = nn.Linear(hidden_size, output_size)
+
+#     def forward(self, x):
+#         batch_size, seq_len, _ = x.shape
+#         x = x.unsqueeze(1)  # Add channel dimension
+#         out = F.relu(self.conv1(x))
+
+#         # Adjust tensor dimensions for fully connected layers
+#         _, _, h, w = out.shape
+#         out = out.view(batch_size, w, -1)  # Reshape tensor for fully connected layers
+#         out = F.relu(self.fc1(out))
+#         out = self.fc2(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
+
+
+
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size, sequence_length=24):
+#         super(PolicyNet, self).__init__()
+#         self.conv1 = nn.Conv2d(1, hidden_size, kernel_size=(input_size, 3), padding=(0, 1), dilation=1)
+#         self.conv2 = nn.Conv2d(hidden_size, hidden_size, kernel_size=(1, 3), padding=(0, 1), dilation=1)
+#         self.conv3 = nn.Conv2d(hidden_size, output_size, kernel_size=(1, 1), padding=(0, 0), dilation=1)
+        
+#     def forward(self, x):
+#         batch_size, seq_len, _ = x.shape
+#         x = x.unsqueeze(1)
+#         out = F.relu(self.conv1(x))
+#         out = F.relu(self.conv2(out))
+#         out = self.conv3(out).squeeze(2)
+        
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
+
+
+
+
+
 
 
 class LSTMRL:
@@ -93,6 +140,7 @@ class LSTMRL:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = PolicyNet(input_size, hidden_size, output_size).to(self.device)
         self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
+        self.scheduler = StepLR(self.optimizer, step_size=100, gamma=0.1)
         self.loss_fn = nn.CrossEntropyLoss()
         self.epsilon = epsilon
         self.batch_size = batch_size
@@ -111,11 +159,21 @@ class LSTMRL:
                 batch_size = states_batch.shape[0]
                 seq_len = states_batch.shape[1]
 
+
+
+            
                 # Forward pass
                 self.model.zero_grad()
                 probs = self.model(states_batch.to(self.device))  
 
                 #print(probs.shape, states_batch.shape, actions_batch.shape, rewards_batch.shape)
+
+                '''
+                Baseline implementation
+                
+                '''
+                baseline = rewards_batch.mean(dim=1, keepdim=True)
+                rewards_batch = rewards_batch - baseline
 
 
                 policy_gradients = torch.zeros(batch_size, seq_len).to(self.device)
@@ -137,10 +195,12 @@ class LSTMRL:
                 loss.backward()
                 nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)   # gradient clipping to avoid vanishing or exploding gradients
                 self.optimizer.step()
+                
 
                 running_loss += loss.item() * states_batch.shape[0]
 
             epoch_loss = running_loss / len(dataset)
+            self.scheduler.step()
         
             print(f"Loss: {epoch_loss:.4f}")
 
@@ -198,7 +258,6 @@ class LSTMRL:
         self.data = self.sequentialize_dataset(num_trajectories=num_trajectories)
         states = self.data.to(self.device)
         states_const = states
-
 
         # Sample actions for each state in each trajectory
         lstm_output = self.model.forward(states) # out: (num_traj, 2)
@@ -274,10 +333,10 @@ class LSTMRL:
 batch_size = 16
 seq_len = 24
 input_size= 5
-hidden_size = 512
-lr = 0.00001
+hidden_size = 1048
+lr = 0.000001
 output_size= 2
-episodes = 150
+episodes = 500
 num_trajectories = 300 # max days: ~ 430
 epsilon = 0.1
 
@@ -289,12 +348,12 @@ max_storage_tank = 18.52
 
 args = {
     "max_storage_tank": max_storage_tank,
-    "optimum_storage": max_storage_tank * 0.6,
+    "optimum_storage": max_storage_tank * 0.8,
     "gamma1": 0,    # financial
     "gamma2": 1,      # distance optimum
     "gamma3": 0.0,      # tank change
-    "demand_price": 0.5,
-    "feedin_price": 0.1
+    "demand_price": 0.1,
+    "feedin_price": 0.5
 }
 
 
@@ -316,9 +375,9 @@ for i in range(episodes):
 
     states, actions, rewards, states_const = model.sample_trajectories(num_trajectories=num_trajectories, sequence_length=seq_len,num_inputs=input_size, env=env)
     
-    j = 250
+    j = 160
 
-    print(actions[j], states[j,:,-1], torch.round(rewards[j]*100) / 100, rewards[j].sum(), np.array(actions).mean())
+    print(actions[j], states[j,:,-1], torch.round(rewards[j]*100) / 100, rewards[j].sum(), np.array(actions.cpu()).mean())
     mean_reward = rewards.mean().detach().item()
     print("Reward Mean: ",mean_reward)
 
