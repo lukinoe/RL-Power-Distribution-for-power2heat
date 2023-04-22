@@ -95,6 +95,16 @@ class Environment:
         reward_o += torch.exp(-self.gaussian_a * distance_to_optimum**2) * 10
 
         reward += reward_o * self.gamma2
+
+
+
+        """
+        ADDITIONAL
+        """
+
+        # if action == 1 and excess == 0:
+        #     reward -= 2.0
+
         
         return reward
 

@@ -51,20 +51,20 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #         self.input_size = input_size
 #         self.hidden_size = hidden_size
 #         self.output_size = output_size
-#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
-#         self.fc = nn.Linear(hidden_size, output_size)
-#         self.sigmoid = nn.Sigmoid()
+#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True, bidirectional=True)
+#         self.fc = nn.Linear(hidden_size *2, output_size)
+#         self.relu = nn.ReLU()
 #         self.device = device
 
 #     def init_hidden(self, batch_size):
-#         return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
-#                 torch.zeros(1, batch_size, self.hidden_size).to(self.device))
+#         return (torch.zeros(1, batch_size, self.hidden_size*2).to(self.device),
+#                 torch.zeros(1, batch_size, self.hidden_size*2).to(self.device))
     
 #     def forward(self, x):
 #         hidden = self.init_hidden(x.size(0))
 #         out, _ = self.lstm(x,hidden)
 
-#         out = self.fc(out)
+#         out = self.relu(out)
 #         out = torch.softmax(out, dim=-1)
 
 #         return out
@@ -94,30 +94,117 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #         out = torch.softmax(out, dim=-1)
 #         return out
 
-    
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size, nhead=2, num_layers=2):
+#         super(PolicyNet, self).__init__()
+
+#         self.embedding = nn.Linear(input_size, hidden_size)
+#         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead)
+#         self.transformer_encoder = nn.TransformerEncoder(encoder_layers, num_layers)
+#         self.fc1 = nn.Linear(hidden_size, hidden_size)
+#         self.fc2 = nn.Linear(hidden_size, output_size)
+#         self.device = device
+
+#     def forward(self, x):
+#         x = self.embedding(x)
+#         x = x.transpose(0, 1)
+#         out = self.transformer_encoder(x)
+#         out = out.transpose(0, 1)
+#         out = F.relu(self.fc1(out))
+#         out = self.fc2(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
+
+
 class PolicyNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size, hidden_size, output_size, num_layers=4, nhead=4, transformer_layers=2):
         super(PolicyNet, self).__init__()
 
-        dilation = 2  # Set dilation rate to 2
-        kernel_size = 3
-        padding = dilation * (kernel_size - 1) // 2  # Calculate padding size
-        self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=kernel_size, padding=padding, dilation=dilation)
-        # self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=3, padding=1, dilation=2)
+        self.convs = nn.ModuleList()
+        for i in range(num_layers):
+            dilation = 2 ** i
+            kernel_size = 3
+            padding = dilation * (kernel_size - 1) // 2
+            conv = nn.Conv1d(input_size if i == 0 else hidden_size, hidden_size, kernel_size=kernel_size, padding=padding, dilation=dilation)
+            self.convs.append(conv)
+
+        self.embedding = nn.Linear(hidden_size, hidden_size)
+        encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead)
+        self.transformer_encoder = nn.TransformerEncoder(encoder_layers, transformer_layers)
+        
         self.fc1 = nn.Linear(hidden_size, hidden_size)
         self.fc2 = nn.Linear(hidden_size, output_size)
-        self.device = device
 
     def forward(self, x):
         x = x.transpose(1, 2)
-        out = F.relu(self.conv1(x))
-        out = out.transpose(1, 2)
+
+        for conv in self.convs:
+            x = F.relu(conv(x))
+
+        x = x.transpose(1, 2)
+        x = self.embedding(x)
+        x = x.transpose(0, 1)
+        out = self.transformer_encoder(x)
+        out = out.transpose(0, 1)
+        
         out = F.relu(self.fc1(out))
         out = self.fc2(out)
         out = torch.softmax(out, dim=-1)
 
         return out
+
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size):
+#         super(PolicyNet, self).__init__()
+
+#         dilation = 2  # Set dilation rate to 2
+#         kernel_size = 3
+#         padding = dilation * (kernel_size - 1) // 2  # Calculate padding size
+#         self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=kernel_size, padding=padding, dilation=dilation)
+#         self.fc1 = nn.Linear(hidden_size, hidden_size)
+#         self.fc2 = nn.Linear(hidden_size, output_size)
+#         self.device = device
+
+#     def forward(self, x):
+#         x = x.transpose(1, 2)
+#         out = F.relu(self.conv1(x))
+#         out = out.transpose(1, 2)
+#         out = F.relu(self.fc1(out))
+#         out = self.fc2(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
     
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size, num_layers=3):
+#         super(PolicyNet, self).__init__()
+
+#         self.convs = nn.ModuleList()
+#         self.device = device
+
+#         for i in range(num_layers):
+#             dilation = 2 ** i  # Increase dilation rate for each layer
+#             kernel_size = 3
+#             padding = dilation * (kernel_size - 1) // 2  # Calculate padding size
+#             conv = nn.Conv1d(input_size if i == 0 else hidden_size, hidden_size, kernel_size=kernel_size, padding=padding, dilation=dilation)
+#             self.convs.append(conv)
+
+#         self.fc1 = nn.Linear(hidden_size, hidden_size)
+#         self.fc2 = nn.Linear(hidden_size, output_size)
+
+#     def forward(self, x):
+#         x = x.transpose(1, 2)
+
+#         for conv in self.convs:
+#             x = F.relu(conv(x))
+
+#         out = x.transpose(1, 2)
+#         out = F.relu(self.fc1(out))
+#         out = self.fc2(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
 
 # class PolicyNet(nn.Module):
 #     def __init__(self, input_size, hidden_size, output_size):
@@ -340,7 +427,7 @@ class LSTMRL:
         df['date'] = pd.to_datetime(df['date'])
 
         # Filter the dataframe to include only rows with a time of 8:00 am
-        df_8_am = df[df['date'].dt.time == pd.to_datetime('08:00:00').time()]
+        df_8_am = df[df['date'].dt.time == pd.to_datetime('12:00:00').time()]
 
         # Sample indices from the filtered dataframe
         sampled_indices = np.random.choice(list(df_8_am.index), num_trajectories)
@@ -367,7 +454,7 @@ batch_size = 16
 seq_len = 24
 input_size= 5
 hidden_size = 1024
-lr = 0.00001
+lr = 0.000001
 output_size= 2
 episodes = 500
 num_trajectories = 300 # max days: ~ 430
