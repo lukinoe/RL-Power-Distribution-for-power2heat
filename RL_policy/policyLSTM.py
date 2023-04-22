@@ -19,30 +19,56 @@ from utils import plot_rewards_loss, plot_states
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size):
+#         super(PolicyNet, self).__init__()
+#         self.conv1 = nn.Conv2d(1, hidden_size, kernel_size=(input_size, 3), padding=(0, 1), dilation=1)
+#         self.fc1 = nn.Linear(hidden_size, hidden_size)  # Input dimensions will be updated in forward method
+#         self.fc2 = nn.Linear(hidden_size, output_size)
 
-class PolicyNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
-        super(PolicyNet, self).__init__()
-        self.input_size = input_size
-        self.hidden_size = hidden_size
-        self.output_size = output_size
-        self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
-        self.fc = nn.Linear(hidden_size, output_size)
-        self.sigmoid = nn.Sigmoid()
-        self.device = device
+#     def forward(self, x):
+#         batch_size, seq_len, _ = x.shape
+#         x = x.unsqueeze(1)  # Add channel dimension
+#         out = F.relu(self.conv1(x))
 
-    def init_hidden(self, batch_size):
-        return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
-                torch.zeros(1, batch_size, self.hidden_size).to(self.device))
+#         # Adjust tensor dimensions for fully connected layers
+#         _, _, h, w = out.shape
+#         out = out.view(batch_size, w, -1)  # Reshape tensor for fully connected layers
+        
+#         self.fc1 = nn.Linear(h * hidden_size, hidden_size)  # Update fc1 input dimensions
+#         out = F.relu(self.fc1(out))
+#         out = self.fc2(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         print(out.shape)
+
+#         return out
+
+
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size):
+#         super(PolicyNet, self).__init__()
+#         self.input_size = input_size
+#         self.hidden_size = hidden_size
+#         self.output_size = output_size
+#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
+#         self.fc = nn.Linear(hidden_size, output_size)
+#         self.sigmoid = nn.Sigmoid()
+#         self.device = device
+
+#     def init_hidden(self, batch_size):
+#         return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
+#                 torch.zeros(1, batch_size, self.hidden_size).to(self.device))
     
-    def forward(self, x):
-        hidden = self.init_hidden(x.size(0))
-        out, _ = self.lstm(x,hidden)
+#     def forward(self, x):
+#         hidden = self.init_hidden(x.size(0))
+#         out, _ = self.lstm(x,hidden)
 
-        out = self.fc(out)
-        out = torch.softmax(out, dim=-1)
+#         out = self.fc(out)
+#         out = torch.softmax(out, dim=-1)
 
-        return out
+#         return out
+
 
 # class PolicyNet(nn.Module):
 #     def __init__(self, input_size, hidden_size=512, output_size=2, nhead=4, num_layers=2):
@@ -69,23 +95,28 @@ class PolicyNet(nn.Module):
 #         return out
 
     
-# class PolicyNet(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size):
-#         super(PolicyNet, self).__init__()
-#         self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=3, padding=1, dilation=1)
-#         self.fc1 = nn.Linear(hidden_size, hidden_size)
-#         self.fc2 = nn.Linear(hidden_size, output_size)
-#         self.device = device
+class PolicyNet(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(PolicyNet, self).__init__()
 
-#     def forward(self, x):
-#         x = x.transpose(1, 2)
-#         out = F.relu(self.conv1(x))
-#         out = out.transpose(1, 2)
-#         out = F.relu(self.fc1(out))
-#         out = self.fc2(out)
-#         out = torch.softmax(out, dim=-1)
+        dilation = 2  # Set dilation rate to 2
+        kernel_size = 3
+        padding = dilation * (kernel_size - 1) // 2  # Calculate padding size
+        self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=kernel_size, padding=padding, dilation=dilation)
+        # self.conv1 = nn.Conv1d(input_size, hidden_size, kernel_size=3, padding=1, dilation=2)
+        self.fc1 = nn.Linear(hidden_size, hidden_size)
+        self.fc2 = nn.Linear(hidden_size, output_size)
+        self.device = device
 
-#         return out
+    def forward(self, x):
+        x = x.transpose(1, 2)
+        out = F.relu(self.conv1(x))
+        out = out.transpose(1, 2)
+        out = F.relu(self.fc1(out))
+        out = self.fc2(out)
+        out = torch.softmax(out, dim=-1)
+
+        return out
     
 
 # class PolicyNet(nn.Module):
@@ -136,7 +167,7 @@ class PolicyNet(nn.Module):
 
 
 class LSTMRL:
-    def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, epsilon=0.1):
+    def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, epsilon=0.1, lr_schedule=False):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = PolicyNet(input_size, hidden_size, output_size).to(self.device)
         self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
@@ -200,7 +231,9 @@ class LSTMRL:
                 running_loss += loss.item() * states_batch.shape[0]
 
             epoch_loss = running_loss / len(dataset)
-            self.scheduler.step()
+
+            if lr_schedule:
+                self.scheduler.step()
         
             print(f"Loss: {epoch_loss:.4f}")
 
@@ -333,12 +366,13 @@ class LSTMRL:
 batch_size = 16
 seq_len = 24
 input_size= 5
-hidden_size = 1048
-lr = 0.000001
+hidden_size = 1024
+lr = 0.00001
 output_size= 2
 episodes = 500
 num_trajectories = 300 # max days: ~ 430
 epsilon = 0.1
+lr_schedule = True
 
 '''
 NUM_TRAJECTORIES: important parameter; case = 100: batch_size = 64 --> only 2 updates per epoch --> 64 + 36
@@ -365,7 +399,7 @@ dataset = dataset[["date", "excess", "demand_price", "feedin_price", "thermal_co
 print(dataset.excess[dataset.excess > 0])
 
 env = Environment(levels=seq_len, max_storage_tank=args["max_storage_tank"], optimum_storage=args["optimum_storage"], gamma1=args["gamma1"], gamma2=args["gamma2"], gamma3=args["gamma3"])
-model = LSTMRL(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, epsilon=epsilon)
+model = LSTMRL(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, epsilon=epsilon, lr_schedule=lr_schedule)
 
 
 rewards_list, loss_list = [], []
