@@ -456,7 +456,7 @@ input_size= 5
 hidden_size = 1024
 lr = 0.000001
 output_size= 2
-episodes = 500
+episodes = 1
 num_trajectories = 300 # max days: ~ 430
 epsilon = 0.1
 lr_schedule = True
@@ -499,7 +499,7 @@ for i in range(episodes):
     j = 160
 
     print(actions[j], states[j,:,-1], torch.round(rewards[j]*100) / 100, rewards[j].sum(), np.array(actions.cpu()).mean())
-    mean_reward = rewards.mean().detach().item()
+    mean_reward = rewards.cpu().mean().detach().item()
     print("Reward Mean: ",mean_reward)
 
     dataset = TensorDataset(states_const, actions, rewards)
@@ -512,7 +512,10 @@ for i in range(episodes):
     rewards_list.append(mean_reward)
 
 plot_rewards_loss(rewards_list, loss_list)
-plot_states(states[j], actions[j], args["optimum_storage"])
+
+
+for i in [50,75,100,125,150,175,200,225,250,275,299]:
+    plot_states(states[i].cpu(), actions[i].cpu(), args["optimum_storage"], id=i)
 
 
 ''' Attention: wrong states; no implementation of step'''

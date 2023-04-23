@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 def plot_rewards_loss(rewards, losses):
 
@@ -18,7 +19,7 @@ def plot_rewards_loss(rewards, losses):
     plt.show()
 
 
-def plot_states(states,actions,optimum_storage_capacity):
+def plot_states(states,actions,optimum_storage_capacity, id=0):
 
     time = np.arange(len(states))
     optimum_storage = np.zeros(len(states))
@@ -42,6 +43,9 @@ def plot_states(states,actions,optimum_storage_capacity):
     # lines1, labels1 = ax1.get_legend_handles_labels()
     # lines2, labels2 = ax2.get_legend_handles_labels()
     # ax2.legend(lines1 + lines2, labels1 + labels2, loc='lower right')
-
+    
     plt.title('Thermal Energy Storage Capacity and Action')
+
+
+    plt.savefig(os.path.dirname(os.path.abspath(__file__)) + '/img/' + str(id) +'.png')
     plt.show()
