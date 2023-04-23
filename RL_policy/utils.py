@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+plt.rcParams["figure.figsize"] = (20,8)
 
 def plot_rewards_loss(rewards, losses):
-
-
 
     # Visualize the data
     fig, ax1 = plt.subplots()
@@ -25,7 +24,6 @@ def plot_states(states,actions,optimum_storage_capacity, id=0):
     optimum_storage = np.zeros(len(states))
     optimum_storage[:] = optimum_storage_capacity
 
-
     fig, ax1 = plt.subplots()
 
     ax1.plot(time,states, 'orange', linewidth=2,label='Thermal Energy Storage Capacity')
@@ -39,10 +37,6 @@ def plot_states(states,actions,optimum_storage_capacity, id=0):
     ax2.set_ylabel('Action (0 or 1)')
     ax2.set_ylim(0, 1)
 
-    # # Combine legends
-    # lines1, labels1 = ax1.get_legend_handles_labels()
-    # lines2, labels2 = ax2.get_legend_handles_labels()
-    # ax2.legend(lines1 + lines2, labels1 + labels2, loc='lower right')
     
     plt.title('Thermal Energy Storage Capacity and Action')
 

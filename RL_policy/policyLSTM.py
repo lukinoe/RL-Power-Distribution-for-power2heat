@@ -117,42 +117,67 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #         return out
 
 
+# class PolicyNet(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size, num_layers=4, nhead=4, transformer_layers=2):
+#         super(PolicyNet, self).__init__()
+
+#         self.convs = nn.ModuleList()
+#         for i in range(num_layers):
+#             dilation = 2 ** i
+#             kernel_size = 3
+#             padding = dilation * (kernel_size - 1) // 2
+#             conv = nn.Conv1d(input_size if i == 0 else hidden_size, hidden_size, kernel_size=kernel_size, padding=padding, dilation=dilation)
+#             self.convs.append(conv)
+
+#         self.embedding = nn.Linear(hidden_size, hidden_size)
+#         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead)
+#         self.transformer_encoder = nn.TransformerEncoder(encoder_layers, transformer_layers)
+        
+#         self.fc1 = nn.Linear(hidden_size, hidden_size)
+#         self.fc2 = nn.Linear(hidden_size, output_size)
+
+#     def forward(self, x):
+#         x = x.transpose(1, 2)
+
+#         for conv in self.convs:
+#             x = F.relu(conv(x))
+
+#         x = x.transpose(1, 2)
+#         x = self.embedding(x)
+#         x = x.transpose(0, 1)
+#         out = self.transformer_encoder(x)
+#         out = out.transpose(0, 1)
+        
+#         out = F.relu(self.fc1(out))
+#         out = self.fc2(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
+
 class PolicyNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, num_layers=4, nhead=4, transformer_layers=2):
         super(PolicyNet, self).__init__()
 
-        self.convs = nn.ModuleList()
-        for i in range(num_layers):
-            dilation = 2 ** i
-            kernel_size = 3
-            padding = dilation * (kernel_size - 1) // 2
-            conv = nn.Conv1d(input_size if i == 0 else hidden_size, hidden_size, kernel_size=kernel_size, padding=padding, dilation=dilation)
-            self.convs.append(conv)
-
         self.embedding = nn.Linear(hidden_size, hidden_size)
-        encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead)
+        encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
         self.transformer_encoder = nn.TransformerEncoder(encoder_layers, transformer_layers)
-        
+
+
+        self.fc0 = nn.Linear(input_size, hidden_size)
         self.fc1 = nn.Linear(hidden_size, hidden_size)
         self.fc2 = nn.Linear(hidden_size, output_size)
 
     def forward(self, x):
-        x = x.transpose(1, 2)
-
-        for conv in self.convs:
-            x = F.relu(conv(x))
-
-        x = x.transpose(1, 2)
-        x = self.embedding(x)
-        x = x.transpose(0, 1)
+        
+        x = self.fc0(x)
         out = self.transformer_encoder(x)
-        out = out.transpose(0, 1)
         
         out = F.relu(self.fc1(out))
         out = self.fc2(out)
         out = torch.softmax(out, dim=-1)
 
         return out
+
 
 # class PolicyNet(nn.Module):
 #     def __init__(self, input_size, hidden_size, output_size):
@@ -456,9 +481,9 @@ input_size= 5
 hidden_size = 1024
 lr = 0.000001
 output_size= 2
-episodes = 1
+episodes = 300
 num_trajectories = 300 # max days: ~ 430
-epsilon = 0.1
+epsilon = 0.0
 lr_schedule = True
 
 '''
@@ -515,7 +540,7 @@ plot_rewards_loss(rewards_list, loss_list)
 
 
 for i in [50,75,100,125,150,175,200,225,250,275,299]:
-    plot_states(states[i].cpu(), actions[i].cpu(), args["optimum_storage"], id=i)
+    plot_states(states[i,:,-1].cpu(), actions[i].cpu(), args["optimum_storage"], id=i)
 
 
 ''' Attention: wrong states; no implementation of step'''
