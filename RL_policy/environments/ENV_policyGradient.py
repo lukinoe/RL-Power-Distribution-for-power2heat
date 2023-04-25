@@ -20,7 +20,7 @@ class Environment:
         self.gamma1 = gamma1
         self.gamma2 = gamma2
         self.gamma3 = gamma3
-        self.gaussian_a = 0.5     # the lower the parameter, the broader the gaussian curve
+        self.gaussian_a = 0.25     # the lower the parameter, the broader the gaussian curve
         self.cool_down = 0.1
 
 
@@ -86,24 +86,21 @@ class Environment:
 
         reward_o = 0
         
-        if state < self.optimum_storage and action == 1:
+
+        if state < self.optimum_storage and action == 1 and availableExcess > 0:
             reward_o += 1
-        if state > self.optimum_storage and action == 0:
+        if state > self.optimum_storage and action == 0 and availableExcess > 0:
             reward_o += 1
+
+        if availableExcess == 0 and action == 0:
+            reward_o += 1
+
 
         distance_to_optimum = abs(state - self.optimum_storage)
         reward_o += torch.exp(-self.gaussian_a * distance_to_optimum**2) * 10
 
         reward += reward_o * self.gamma2
 
-
-
-        """
-        ADDITIONAL
-        """
-
-        # if action == 1 and excess == 0:
-        #     reward -= 2.0
 
         
         return reward

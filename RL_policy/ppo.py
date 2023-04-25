@@ -18,30 +18,64 @@ from utils import plot_rewards_loss
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-class LSTMPolicy(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
-        super(LSTMPolicy, self).__init__()
-        self.input_size = input_size
-        self.hidden_size = hidden_size
-        self.output_size = output_size
-        self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
-        self.fc = nn.Linear(hidden_size, output_size)
-        self.sigmoid = nn.Sigmoid()
-        self.device = device
+# class LSTMPolicy(nn.Module):
+#     def __init__(self, input_size, hidden_size, output_size):
+#         super(LSTMPolicy, self).__init__()
+#         self.input_size = input_size
+#         self.hidden_size = hidden_size
+#         self.output_size = output_size
+#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
+#         self.fc = nn.Linear(hidden_size, output_size)
+#         self.sigmoid = nn.Sigmoid()
+#         self.device = device
 
-    def init_hidden(self, batch_size):
-        return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
-                torch.zeros(1, batch_size, self.hidden_size).to(self.device))
+#     def init_hidden(self, batch_size):
+#         return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
+#                 torch.zeros(1, batch_size, self.hidden_size).to(self.device))
     
-    def forward(self, x):
-        hidden = self.init_hidden(x.size(0))
-        out, _ = self.lstm(x,hidden)
+#     def forward(self, x):
+#         hidden = self.init_hidden(x.size(0))
+#         out, _ = self.lstm(x,hidden)
 
-        out = self.fc(out)
+#         out = self.fc(out)
+#         out = torch.softmax(out, dim=-1)
+
+#         return out
+
+
+# class Critic(nn.Module):
+#     def __init__(self, input_size, hidden_size):
+#         super(Critic, self).__init__()
+#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
+#         self.fc = nn.Linear(hidden_size, 1)
+
+#     def forward(self, x):
+#         out, _ = self.lstm(x)
+#         out = self.fc(out)
+#         return out.squeeze(-1)
+
+class LSTMPolicy(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size, nhead=4, transformer_layers=2):
+        super(LSTMPolicy, self).__init__()
+
+        encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
+        self.transformer_encoder = nn.TransformerEncoder(encoder_layers, transformer_layers)
+
+        self.fc0 = nn.Linear(input_size, hidden_size)
+        self.fc1 = nn.Linear(hidden_size, output_size)
+
+    def forward(self, x):
+        
+        x = self.fc0(x)
+        out = self.transformer_encoder(x)
+
+        out = self.fc1(out)
         out = torch.softmax(out, dim=-1)
 
         return out
 
+
+    
 class Critic(nn.Module):
     def __init__(self, input_size, hidden_size):
         super(Critic, self).__init__()
@@ -52,7 +86,6 @@ class Critic(nn.Module):
         out, _ = self.lstm(x)
         out = self.fc(out)
         return out.squeeze(-1)
-    
 
 
 # class LSTMPolicy(nn.Module):
@@ -87,7 +120,7 @@ class Critic(nn.Module):
     
 
 class LSTMRLPPO:
-    def __init__(self, input_size, hidden_size, output_size, critic_hidden_size, learning_rate, batch_size, num_epochs, seq_len, dataset, epsilon=0.1, c_lr=0.0001, ppo_epochs=4, ppo_clip=0.2):
+    def __init__(self, input_size, hidden_size, output_size, critic_hidden_size, learning_rate, batch_size, num_epochs, seq_len, dataset, epsilon=0.1, c_lr=0.00001, ppo_epochs=4, ppo_clip=0.3):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = LSTMPolicy(input_size, hidden_size, output_size).to(self.device)
         self.critic = Critic(input_size, critic_hidden_size).to(self.device)
@@ -103,11 +136,11 @@ class LSTMRLPPO:
         self.ppo_epochs = ppo_epochs
         self.ppo_clip = ppo_clip
         self.c1 = 0.5
-        self.c2 = 0.01
+        self.c2 = 0.1
 
 
     def train(self, loader):
-        for epoch in range(self.num_epochs):
+        for epoch in range(self.ppo_epochs):
             running_loss = 0.0
             running_critic_loss = 0.0
 
@@ -259,12 +292,12 @@ class LSTMRLPPO:
 batch_size = 16
 seq_len = 24
 input_size= 5
-hidden_size = 1000
+hidden_size = 256
 lr = 0.00001
 output_size= 2
 episodes = 500
 num_trajectories = 300 # max days: ~ 430
-epsilon = 0.1
+epsilon = 0.00
 
 '''
 NUM_TRAJECTORIES: important parameter; case = 100: batch_size = 64 --> only 2 updates per epoch --> 64 + 36

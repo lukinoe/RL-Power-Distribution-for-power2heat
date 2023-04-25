@@ -68,7 +68,24 @@ class PolicyNet(nn.Module):
 
         return out
 
+class CriticNet(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size, nhead=2, transformer_layers=1):
+        super(CriticNet, self).__init__()
 
+        encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
+        self.transformer_encoder = nn.TransformerEncoder(encoder_layers, transformer_layers)
+
+        self.fc0 = nn.Linear(input_size, hidden_size)
+        self.fc1 = nn.Linear(hidden_size, 1)
+
+    def forward(self, x):
+        
+        x = self.fc0(x)
+        out = self.transformer_encoder(x)
+
+        out = self.fc1(out)
+
+        return out
 
 
 
@@ -85,6 +102,11 @@ class LSTMRL:
         self.num_epochs = num_epochs
         self.seq_len = seq_len
         self.dataset = dataset
+        self.critic = CriticNet(input_size, hidden_size, 1).to(self.device)
+        self.critic_optimizer = optim.Adam(self.critic.parameters(), lr=0.00001)
+        self.scheduler_critic = StepLR(self.critic_optimizer, step_size=100, gamma=0.1)
+        self.value_loss_fn = nn.MSELoss()
+
         self.scaler = scaler
 
         print("Params: ", sum(p.numel() for p in self.model.parameters()))
@@ -93,6 +115,7 @@ class LSTMRL:
     def train(self, loader):
         for epoch in range(self.num_epochs):
             running_loss = 0.0
+            running_value_loss = 0.0
 
             for states_batch, actions_batch, rewards_batch in loader:
 
@@ -108,12 +131,12 @@ class LSTMRL:
 
                 #print(probs.shape, states_batch.shape, actions_batch.shape, rewards_batch.shape)
 
-                '''
-                Baseline implementation
-                
-                '''
-                baseline = rewards_batch.mean(dim=1, keepdim=True)
+                # Get the baseline using the critic network
+                state_values = self.critic(self.scale(states_batch).to(self.device)).squeeze()
+                baseline = state_values.detach()
+
                 rewards_batch = rewards_batch - baseline
+
 
 
                 policy_gradients = torch.zeros(batch_size, seq_len).to(self.device)
@@ -135,16 +158,26 @@ class LSTMRL:
                 loss.backward()
                 nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)   # gradient clipping to avoid vanishing or exploding gradients
                 self.optimizer.step()
+
+                # Train the critic network
+                self.critic.zero_grad()
+                value_loss = self.value_loss_fn(state_values, rewards_batch)
+                value_loss.backward()
+                self.critic_optimizer.step()
                 
 
                 running_loss += loss.item() * states_batch.shape[0]
+                running_value_loss += value_loss.item() * states_batch.shape[0]
 
+            
             epoch_loss = running_loss / len(dataset)
+            epoch_value_loss = running_value_loss / len(dataset)
 
             if lr_schedule:
                 self.scheduler.step()
-        
-            print(f"Loss: {epoch_loss:.4f}")
+                self.scheduler_critic.step()
+
+            print(f"Loss: {epoch_loss:.4f}, Value Loss: {epoch_value_loss:.4f}")
 
             return epoch_loss
 
@@ -274,7 +307,6 @@ class LSTMRL:
 
         return torch.tensor(sequences, dtype=torch.float32)
 
-
     def scale(self,tensor):
 
 
@@ -285,8 +317,6 @@ class LSTMRL:
         tensor_scaled = tensor_scaled.view(tensor.shape)
 
         return tensor_scaled
-    
-
 
 
 batch_size = 16
@@ -322,8 +352,10 @@ dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False,
 dataset["excess"] = (dataset.i_m1sum - dataset.power_consumption_kwh).clip(lower=0)
 dataset = dataset[["date", "excess", "demand_price", "feedin_price", "thermal_consumption_kwh", "kwh_eq_state"]]
 
+
 SC = StandardScaler()
 scaler = SC.fit(dataset[["excess", "demand_price", "feedin_price", "thermal_consumption_kwh", "kwh_eq_state"]].values)
+
 
 print(dataset.excess[dataset.excess > 0])
 
