@@ -23,7 +23,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # class PolicyNet(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size):
+#     def __init__(self, input_size, hidden_size, output_size=2):
 #         super(PolicyNet, self).__init__()
 #         self.input_size = input_size
 #         self.hidden_size = hidden_size
@@ -34,22 +34,20 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #         self.device = device
 
 #     def init_hidden(self, batch_size):
-#         return (torch.zeros(1, batch_size, self.hidden_size*2).to(self.device),
-#                 torch.zeros(1, batch_size, self.hidden_size*2).to(self.device))
+#         return (torch.zeros(2, batch_size, self.hidden_size).to(self.device),
+#                 torch.zeros(2, batch_size, self.hidden_size).to(self.device))
     
 #     def forward(self, x):
 #         hidden = self.init_hidden(x.size(0))
 #         out, _ = self.lstm(x,hidden)
-
-#         out = self.relu(out)
+#         out = self.fc(out)
 #         out = torch.softmax(out, dim=-1)
 
 #         return out
 
 
-
 class PolicyNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, nhead=4, transformer_layers=2):
+    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=1):
         super(PolicyNet, self).__init__()
 
         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
@@ -69,7 +67,7 @@ class PolicyNet(nn.Module):
         return out
 
 class CriticNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, nhead=2, transformer_layers=1):
+    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=1):
         super(CriticNet, self).__init__()
 
         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
@@ -95,6 +93,7 @@ class LSTMRL:
         self.model = PolicyNet(input_size, hidden_size, output_size).to(self.device)
         self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
         self.scheduler = StepLR(self.optimizer, step_size=100, gamma=0.1)
+        self.lr_schedule = lr_schedule
         self.loss_fn = nn.CrossEntropyLoss()
         self.epsilon = epsilon
         self.batch_size = batch_size
@@ -124,7 +123,6 @@ class LSTMRL:
 
 
 
-            
                 # Forward pass
                 self.model.zero_grad()
                 probs = self.model(self.scale(states_batch).to(self.device))  
@@ -136,7 +134,6 @@ class LSTMRL:
                 baseline = state_values.detach()
 
                 rewards_batch = rewards_batch - baseline
-
 
 
                 policy_gradients = torch.zeros(batch_size, seq_len).to(self.device)
@@ -173,7 +170,7 @@ class LSTMRL:
             epoch_loss = running_loss / len(dataset)
             epoch_value_loss = running_value_loss / len(dataset)
 
-            if lr_schedule:
+            if self.lr_schedule:
                 self.scheduler.step()
                 self.scheduler_critic.step()
 
@@ -311,9 +308,9 @@ class LSTMRL:
 
 
         tensor_reshaped = tensor.view(-1, tensor.shape[-1])
-        tensor_np = tensor_reshaped.numpy()
+        tensor_np = tensor_reshaped.cpu().numpy()
         tensor_scaled_np = self.scaler.transform(tensor_np)
-        tensor_scaled = torch.tensor(tensor_scaled_np, dtype=tensor.dtype)
+        tensor_scaled = torch.tensor(tensor_scaled_np, dtype=tensor.dtype).to(device)
         tensor_scaled = tensor_scaled.view(tensor.shape)
 
         return tensor_scaled
@@ -325,10 +322,15 @@ input_size= 5
 hidden_size = 256
 lr = 0.000001
 output_size= 2
-episodes = 50
+episodes = 200
 num_trajectories = 300 # max days: ~ 430
-epsilon = 0.02
+epsilon = 0.1
 lr_schedule = True
+
+resample = None
+if seq_len == 24:
+  resample = "h"
+
 
 '''
 NUM_TRAJECTORIES: important parameter; case = 100: batch_size = 64 --> only 2 updates per epoch --> 64 + 36
@@ -348,7 +350,7 @@ args = {
 
 
 
-dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample="h",dynamic_price=False, demand_price=args["demand_price"], feedin_price=args["feedin_price"]).pipeline()
+dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample=resample,dynamic_price=False, demand_price=args["demand_price"], feedin_price=args["feedin_price"]).pipeline()
 dataset["excess"] = (dataset.i_m1sum - dataset.power_consumption_kwh).clip(lower=0)
 dataset = dataset[["date", "excess", "demand_price", "feedin_price", "thermal_consumption_kwh", "kwh_eq_state"]]
 

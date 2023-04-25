@@ -49,7 +49,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class PolicyNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, nhead=4, transformer_layers=2):
+    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=3):
         super(PolicyNet, self).__init__()
 
         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
@@ -295,10 +295,14 @@ input_size= 5
 hidden_size = 256
 lr = 0.000001
 output_size= 2
-episodes = 50
+episodes = 120
 num_trajectories = 300 # max days: ~ 430
 epsilon = 0.02
 lr_schedule = True
+
+resample = None
+if seq_len == 24:
+  resample = "h"
 
 '''
 NUM_TRAJECTORIES: important parameter; case = 100: batch_size = 64 --> only 2 updates per epoch --> 64 + 36
@@ -318,7 +322,7 @@ args = {
 
 
 
-dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample="h",dynamic_price=False, demand_price=args["demand_price"], feedin_price=args["feedin_price"]).pipeline()
+dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, resample=resample,dynamic_price=False, demand_price=args["demand_price"], feedin_price=args["feedin_price"]).pipeline()
 dataset["excess"] = (dataset.i_m1sum - dataset.power_consumption_kwh).clip(lower=0)
 dataset = dataset[["date", "excess", "demand_price", "feedin_price", "thermal_consumption_kwh", "kwh_eq_state"]]
 
