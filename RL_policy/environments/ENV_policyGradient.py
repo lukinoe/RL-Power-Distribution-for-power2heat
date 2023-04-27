@@ -81,8 +81,6 @@ class Environment:
         REWARD FOR DISTANCE TO OPTIMUM
         '''
 
-        # distance_to_optimum = abs(state - self.optimum_storage)
-        # reward += torch.exp(-self.gaussian_a * distance_to_optimum**2)*self.gamma2
 
         reward_o = 0
         

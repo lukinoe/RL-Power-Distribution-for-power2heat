@@ -48,7 +48,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class PolicyNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=1):
+    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=3):
         super(PolicyNet, self).__init__()
 
         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
@@ -96,7 +96,7 @@ class PolicyNet(nn.Module):
 #         return out
 
 class CriticNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=1):
+    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=2):
         super(CriticNet, self).__init__()
 
         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
@@ -131,6 +131,8 @@ class LSTMRL:
         self.num_epochs = num_epochs
         self.seq_len = seq_len
         self.dataset = dataset
+        self.seq_dataset = self.sequentialize_dataset(num_trajectories=300)
+
         self.critic = CriticNet(input_size, hidden_size, 1).to(self.device)
         self.critic_optimizer = optim.Adam(self.critic.parameters(), lr=0.00001)
         self.scheduler_critic = StepLR(self.critic_optimizer, step_size=100, gamma=0.1)
@@ -153,8 +155,12 @@ class LSTMRL:
         batch_size = self.batch_size
         num_batches = math.ceil(num_trajectories/ batch_size)
 
-        self.data = self.sequentialize_dataset(num_trajectories=num_trajectories)
+        self.data = self.seq_dataset
         states_dataset = self.data.to(self.device)
+
+
+        all_actions, all_states, all_rewards = np.zeros((num_trajectories, self.seq_len)), np.zeros((num_trajectories, self.seq_len)), np.zeros((num_trajectories, self.seq_len))
+
 
 
         for i in range(num_batches):
@@ -162,22 +168,27 @@ class LSTMRL:
             start_idx = i * batch_size
             end_idx = (i + 1) * batch_size
 
-            states_batch = states_dataset[start_idx:end_idx]
-
-
             if len(states_dataset) - end_idx < batch_size:
                 break
+
+
+            states_batch = states_dataset[start_idx:end_idx]
             
             
             self.model.zero_grad()
             states_simulated, actions_batch, rewards_batch, probs = self.sample_trajectories(data=states_batch, gamma=0.99)
 
-
+            '''
+            Store batches
+            '''
+            all_actions[start_idx:end_idx], all_rewards[start_idx:end_idx], all_states[start_idx:end_idx] = actions_batch, rewards_batch, states_simulated[:,:,-1]
 
             # print(actions_batch.shape, rewards_batch.shape, states_batch.shape, probs.shape)
 
 
-            # Get the baseline using the critic network
+            '''
+            Predict baseline and use it to align rewards
+            '''
             state_values = self.critic(self.scale(states_batch).to(self.device)).squeeze()
             baseline = state_values.detach()
 
@@ -199,7 +210,6 @@ class LSTMRL:
             loss = policy_gradients.mean(dim=1).sum()      
 
 
-            # Calculate loss and backpropagate
             loss.backward()
             nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)   # gradient clipping to avoid vanishing or exploding gradients
             self.optimizer.step()
@@ -226,7 +236,7 @@ class LSTMRL:
 
         print(f"Loss: {epoch_loss:.4f}, Value Loss: {epoch_value_loss:.4f}")
 
-        return epoch_loss, states_simulated, actions_batch, epoch_reward
+        return epoch_loss, all_states, all_actions, epoch_reward
 
 
     def predict(self, num_samples):
@@ -362,15 +372,27 @@ class LSTMRL:
         tensor_scaled = tensor_scaled.view(tensor.shape)
 
         return tensor_scaled
+    
+    def predict(self, index):
+
+        states = self.seq_dataset[index]
+        probs = self.model(self.scale(states)).cpu().detach()
+
+        print(probs)
+
+        actions = torch.argmax(probs, dim=-1)
+
+
+        return states.numpy(), actions.numpy()
 
 
 batch_size = 16
 seq_len = 96
 input_size= 5
 hidden_size = 256
-lr = 0.00001
+lr = 1e-05
 output_size= 2
-episodes = 100
+episodes = 30
 num_trajectories = 300 # max days: ~ 430
 epsilon = 0.1
 lr_schedule = True
@@ -411,32 +433,37 @@ print(dataset.excess[dataset.excess > 0])
 
 env = Environment(levels=seq_len, max_storage_tank=args["max_storage_tank"], optimum_storage=args["optimum_storage"], gamma1=args["gamma1"], gamma2=args["gamma2"], gamma3=args["gamma3"])
 model = LSTMRL(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, env=env ,epsilon=epsilon, lr_schedule=lr_schedule, scaler=scaler)
-
+print(1)
+day = 160
 
 rewards_list, loss_list = [], []
 for i in range(episodes):
 
-    print("Episode " + str(i))
 
     loss, states, actions, rewards = model.train()
-
     mean_reward = rewards
-    print("Reward Mean: ",mean_reward)
-    print(states[0,:,-1], actions[0])
 
+
+    
 
     loss_list.append(loss)
     rewards_list.append(mean_reward)
     
-    # rewards_list.append(mean_reward)
+    print("Episode " + str(i))
+    print("Reward Mean: ",mean_reward)
+    print(states[day], actions[day])
+
 
 plot_rewards_loss(rewards_list, loss_list)
 
-
-for i in [50,75,100,125,150,175,203,204,205,225,250,275,299]:
-    plot_states(states[i,:,-1].cpu(), actions[i].cpu(), args["optimum_storage"], id=i)
-
-
 ''' Attention: wrong states; no implementation of step'''
-policy_actions, states = model.predict(num_samples=1)
+print(model.predict(160))
+
+for i in [50,75,100,125,150,175,203,204,205,225,250,270]:
+    _states, _actions = model.predict(i)
+    plot_states(_states[:,-1], _actions, args["optimum_storage"], id=i)
+
+
+
+
     
