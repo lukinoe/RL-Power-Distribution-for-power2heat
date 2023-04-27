@@ -7,6 +7,7 @@ from torch.utils.data import TensorDataset, DataLoader
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import math
 import os
 import sys
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -118,8 +119,8 @@ class CriticNet(nn.Module):
 class LSTMRL:
     def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, env, epsilon=0.1, lr_schedule=False, scaler=None):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.env = env
         self.model = PolicyNet(input_size, hidden_size, output_size).to(self.device)
+        self.env = env
         self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
         self.scheduler = StepLR(self.optimizer, step_size=100, gamma=0.1)
         self.lr_schedule = lr_schedule
@@ -142,50 +143,90 @@ class LSTMRL:
 
     def train(self):
 
-        states_dynamic, actions_batch, rewards_batch, states_batch, probs = model.sample_trajectories(num_trajectories=1, sequence_length=self.seq_len,num_inputs=self.input_size, env=env)
-        seq_len = states_batch.shape[1]
+        running_loss = 0.0
+        running_value_loss = 0.0
+        reward_running = 0.0
 
 
-        # Get the baseline using the critic network
-        state_values = self.critic(self.scale_tensor(states_batch).to(self.device)).squeeze()
-        baseline = state_values.detach()
 
-        rewards_batch = rewards_batch - baseline
+        num_trajectories = 300
+        batch_size = self.batch_size
+        num_batches = math.ceil(num_trajectories/ batch_size)
 
-        policy_gradients = torch.zeros(seq_len).to(self.device)
-        for t in range(seq_len):
-            action = actions_batch[t]
-            reward = rewards_batch[t]
-            prob_selected = probs[t].squeeze()[action]   # get the probability of the chosen action
-            policy_gradients[t] = -torch.log(prob_selected) * reward.to(self.device)
-
-        ''' 
-        Sum over time and batch dimensions to get total loss
-        Calculates a scalar of the loss which is passed to the LSTM where BPTT happens.
-        '''
-        loss = policy_gradients.sum()      
+        self.data = self.sequentialize_dataset(num_trajectories=num_trajectories)
+        states_dataset = self.data.to(self.device)
 
 
-        # Calculate loss and backpropagate
-        loss.backward()
+        for i in range(num_batches):
 
-        '''
-        Train the critic network
-        '''
-        self.critic.zero_grad()
-        value_loss = self.value_loss_fn(state_values, rewards_batch)
-        value_loss.backward()
-        self.critic_optimizer.step()
+            start_idx = i * batch_size
+            end_idx = (i + 1) * batch_size
+
+            states_batch = states_dataset[start_idx:end_idx]
+
+
+            if len(states_dataset) - end_idx < batch_size:
+                break
+            
+            
+            self.model.zero_grad()
+            states_simulated, actions_batch, rewards_batch, probs = self.sample_trajectories(data=states_batch, gamma=0.99)
+
+
+
+            # print(actions_batch.shape, rewards_batch.shape, states_batch.shape, probs.shape)
+
+
+            # Get the baseline using the critic network
+            state_values = self.critic(self.scale(states_batch).to(self.device)).squeeze()
+            baseline = state_values.detach()
+
+            rewards_batch = rewards_batch - baseline
+
+
+            policy_gradients = torch.zeros(batch_size, self.seq_len).to(self.device)
+            for t in range(self.seq_len):
+                actions = actions_batch[:, t]
+                rewards = rewards_batch[:, t]
+                probs_t = probs[:, t, :]
+                probs_selected = probs_t.gather(1, actions.unsqueeze(1)).squeeze(1)    # get the probability of the chosen action
+                policy_gradients[:, t] = -torch.log(probs_selected) * rewards.to(self.device)
+
+            ''' 
+            Sum over time and batch dimensions to get total loss
+            Calculates a scalar of the loss which is passed to the LSTM where BPTT happens.
+            '''
+            loss = policy_gradients.mean(dim=1).sum()      
+
+
+            # Calculate loss and backpropagate
+            loss.backward()
+            nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)   # gradient clipping to avoid vanishing or exploding gradients
+            self.optimizer.step()
+
+            # Train the critic network
+            self.critic.zero_grad()
+            value_loss = self.value_loss_fn(state_values, rewards_batch)
+            value_loss.backward()
+            self.critic_optimizer.step()
             
 
+            running_loss += loss.item() * states_batch.shape[0]
+            running_value_loss += value_loss.item() * states_batch.shape[0]
+            reward_running += rewards_batch.mean().item()
+
+        
+        epoch_loss = running_loss / num_batches
+        epoch_value_loss = running_value_loss / num_batches
+        epoch_reward = reward_running / num_batches
 
         if self.lr_schedule:
             self.scheduler.step()
             self.scheduler_critic.step()
 
-        
+        print(f"Loss: {epoch_loss:.4f}, Value Loss: {epoch_value_loss:.4f}")
 
-        return loss.item(), value_loss.item(), states_batch, actions_batch, rewards_batch
+        return epoch_loss, states_simulated, actions_batch, epoch_reward
 
 
     def predict(self, num_samples):
@@ -212,7 +253,7 @@ class LSTMRL:
         return rewards_discounted
 
 
-    def sample_trajectories(self, num_trajectories, sequence_length, num_inputs, env, gamma=0.99):
+    def sample_trajectories(self, data, gamma=0.99):
         """
         Samples trajectories using the given LSTM policy model.
 
@@ -231,49 +272,54 @@ class LSTMRL:
             - rewards: A tensor of shape (num_trajectories, sequence_length) containing
             the discounted rewards obtained for each action in each trajectory.
         """
-        states = torch.zeros((sequence_length, num_inputs))
-        actions = torch.zeros((sequence_length), dtype=torch.int64)
-        rewards = torch.zeros((sequence_length))
+        sequence_length, num_inputs = self.seq_len, self.input_size
+        num_trajectories = data.shape[0]
 
-        # Sample the initial states for each trajectory            
-        self.data = self.sequentialize_dataset(num_trajectories=num_trajectories)
-        states = self.data.to(self.device).reshape((self.seq_len, self.input_size))
-        states_const = states
+
+        env = self.env
+
+        states = torch.zeros((num_trajectories, sequence_length, num_inputs))
+        actions = torch.zeros((num_trajectories, sequence_length), dtype=torch.int64)
+        rewards = torch.zeros((num_trajectories, sequence_length))
+
+        states = data
 
         # Sample actions for each state in each trajectory
-        lstm_output = self.model.forward(self.scale_tensor(states)) # out: (num_traj, 2)
+        lstm_output = self.model.forward(self.scale(states)) # out: (num_traj, 2)
 
-        probs = lstm_output.detach().squeeze()
+        probs = lstm_output.squeeze().detach()
         action_dist = torch.distributions.Categorical(probs=probs)
 
         # Sample from Distribution of PolicyLSTM Outputs
         actions = action_dist.sample()
 
         uniform_dist = torch.distributions.Uniform(0, 1)
-        random_actions = uniform_dist.sample((1,sequence_length)).flatten()
+        random_actions = uniform_dist.sample((num_trajectories, sequence_length))
 
 
         for t in range(sequence_length):
+            for trajectory in range(num_trajectories):
 
 
                 # Epsilon-greedy action selection
-            if random_actions[t] < self.epsilon:
-                actions[t] = torch.randint(0, probs.shape[-1], (1,)).item()
+                if random_actions[trajectory, t] < self.epsilon:
+                    actions[trajectory, t] = torch.randint(0, probs.shape[-1], (1,)).item()
 
-            if t < sequence_length - 1:
+
+                # Update the states for the next time step
+                if t < sequence_length - 1:
                     
-                s_1 = env.step(s=states[t], a=actions[t])
-                states[t+1, -1] = s_1
+                    s_1 = env.step(s=states[trajectory, t, :], a=actions[trajectory, t])
+                    states[trajectory, t+1, -1] = s_1
 
-            if actions[t] not in [0,1]:
-                print("error")
+                if actions[trajectory, t] not in [0,1]:
+                    print("error")
 
-            rewards[t] = env.reward(action=actions[t], s=states[t])
+                rewards[trajectory, t] = env.reward(action=actions[trajectory, t], s=states[trajectory, t, :])
 
         # rewards = self.discount_rewards(rewards, gamma)
 
-
-        return states, actions, rewards, states_const, lstm_output
+        return states, actions, rewards, lstm_output
     
 
     
@@ -286,7 +332,7 @@ class LSTMRL:
         df_8_am = df[df['date'].dt.time == pd.to_datetime('12:00:00').time()]
 
         # Sample indices from the filtered dataframe
-        sampled_indices = np.random.choice(list(df_8_am.index)[:300], num_trajectories)
+        sampled_indices = np.random.choice(list(df_8_am.index)[:-num_trajectories], num_trajectories)
         index_list = df_8_am.index.to_list()
 
         del df["date"]
@@ -295,7 +341,7 @@ class LSTMRL:
         upperBound = len(df) - self.seq_len
         sequences = np.zeros((num_trajectories, self.seq_len, self.input_size))
         for i in range(num_trajectories):
-            u = sampled_indices[i]
+            u = index_list[i]
             if sample:
                 u = sampled_indices[i] 
 
@@ -316,27 +362,15 @@ class LSTMRL:
         tensor_scaled = tensor_scaled.view(tensor.shape)
 
         return tensor_scaled
-    
-    def scale_tensor(self,tensor):
-        # convert the tensor to a NumPy array
-        array = tensor.numpy()
-
-        # apply the scaler to the array
-        scaled_array = self.scaler.transform(array)
-
-        # convert the scaled array back to a PyTorch tensor
-        scaled_tensor = torch.from_numpy(scaled_array).float()
-
-        return scaled_tensor
 
 
 batch_size = 16
-seq_len = 24
+seq_len = 96
 input_size= 5
 hidden_size = 256
-lr = 0.0000001
+lr = 0.00001
 output_size= 2
-episodes = 2000
+episodes = 100
 num_trajectories = 300 # max days: ~ 430
 epsilon = 0.1
 lr_schedule = True
@@ -355,8 +389,8 @@ max_storage_tank = 18.52
 args = {
     "max_storage_tank": max_storage_tank,
     "optimum_storage": max_storage_tank * 0.8,
-    "gamma1": 1,    # financial
-    "gamma2": 0,      # distance optimum
+    "gamma1": 0,    # financial
+    "gamma2": 1,      # distance optimum
     "gamma3": 0.0,      # tank change
     "demand_price": 0.5,
     "feedin_price": 0.1
@@ -376,32 +410,31 @@ scaler = SC.fit(dataset[["excess", "demand_price", "feedin_price", "thermal_cons
 print(dataset.excess[dataset.excess > 0])
 
 env = Environment(levels=seq_len, max_storage_tank=args["max_storage_tank"], optimum_storage=args["optimum_storage"], gamma1=args["gamma1"], gamma2=args["gamma2"], gamma3=args["gamma3"])
-model = LSTMRL(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, env=env, epsilon=epsilon, lr_schedule=lr_schedule, scaler=scaler)
+model = LSTMRL(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, env=env ,epsilon=epsilon, lr_schedule=lr_schedule, scaler=scaler)
 
 
 rewards_list, loss_list = [], []
 for i in range(episodes):
 
+    print("Episode " + str(i))
 
-    loss, value_loss, states, actions, rewards = model.train()
+    loss, states, actions, rewards = model.train()
 
-    mean_reward = rewards.mean().cpu().item()
+    mean_reward = rewards
+    print("Reward Mean: ",mean_reward)
+    print(states[0,:,-1], actions[0])
 
-    if i % 100 == 0:
-        print(actions, states[:,-1], np.array(actions.cpu()).mean())
-        
-
-        print("Episode " + str(i), " Reward Mean: ",mean_reward)
-        print(f"Loss: {loss:.4f}, Value Loss: {value_loss:.4f}")
 
     loss_list.append(loss)
     rewards_list.append(mean_reward)
+    
+    # rewards_list.append(mean_reward)
 
 plot_rewards_loss(rewards_list, loss_list)
 
 
-# for i in [50,75,100,125,150,175,203,204,205,225,250,275,299]:
-#     plot_states(states[i,:,-1].cpu(), actions[i].cpu(), args["optimum_storage"], id=i)
+for i in [50,75,100,125,150,175,203,204,205,225,250,275,299]:
+    plot_states(states[i,:,-1].cpu(), actions[i].cpu(), args["optimum_storage"], id=i)
 
 
 ''' Attention: wrong states; no implementation of step'''
