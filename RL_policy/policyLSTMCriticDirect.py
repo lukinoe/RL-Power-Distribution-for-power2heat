@@ -159,7 +159,7 @@ class LSTMRL:
         states_dataset = self.data.to(self.device)
 
 
-        all_actions, all_states, all_rewards = np.zeros((num_trajectories, self.seq_len)), np.zeros((num_trajectories, self.seq_len)), np.zeros((num_trajectories, self.seq_len))
+        all_actions, all_states, all_rewards = torch.zeros((num_trajectories, self.seq_len)), torch.zeros((num_trajectories, self.seq_len)), torch.zeros((num_trajectories, self.seq_len))
 
 
 
@@ -190,7 +190,7 @@ class LSTMRL:
             Predict baseline and use it to align rewards
             '''
             state_values = self.critic(self.scale(states_batch).to(self.device)).squeeze()
-            baseline = state_values.detach()
+            baseline = state_values.detach().to(device)
 
             rewards_batch = rewards_batch - baseline
 
@@ -377,11 +377,13 @@ class LSTMRL:
 
         states = self.seq_dataset[index]
         probs = self.model(self.scale(states)).cpu().detach()
-
-        print(probs)
-
         actions = torch.argmax(probs, dim=-1)
 
+        for i in range(self.seq_len):
+          
+          if i < self.seq_len - 1:
+            s_1 = self.env.step(states[i], a=actions[i])
+            states[i+1, -1] = s_1
 
         return states.numpy(), actions.numpy()
 
