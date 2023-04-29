@@ -22,33 +22,8 @@ from sklearn.preprocessing import StandardScaler
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-
-# class PolicyNet(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size=2):
-#         super(PolicyNet, self).__init__()
-#         self.input_size = input_size
-#         self.hidden_size = hidden_size
-#         self.output_size = output_size
-#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True, bidirectional=True)
-#         self.fc = nn.Linear(hidden_size *2, output_size)
-#         self.relu = nn.ReLU()
-#         self.device = device
-
-#     def init_hidden(self, batch_size):
-#         return (torch.zeros(2, batch_size, self.hidden_size).to(self.device),
-#                 torch.zeros(2, batch_size, self.hidden_size).to(self.device))
-    
-#     def forward(self, x):
-#         hidden = self.init_hidden(x.size(0))
-#         out, _ = self.lstm(x,hidden)
-#         out = self.fc(out)
-#         out = torch.softmax(out, dim=-1)
-
-#         return out
-
-
 class PolicyNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=3):
+    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=1):
         super(PolicyNet, self).__init__()
 
         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
@@ -61,42 +36,15 @@ class PolicyNet(nn.Module):
         
         x = self.fc0(x)
         out = self.transformer_encoder(x)
-
         out = self.fc1(out)
+
         out = torch.softmax(out, dim=-1)
 
         return out
 
 
-
-# class PolicyNet(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=1):
-#         super(PolicyNet, self).__init__()
-
-#         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
-#         self.transformer_encoder = nn.TransformerEncoder(encoder_layers, transformer_layers)
-
-#         decoder_layers = nn.TransformerDecoderLayer(hidden_size, nhead, batch_first=True)
-#         self.transformer_decoder = nn.TransformerDecoder(decoder_layers, transformer_layers)
-
-#         self.fc0 = nn.Linear(input_size, hidden_size)
-#         self.fc1 = nn.Linear(hidden_size, output_size)
-
-#     def forward(self, x):
-        
-#         x = self.fc0(x)
-#         out_encoder = self.transformer_encoder(x)
-
-#         tgt = torch.zeros_like(out_encoder)
-#         out_decoder = self.transformer_decoder(tgt, out_encoder)
-
-#         out = self.fc1(out_decoder)
-#         out = torch.softmax(out, dim=-1)
-
-#         return out
-
 class CriticNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=2):
+    def __init__(self, input_size, hidden_size, output_size, nhead=8, transformer_layers=1):
         super(CriticNet, self).__init__()
 
         encoder_layers = nn.TransformerEncoderLayer(hidden_size, nhead, batch_first=True)
@@ -109,14 +57,13 @@ class CriticNet(nn.Module):
         
         x = self.fc0(x)
         out = self.transformer_encoder(x)
-
         out = self.fc1(out)
 
         return out
 
 
 
-class LSTMRL:
+class MCPolicyGrad:
     def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, env, epsilon=0.1, lr_schedule=False, scaler=None):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = PolicyNet(input_size, hidden_size, output_size).to(self.device)
@@ -149,31 +96,22 @@ class LSTMRL:
         running_value_loss = 0.0
         reward_running = 0.0
 
-
-
         num_trajectories = 300
         batch_size = self.batch_size
         num_batches = math.ceil(num_trajectories/ batch_size)
 
-        self.data = self.seq_dataset
-        states_dataset = self.data.to(self.device)
-
+        states_dataset = self.seq_dataset.to(self.device)
 
         all_actions, all_states, all_rewards = torch.zeros((num_trajectories, self.seq_len)), torch.zeros((num_trajectories, self.seq_len)), torch.zeros((num_trajectories, self.seq_len))
-
-
 
         for i in range(num_batches):
 
             start_idx = i * batch_size
             end_idx = (i + 1) * batch_size
-
             if len(states_dataset) - end_idx < batch_size:
                 break
 
-
             states_batch = states_dataset[start_idx:end_idx]
-            
             
             self.model.zero_grad()
             states_simulated, actions_batch, rewards_batch, probs = self.sample_trajectories(data=states_batch, gamma=0.99)
@@ -183,29 +121,29 @@ class LSTMRL:
             '''
             all_actions[start_idx:end_idx], all_rewards[start_idx:end_idx], all_states[start_idx:end_idx] = actions_batch, rewards_batch, states_simulated[:,:,-1]
 
-            # print(actions_batch.shape, rewards_batch.shape, states_batch.shape, probs.shape)
-
-
             '''
             Predict baseline and use it to align rewards
             '''
             state_values = self.critic(self.scale(states_batch).to(self.device)).squeeze()
             baseline = state_values.detach().to(device)
 
-            rewards_batch = rewards_batch - baseline
+            advantage_batch = rewards_batch - baseline
 
+            '''
+            Calculate Policy Gradients
+            '''
 
             policy_gradients = torch.zeros(batch_size, self.seq_len).to(self.device)
             for t in range(self.seq_len):
                 actions = actions_batch[:, t]
-                rewards = rewards_batch[:, t]
+                advantage = advantage_batch[:, t]
                 probs_t = probs[:, t, :]
                 probs_selected = probs_t.gather(1, actions.unsqueeze(1)).squeeze(1)    # get the probability of the chosen action
-                policy_gradients[:, t] = -torch.log(probs_selected) * rewards.to(self.device)
+                policy_gradients[:, t] = -torch.log(probs_selected) * advantage.to(self.device)
 
             ''' 
             Sum over time and batch dimensions to get total loss
-            Calculates a scalar of the loss which is passed to the LSTM where BPTT happens.
+            Calculates a scalar of the loss which is passed to perform backprop via computational graph.
             '''
             loss = policy_gradients.mean(dim=1).sum()      
 
@@ -214,7 +152,10 @@ class LSTMRL:
             nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)   # gradient clipping to avoid vanishing or exploding gradients
             self.optimizer.step()
 
-            # Train the critic network
+            
+            '''
+            Update Critic Network
+            '''
             self.critic.zero_grad()
             value_loss = self.value_loss_fn(state_values, rewards_batch)
             value_loss.backward()
@@ -239,20 +180,6 @@ class LSTMRL:
         return epoch_loss, all_states, all_actions, epoch_reward
 
 
-    def predict(self, num_samples):
-        self.model.eval()
-        with torch.no_grad():
-            states = self.data[0:num_samples].to(self.device)
-            probs = self.model(states)
-            max_probs, max_indices = torch.max(probs, dim=-1)
-
-            actions = max_indices
-
-            '''
-            no simulation of states implemented !
-            '''
-
-            return actions, states[:,:,-1]
 
     def discount_rewards(self, rewards, gamma):
         n = rewards.size(1)
@@ -268,9 +195,7 @@ class LSTMRL:
         Samples trajectories using the given LSTM policy model.
 
         Args:
-            lstm_model: The LSTM policy model to use for sampling.
-            num_trajectories: The number of trajectories to sample.
-            sequence_length: The length of each trajectory.
+            data:  state tensor of shape (num_trajectories, sequence_length, input_size) from which the trajectories should be simulated
             gamma: Discount factor.
 
         Returns:
@@ -281,12 +206,12 @@ class LSTMRL:
             the actions taken for each state in each trajectory.
             - rewards: A tensor of shape (num_trajectories, sequence_length) containing
             the discounted rewards obtained for each action in each trajectory.
+            - lstm_output: A tensor of shape (num_trajectories, sequence_length, 2) containing
+            the softmax probabilities of the actions predicted by the policy network.
         """
         sequence_length, num_inputs = self.seq_len, self.input_size
         num_trajectories = data.shape[0]
 
-
-        env = self.env
 
         states = torch.zeros((num_trajectories, sequence_length, num_inputs))
         actions = torch.zeros((num_trajectories, sequence_length), dtype=torch.int64)
@@ -310,22 +235,19 @@ class LSTMRL:
         for t in range(sequence_length):
             for trajectory in range(num_trajectories):
 
-
                 # Epsilon-greedy action selection
                 if random_actions[trajectory, t] < self.epsilon:
                     actions[trajectory, t] = torch.randint(0, probs.shape[-1], (1,)).item()
 
 
-                # Update the states for the next time step
                 if t < sequence_length - 1:
-                    
-                    s_1 = env.step(s=states[trajectory, t, :], a=actions[trajectory, t])
+                    s_1 = self.env.step(s=states[trajectory, t, :], a=actions[trajectory, t])
                     states[trajectory, t+1, -1] = s_1
 
-                if actions[trajectory, t] not in [0,1]:
-                    print("error")
 
-                rewards[trajectory, t] = env.reward(action=actions[trajectory, t], s=states[trajectory, t, :])
+                assert actions[trajectory, t] in [0,1]
+
+                rewards[trajectory, t] = self.env.reward(action=actions[trajectory, t], s=states[trajectory, t, :])
 
         # rewards = self.discount_rewards(rewards, gamma)
 
@@ -337,16 +259,13 @@ class LSTMRL:
         df = self.dataset.copy()
 
         df['date'] = pd.to_datetime(df['date'])
-
-        # Filter the dataframe to include only rows with a time of 8:00 am
         df_8_am = df[df['date'].dt.time == pd.to_datetime('12:00:00').time()]
-
-        # Sample indices from the filtered dataframe
-        sampled_indices = np.random.choice(list(df_8_am.index)[:-num_trajectories], num_trajectories)
-        index_list = df_8_am.index.to_list()
-
         del df["date"]
 
+
+        # Sample indices from the filtered dataframe
+        sampled_indices = np.random.choice(list(df_8_am.index)[:num_trajectories], num_trajectories)
+        index_list = df_8_am.index.to_list()
 
         upperBound = len(df) - self.seq_len
         sequences = np.zeros((num_trajectories, self.seq_len, self.input_size))
@@ -361,6 +280,8 @@ class LSTMRL:
 
 
         return torch.tensor(sequences, dtype=torch.float32)
+    
+
 
     def scale(self,tensor):
 
@@ -378,14 +299,16 @@ class LSTMRL:
         states = self.seq_dataset[index]
         probs = self.model(self.scale(states)).cpu().detach()
         actions = torch.argmax(probs, dim=-1)
+        rewards = torch.zeros(self.seq_len)
 
         for i in range(self.seq_len):
           
           if i < self.seq_len - 1:
-            s_1 = self.env.step(states[i], a=actions[i])
+            s_1 = self.env.step(s=states[i], a=actions[i])
             states[i+1, -1] = s_1
+            rewards[i] = self.env.reward(action=actions[i], s=states[i])
 
-        return states.numpy(), actions.numpy()
+        return states.numpy(), actions.numpy(), rewards.sum()
 
 
 batch_size = 16
@@ -394,9 +317,9 @@ input_size= 5
 hidden_size = 256
 lr = 1e-05
 output_size= 2
-episodes = 30
+epochs = 200
 num_trajectories = 300 # max days: ~ 430
-epsilon = 0.1
+epsilon = 0.0
 lr_schedule = True
 
 resample = None
@@ -431,21 +354,16 @@ SC = StandardScaler()
 scaler = SC.fit(dataset[["excess", "demand_price", "feedin_price", "thermal_consumption_kwh", "kwh_eq_state"]].values)
 
 
-print(dataset.excess[dataset.excess > 0])
-
 env = Environment(levels=seq_len, max_storage_tank=args["max_storage_tank"], optimum_storage=args["optimum_storage"], gamma1=args["gamma1"], gamma2=args["gamma2"], gamma3=args["gamma3"])
-model = LSTMRL(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, env=env ,epsilon=epsilon, lr_schedule=lr_schedule, scaler=scaler)
-print(1)
+model = MCPolicyGrad(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, env=env ,epsilon=epsilon, lr_schedule=lr_schedule, scaler=scaler)
 day = 160
 
 rewards_list, loss_list = [], []
-for i in range(episodes):
+for i in range(epochs):
 
 
     loss, states, actions, rewards = model.train()
     mean_reward = rewards
-
-
     
 
     loss_list.append(loss)
@@ -458,14 +376,13 @@ for i in range(episodes):
 
 plot_rewards_loss(rewards_list, loss_list)
 
-''' Attention: wrong states; no implementation of step'''
-print(model.predict(160))
 
-for i in [50,75,100,125,150,175,203,204,205,225,250,270]:
-    _states, _actions = model.predict(i)
+for i in [50,60,75,85,100,115,125,140,150,175,203,204,205,220,225,245,250,260,270]:
+    _states, _actions, _reward_sum = model.predict(i)
     plot_states(_states[:,-1], _actions, args["optimum_storage"], id=i)
 
 
+torch.save(model.model.state_dict(), script_dir + "/checkpoints/model_" + str(seq_len))
 
 
     
