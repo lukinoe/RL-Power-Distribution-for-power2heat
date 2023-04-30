@@ -57,6 +57,7 @@ class Environment:
         potentialHeat = clip(excess, max=max_increase)
 
         feedInAdvantage = clip((demand_price - feedin_price), min=0)
+        demandAdvantage = clip((feedin_price - demand_price), min=0)
         
 
         '''
@@ -64,7 +65,10 @@ class Environment:
         '''
 
         if action == 0:
-            reward += (availableExcess * feedin_price)
+            if demandAdvantage > feedInAdvantage:
+                reward += (availableExcess * demandAdvantage)
+            else:
+                reward += (availableExcess * feedin_price)
 
         elif action == 1:
             reward += (availableExcess * feedInAdvantage)
@@ -94,17 +98,17 @@ class Environment:
             reward_o += 1
 
 
-        # distance_to_optimum = abs(state - self.optimum_storage)
-        # reward_o += torch.exp(-self.gaussian_a * distance_to_optimum**2) * 3
+        distance_to_optimum = abs(state - self.optimum_storage)
+        reward_o += torch.exp(-self.gaussian_a * distance_to_optimum**2) * 10 #3
 
-        if abs(state - self.optimum_storage) < 0.5:
-            reward_o += 3
+        # if abs(state - self.optimum_storage) < 0.5:
+        #     reward_o += 3
 
-        if abs(state - self.optimum_storage) < 1:
-            reward_o += 1.5
+        # if abs(state - self.optimum_storage) < 1:
+        #     reward_o += 1.5
 
-        if abs(state - self.optimum_storage) < 2:
-            reward_o += 0.75
+        # if abs(state - self.optimum_storage) < 2:
+        #     reward_o += 0.75
 
 
         reward += reward_o * self.gamma2
