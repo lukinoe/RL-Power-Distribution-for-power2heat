@@ -204,9 +204,9 @@ class MCPolicyGrad:
         num_trajectories = data.shape[0]
 
 
-        states = torch.zeros((num_trajectories, sequence_length, num_inputs))
-        actions = torch.zeros((num_trajectories, sequence_length), dtype=torch.int64)
-        rewards = torch.zeros((num_trajectories, sequence_length))
+        states = torch.zeros((num_trajectories, sequence_length, num_inputs)).to(device)
+        actions = torch.zeros((num_trajectories, sequence_length), dtype=torch.int64).to(device)
+        rewards = torch.zeros((num_trajectories, sequence_length)).to(device)
 
         states = data
 
