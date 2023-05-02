@@ -23,16 +23,16 @@ from MCPolicyFormer import MCPolicyGrad
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-batch_size = 16
+batch_size = 1
 seq_len = 96
 input_size= 5
 hidden_size = 256
 lr = 1e-05
 output_size= 2
-epochs = 200
+epochs = 100
 num_trajectories = 300 # max days: ~ 430
-epsilon = 0.0
-lr_schedule = True
+epsilon = 0.00
+lr_schedule = 50 # epochs
 
 resample = None
 if seq_len == 24:
@@ -67,19 +67,19 @@ print(dataset)
 SC = StandardScaler()
 scaler = SC.fit(dataset[["excess", "demand_price", "feedin_price", "thermal_consumption_kwh", "kwh_eq_state"]].values)
 
-
 env = Environment(levels=seq_len, max_storage_tank=args["max_storage_tank"], optimum_storage=args["optimum_storage"], gamma1=args["gamma1"], gamma2=args["gamma2"], gamma3=args["gamma3"])
 model = MCPolicyGrad(input_size=input_size, hidden_size=hidden_size, output_size=output_size, learning_rate=lr, batch_size=batch_size, num_epochs=1, seq_len=seq_len, dataset=dataset, env=env ,epsilon=epsilon, lr_schedule=lr_schedule, scaler=scaler)
 day = 160
 
-rewards_list, loss_list = [], []
+rewards_list, loss_list, value_loss_list = [], [], []
 for i in range(epochs):
 
 
-    loss, states, actions, rewards = model.train()
+    loss, values_loss, states, actions, rewards = model.train()
     mean_reward = rewards
     
     loss_list.append(loss)
+    value_loss_list.append(values_loss)
     rewards_list.append(mean_reward)
     
     print("Episode " + str(i))
@@ -87,7 +87,7 @@ for i in range(epochs):
     print(states[day], actions[day])
 
 
-plot_rewards_loss(rewards_list, loss_list)
+plot_rewards_loss(rewards_list, loss_list, value_loss_list, updates=batch_size)
 
 
 for i in [50,60,75,85,100,115,125,140,150,175,203,204,205,220,225,245,250,260,270]:

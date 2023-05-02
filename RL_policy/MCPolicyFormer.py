@@ -53,12 +53,12 @@ class CriticNet(nn.Module):
 
 
 class MCPolicyGrad:
-    def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, env, epsilon=0.1, lr_schedule=False, scaler=None):
+    def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, env, epsilon=0.1, lr_schedule=None, scaler=None):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = PolicyNet(input_size, hidden_size, output_size).to(self.device)
         self.env = env
         self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
-        self.scheduler = StepLR(self.optimizer, step_size=100, gamma=0.1)
+        self.scheduler = StepLR(self.optimizer, step_size=lr_schedule, gamma=0.1)
         self.lr_schedule = lr_schedule
         self.loss_fn = nn.CrossEntropyLoss()
         self.epsilon = epsilon
@@ -71,7 +71,7 @@ class MCPolicyGrad:
 
         self.critic = CriticNet(input_size, hidden_size, 1).to(self.device)
         self.critic_optimizer = optim.Adam(self.critic.parameters(), lr=0.00001)
-        self.scheduler_critic = StepLR(self.critic_optimizer, step_size=100, gamma=0.1)
+        self.scheduler_critic = StepLR(self.critic_optimizer, step_size=lr_schedule, gamma=0.1)
         self.value_loss_fn = nn.MSELoss()
 
         self.scaler = scaler
@@ -83,9 +83,9 @@ class MCPolicyGrad:
 
         self.model.train()  # set model to train mode
 
-        running_loss = 0.0
-        running_value_loss = 0.0
-        reward_running = 0.0
+        running_loss = []
+        running_value_loss = []
+        reward_running = []
 
         num_trajectories = 300
         batch_size = self.batch_size
@@ -115,7 +115,7 @@ class MCPolicyGrad:
             '''
             Predict baseline and use it to align rewards
             '''
-            state_values = self.critic(self.scale(states_batch).to(self.device)).squeeze()
+            state_values = self.critic(self.scale(states_batch).to(self.device)).squeeze(-1)  # squeeze the last dimension
             baseline = state_values.detach().to(device)
 
             advantage_batch = rewards_batch - baseline
@@ -168,7 +168,7 @@ class MCPolicyGrad:
 
         print(f"Loss: {epoch_loss:.4f}, Value Loss: {epoch_value_loss:.4f}")
 
-        return epoch_loss, all_states, all_actions, epoch_reward
+        return epoch_loss, epoch_value_loss, all_states, all_actions, epoch_reward
 
 
 
@@ -213,7 +213,7 @@ class MCPolicyGrad:
         # Sample actions for each state in each trajectory
         lstm_output = self.model.forward(self.scale(states)) # out: (num_traj, 2)
 
-        probs = lstm_output.squeeze().detach()
+        probs = lstm_output.detach()
         action_dist = torch.distributions.Categorical(probs=probs)
 
         # Sample from Distribution of PolicyLSTM Outputs

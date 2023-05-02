@@ -14,22 +14,25 @@ dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False,
 
 from extensiveSearch import Tree, Experiment, Experiment_Concat
 
-levels = 21
+levels = 24
 start_date = "2022-07-24 12:00:00"
+# start_date = "2022-06-25 12:00:00"
 
+
+max_storage_tank = 18.52
 args = {
-    "max_storage_tank": dataset.kwh_eq_state.max(),
-    "optimum_storage": dataset.kwh_eq_state.max() * 0.9,
-    "gamma1": 1,    # financial
-    "gamma2": 0,      # distance optimum
+    "max_storage_tank": max_storage_tank,
+    "optimum_storage": max_storage_tank * 0.8,
+    "gamma1": 0,    # financial
+    "gamma2": 1,      # distance optimum
     "gamma3": 0.0,      # tank change
     "demand_price": 0.5,
     "feedin_price": 0.01
 }
 
-dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, scale_variables=False, time_features=False, dynamic_price=False, demand_price=args["demand_price"], feedin_price=args["feedin_price"]).pipeline()
+dataset = DataSet(start_date="2022-01-01", target="i_m1sum", scale_target=False, resample="h", scale_variables=False, time_features=False, dynamic_price=False, demand_price=args["demand_price"], feedin_price=args["feedin_price"]).pipeline()
 dataset = dataset[["date", "i_m1sum" , "demand_price", "feedin_price", "power_consumption_kwh", "thermal_consumption_kwh",  "kwh_eq_state"]]
-print(dataset)
+print(dataset[dataset.date == start_date].kwh_eq_state)
 
 e = Experiment(levels, n_samples=2, dataset=dataset, args=args, exploit=True, start_date=start_date) 
 
