@@ -10,6 +10,11 @@ def clip(scalar, min=None, max=None):       # way faster than numpy array.clip()
     return scalar
 
 
+def min_max_scale_reward(reward, min_reward, max_reward):
+    shifted_reward = reward - min_reward
+    normalized_reward = shifted_reward / (max_reward - min_reward)
+    return normalized_reward
+
 
 class Environment:
 
@@ -22,6 +27,7 @@ class Environment:
         self.gamma3 = gamma3
         self.gaussian_a = 0.25     # the lower the parameter, the broader the gaussian curve
         self.cool_down = 0.1
+        self.max_possible_reward_optimum = 0
 
 
     def step(self, s, a):
@@ -58,7 +64,7 @@ class Environment:
 
         feedInAdvantage = clip((demand_price - feedin_price), min=0)
         demandAdvantage = clip((feedin_price - demand_price), min=0)
-        
+
 
         '''
         FINANCIAL REWARD
@@ -66,7 +72,7 @@ class Environment:
 
         if action == 0:
             if demandAdvantage > feedInAdvantage:
-                reward += (availableExcess * demandAdvantage)
+                reward += (availableExcess * demandAdvantage) *100
             else:
                 reward += (availableExcess * feedin_price)
 
@@ -118,4 +124,7 @@ class Environment:
 
         
         return reward
+
+
+
 

@@ -53,7 +53,7 @@ class CriticNet(nn.Module):
 
 
 class MCPolicyGrad:
-    def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, env, epsilon=0.1, lr_schedule=None, scaler=None):
+    def __init__(self, input_size, hidden_size, output_size, learning_rate, batch_size, num_epochs, seq_len, dataset, env, epsilon=0.1, lr_schedule=None, scaler=None, sampleIdx=False):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = PolicyNet(input_size, hidden_size, output_size).to(self.device)
         self.env = env
@@ -67,7 +67,7 @@ class MCPolicyGrad:
         self.num_epochs = num_epochs
         self.seq_len = seq_len
         self.dataset = dataset
-        self.seq_dataset = self.sequentialize_dataset(num_trajectories=300)
+        self.seq_dataset = self.sequentialize_dataset(num_trajectories=300, sample=sampleIdx)
 
         self.critic = CriticNet(input_size, hidden_size, 1).to(self.device)
         self.critic_optimizer = optim.Adam(self.critic.parameters(), lr=0.00001)
@@ -75,25 +75,27 @@ class MCPolicyGrad:
         self.value_loss_fn = nn.MSELoss()
 
         self.scaler = scaler
+        self.sampleIdx = sampleIdx
 
         print("Params: ", sum(p.numel() for p in self.model.parameters()))
 
 
-    def train(self):
+    def train(self, num_trajectories=300):
 
         self.model.train()  # set model to train mode
 
-        running_loss = []
-        running_value_loss = []
-        reward_running = []
+        if self.sampleIdx:
+            self.sample_dataset(num_trajectories)
 
-        num_trajectories = 300
+
         batch_size = self.batch_size
         num_batches = math.ceil(num_trajectories/ batch_size)
 
         states_dataset = self.seq_dataset.to(self.device)
 
         all_actions, all_states, all_rewards = torch.zeros((num_trajectories, self.seq_len)), torch.zeros((num_trajectories, self.seq_len)), torch.zeros((num_trajectories, self.seq_len))
+
+        running_loss, running_value_loss, reward_running = torch.zeros(num_batches), torch.zeros(num_batches), torch.zeros(num_batches)
 
         for i in range(num_batches):
 
@@ -153,22 +155,18 @@ class MCPolicyGrad:
             self.critic_optimizer.step()
             
 
-            running_loss += loss.item() * states_batch.shape[0]
-            running_value_loss += value_loss.item() * states_batch.shape[0]
-            reward_running += rewards_batch.mean().item()
+            running_loss[i] = loss.item()
+            running_value_loss[i] = value_loss.item()
+            reward_running[i] = rewards_batch.mean().item()
 
-        
-        epoch_loss = running_loss / num_batches
-        epoch_value_loss = running_value_loss / num_batches
-        epoch_reward = reward_running / num_batches
 
         if self.lr_schedule:
             self.scheduler.step()
             self.scheduler_critic.step()
 
-        print(f"Loss: {epoch_loss:.4f}, Value Loss: {epoch_value_loss:.4f}")
+        print(f"Loss: {running_loss.mean():.4f}, Value Loss: {running_value_loss.mean():.4f}")
 
-        return epoch_loss, epoch_value_loss, all_states, all_actions, epoch_reward
+        return running_loss, running_value_loss, all_states, all_actions, reward_running
 
 
 
@@ -251,13 +249,13 @@ class MCPolicyGrad:
         df = self.dataset.copy()
 
         df['date'] = pd.to_datetime(df['date'])
-        df_8_am = df[df['date'].dt.time == pd.to_datetime('12:00:00').time()]
+        df_12_am = df[df['date'].dt.time == pd.to_datetime('12:00:00').time()]
         del df["date"]
 
 
-        # Sample indices from the filtered dataframe
-        sampled_indices = np.random.choice(list(df_8_am.index)[:num_trajectories], num_trajectories)
-        index_list = df_8_am.index.to_list()
+        
+        sampled_indices = np.random.choice(list(df.index)[:self.seq_len], num_trajectories)  # Sample indices from the dataframe --> random times
+        index_list = df_12_am.index.to_list()
 
         upperBound = len(df) - self.seq_len
         sequences = np.zeros((num_trajectories, self.seq_len, self.input_size))
@@ -273,6 +271,8 @@ class MCPolicyGrad:
 
         return torch.tensor(sequences, dtype=torch.float32)
     
+    def sample_dataset(self, num_trajectories):
+        self.seq_dataset = self.sequentialize_dataset(num_trajectories=num_trajectories, sample=True)
 
 
     def scale(self,tensor):

@@ -6,16 +6,14 @@ from environments.ENV_extensiveSearch import Environment
 
 class Tree:
 
-    def __init__(self, levels, max_storage_tank, optimum_storage, gamma1, gamma2, gamma3) -> None:
+    def __init__(self, levels, max_storage_tank, optimum_storage, gamma1, gamma2) -> None:
         self.levels = levels
         self.max_storage_tank = max_storage_tank
         self.optimum_storage = optimum_storage
         self.gamma1 = gamma1
         self.gamma2 = gamma2
-        self.gamma3 = gamma3
-        self.cool_down = 0.1
 
-        self.env = Environment(levels, max_storage_tank, optimum_storage, gamma1, gamma2, gamma3)
+        self.env = Environment(levels, max_storage_tank, optimum_storage, gamma1, gamma2)
 
 
     def build_trees(self, levels):
@@ -124,7 +122,7 @@ class Experiment(Tree):
 
     def __init__(self, levels, n_samples, dataset, args, start_date="2022-04-08 10:45:00", random=False, exploit=False) -> None:
         print(args)
-        super().__init__(levels, args["max_storage_tank"], args["optimum_storage"], args["gamma1"], args["gamma2"], args["gamma3"])
+        super().__init__(levels, args["max_storage_tank"], args["optimum_storage"], args["gamma1"], args["gamma2"])
         self.df = dataset
         self.start_date = start_date
         self.day_interval = 96          # 96 | 24

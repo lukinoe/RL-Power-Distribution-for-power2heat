@@ -94,10 +94,14 @@ class DataSet:
         if self.dynamic_price: # arbitrary assumptions
             print("Dynamic prices: enabled")
             data.demand_price[(data.index.hour > 0) & (data.index.hour <= 6)  ] = 0.30
-            data.demand_price[(data.index.hour > 6) & (data.index.hour <= 12)  ] = 0.45
-            data.demand_price[(data.index.hour > 16) & (data.index.hour <= 19)  ] = 0.05
-            data.demand_price[(data.index.hour > 12) & (data.index.hour <= 18)  ] = 0.47
-            data.demand_price[(data.index.hour > 18) & (data.index.hour <= 22)  ] = 0.35
+            data.demand_price[(data.index.hour > 6) & (data.index.hour <= 8)  ] = 0.45
+            data.demand_price[(data.index.hour > 8) & (data.index.hour <= 9)  ] = 0.01
+            data.demand_price[(data.index.hour > 9) & (data.index.hour <= 10)  ] = 0.35
+            data.demand_price[(data.index.hour > 10) & (data.index.hour <= 12)  ] = 0.30
+            data.demand_price[(data.index.hour > 12) & (data.index.hour <= 14)  ] = 0.47
+            data.demand_price[(data.index.hour > 14) & (data.index.hour <= 15)  ] = 0.01
+            data.demand_price[(data.index.hour > 15) & (data.index.hour <= 17)  ] = 0.25
+            data.demand_price[(data.index.hour > 17) & (data.index.hour <= 22)  ] = 0.35
             data.demand_price[data.index.hour > 22] = 0.35
 
 

@@ -10,13 +10,13 @@ def clip(scalar, min=None, max=None):       # way faster than numpy array.clip()
 
 class Environment:
 
-    def __init__(self, levels, max_storage_tank, optimum_storage, gamma1, gamma2, gamma3) -> None:
+    def __init__(self, levels, max_storage_tank, optimum_storage, gamma1, gamma2, gamma3=0) -> None:
         self.levels = levels
         self.max_storage_tank = max_storage_tank
         self.optimum_storage = optimum_storage
         self.gamma1 = gamma1
         self.gamma2 = gamma2
-        self.gamma3 = gamma3
+        
         self.cool_down = 0.1
         
         
@@ -36,27 +36,34 @@ class Environment:
         reward = 0
 
         max_increase = self.max_storage_tank - state
-        action = clip(action, max=max_increase)
+        # action = clip(action, max=max_increase)
 
 
         consumption = power_consumption   
         availableExcess = clip((pv_excess - consumption), min=0) 
+    
         feedInAdvantage = clip((demand_price - feedin_price), min=0)
-        
-        
+        demandAdvantage = clip((feedin_price - demand_price), min=0)
+
+
         '''
         FINANCIAL REWARD
         '''
 
         if action == 0:
-            reward += (availableExcess * feedin_price)
+            if demandAdvantage > feedInAdvantage:
+                reward += (availableExcess * demandAdvantage) *100
+            else:
+                reward += (availableExcess * feedin_price)
 
-        else:
-            if availableExcess > 0: # no excess power
-                reward += (availableExcess * feedInAdvantage)
+        elif action > 0:
+            reward += (availableExcess * feedInAdvantage)
+
+        else: 
+            print("undefined action!", action, state)
+
 
         reward = reward * self.gamma1
-
         
         '''
         PENALTY FOR DISTANCE TO OPTIMUM
