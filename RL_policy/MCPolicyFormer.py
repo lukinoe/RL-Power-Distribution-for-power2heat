@@ -235,8 +235,6 @@ class MCPolicyGrad:
                     states[trajectory, t+1, -1] = s_1
 
 
-                
-
                 rewards[trajectory, t] = self.env.reward(action=actions[trajectory, t], s=states[trajectory, t, :])
 
         # rewards = self.discount_rewards(rewards, gamma)
@@ -276,7 +274,6 @@ class MCPolicyGrad:
 
 
     def scale(self,tensor):
-
 
         tensor_reshaped = tensor.view(-1, tensor.shape[-1])
         tensor_np = tensor_reshaped.cpu().numpy()
