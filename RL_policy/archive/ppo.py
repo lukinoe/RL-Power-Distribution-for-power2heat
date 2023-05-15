@@ -18,41 +18,6 @@ from utils import plot_rewards_loss
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-# class LSTMPolicy(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size):
-#         super(LSTMPolicy, self).__init__()
-#         self.input_size = input_size
-#         self.hidden_size = hidden_size
-#         self.output_size = output_size
-#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
-#         self.fc = nn.Linear(hidden_size, output_size)
-#         self.sigmoid = nn.Sigmoid()
-#         self.device = device
-
-#     def init_hidden(self, batch_size):
-#         return (torch.zeros(1, batch_size, self.hidden_size).to(self.device),
-#                 torch.zeros(1, batch_size, self.hidden_size).to(self.device))
-    
-#     def forward(self, x):
-#         hidden = self.init_hidden(x.size(0))
-#         out, _ = self.lstm(x,hidden)
-
-#         out = self.fc(out)
-#         out = torch.softmax(out, dim=-1)
-
-#         return out
-
-
-# class Critic(nn.Module):
-#     def __init__(self, input_size, hidden_size):
-#         super(Critic, self).__init__()
-#         self.lstm = nn.LSTM(input_size, hidden_size, batch_first=True)
-#         self.fc = nn.Linear(hidden_size, 1)
-
-#     def forward(self, x):
-#         out, _ = self.lstm(x)
-#         out = self.fc(out)
-#         return out.squeeze(-1)
 
 class LSTMPolicy(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, nhead=4, transformer_layers=2):
@@ -86,36 +51,6 @@ class Critic(nn.Module):
         out, _ = self.lstm(x)
         out = self.fc(out)
         return out.squeeze(-1)
-
-
-# class LSTMPolicy(nn.Module):
-#     def __init__(self, input_size, hidden_size, output_size):
-#         super(LSTMPolicy, self).__init__()
-#         self.input_size = input_size
-#         self.hidden_size = hidden_size
-#         self.output_size = output_size
-#         self.fc1 = nn.Linear(input_size, hidden_size)
-#         self.fc2 = nn.Linear(hidden_size, output_size)
-#         self.sigmoid = nn.Sigmoid()
-#         self.device = device
-
-#     def forward(self, x):
-#         out = F.relu(self.fc1(x))
-#         out = self.fc2(out)
-#         out = torch.softmax(out, dim=-1)
-
-#         return out
-    
-# class Critic(nn.Module):
-#     def __init__(self, input_size, hidden_size):
-#         super(Critic, self).__init__()
-#         self.fc1 = nn.Linear(input_size, hidden_size)
-#         self.fc2 = nn.Linear(hidden_size, 1)
-
-#     def forward(self, x):
-#         out = F.relu(self.fc1(x))
-#         out = self.fc2(out)
-#         return out.squeeze(-1)
 
     
 
@@ -354,8 +289,3 @@ for i in range(episodes):
 
 plot_rewards_loss(rewards_list, loss_list)
 
-
-
-# ...
-
-# ...
